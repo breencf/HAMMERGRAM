@@ -19,9 +19,7 @@ function App() {
     isLoaded && (
       <>
       <NavigatonTop/>
-      <hr/>
       <Main />
-      <hr/>
       <NavigationBottom/>
       <Switch>
         <Route exact path="/">

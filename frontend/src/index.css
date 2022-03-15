@@ -16,7 +16,12 @@ body {
   justify-content: center;
   background-color: #00376b;
   color: var(--ig-dark);
+  margin: 0;
+  font-family: "BlinkMacSystemFont", "Segoe UI", "Roboto", Helvetica, Arial, sans-serif;
+  font-size: 14px;
 }
+
+
 
 a {
   color: var(--ig-blue);
@@ -73,4 +78,10 @@ input::placeholder {
 
 hr {
   width: 100%;
+}
+
+.userIcon {
+  height: 32px;
+  width: 32px;
+  border-radius: 50%;
 }

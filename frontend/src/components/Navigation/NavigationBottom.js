@@ -12,7 +12,7 @@ import { useSelector } from "react-redux";
 
 export const NavigationBottom = () => {
   return (
-    <nav>
+    <nav className="nav-bottom">
       {/* <h2>Hammergram</h2> */}
       <FaHome />
       <FaSearch />

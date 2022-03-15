@@ -3,7 +3,7 @@ import "./Navigation.css"
 
 export const NavigatonTop = () => {
     return (
-        <nav>
+        <nav className='nav-top'>
             <FaCamera/>
             <h2>Hammergram</h2>
             <FaCommentDots/>

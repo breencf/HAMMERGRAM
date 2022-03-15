@@ -2,6 +2,7 @@ import { createStore, combineReducers, applyMiddleware, compose } from "redux";
 import thunk from "redux-thunk";
 
 import sessionReducer from "./session";
+import { postReducer } from "./posts";
 let enhancer;
 
 if (process.env.NODE_ENV === "production") {
@@ -19,6 +20,7 @@ const configureStore = (preloadedState) => {
 
 const rootReducer = combineReducers({
   sessions: sessionReducer,
+  posts: postReducer,
 });
 
 export default configureStore;

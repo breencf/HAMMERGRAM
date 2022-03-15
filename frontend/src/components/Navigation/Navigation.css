@@ -6,4 +6,17 @@ nav {
     height: 7.5%;
     padding:20px;
     width: 100%;
+    position: fixed;
+    background-color: var(--ig-background);
+
+}
+
+.nav-bottom {
+    bottom: 0;
+    border-top: 1px solid var(--ig-dark);
+}
+
+.nav-top {
+    top: 0;
+    border-bottom: 1px solid var(--ig-dark)
 }
