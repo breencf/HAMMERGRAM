@@ -1,5 +1,7 @@
 "use strict";
 const { Validator } = require("sequelize");
+const bcrypt = require("bcryptjs");
+
 module.exports = (sequelize, DataTypes) => {
   const User = sequelize.define(
     "User",
@@ -46,11 +48,11 @@ module.exports = (sequelize, DataTypes) => {
     {
       defaultScope: {
         attributes: {
-          exclude: ["passwordHash", "createdAt", "updatedAt"],
+          exclude: ["hashedPassword", "createdAt", "updatedAt"],
         },
       },
       scopes: {
-        currentUser: { attributes: { exclude: ["passwordHash"] } },
+        currentUser: { attributes: { exclude: ["hashedPassword"] } },
         loginUser: { attributes: {} },
       },
     }
@@ -62,7 +64,7 @@ module.exports = (sequelize, DataTypes) => {
   };
 
   User.prototype.validatePassword = function (password) {
-    return bcrypt.compareSync(password, this.passwordHash.toString());
+    return bcrypt.compareSync(password, this.hashedPassword.toString());
   };
 
   User.getCurrentUserById = async function (id) {
@@ -85,13 +87,13 @@ module.exports = (sequelize, DataTypes) => {
   };
 
   User.signup = async function ({ username, name, image, email, password }) {
-    const passwordHash = bcrypt.hashSync(password);
+    const hashedPassword = bcrypt.hashSync(password);
     const newUser = await User.create({
       username,
       name,
       image,
       email,
-      passwordHash: passwordHash,
+      hashedPassword: hashedPassword,
     });
     return await User.scope("currentUser").findByPk(newUser.id);
   };

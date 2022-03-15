@@ -1,1 +1,57 @@
 /* sitewide styles here */
+* {
+  --ig-dark: #262626;
+  --ig-background: rgb(249, 249, 249);
+  --ig-gray: rgb(123, 123, 123);
+  --ig-light-gray: #c7c7c7;
+  --ig-navy: #00376b;
+  --ig-blue: #0095f6;
+  --ig-blue-disabled: rgb(175, 210, 248);
+}
+
+body {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #00376b;
+}
+
+#root {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 375px;
+  background-color: var(--ig-background);
+  border-radius: 20px;
+  height: 667px;
+  /* width will need to be more flexible */
+}
+
+h1 {
+  font-family: "Billabong";
+  font-size: 72px;
+}
+
+.submitButton {
+  width: 100%;
+  border: none;
+  border-radius: 3px;
+  background-color: var(--ig-blue);
+}
+
+.submitButton:disabled {
+  background-color: var(--ig-blue-disabled);
+}
+
+input {
+  padding: 9px 8px 7px 8px;
+  border-radius: 3px;
+  border: 1px solid var(--ig-light-gray);
+  color: var(--ig-dark);
+  margin-bottom: 5px;
+}
+
+input::placeholder {
+  color: var(--ig-light-gray);
+  font-size: 12px;
+}

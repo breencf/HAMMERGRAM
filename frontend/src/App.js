@@ -1,9 +1,12 @@
-
+import {Route, Switch} from 'react-router-dom'
+import {LoginForm} from './components/LoginPage'
 function App() {
   return (
-    <div className="App">
-      <h1>Welcome to my app!</h1>
-    </div>
+    <Switch>
+      <Route path="/login">
+        <LoginForm />
+      </Route>
+    </Switch>
   );
 }
 
