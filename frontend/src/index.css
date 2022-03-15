@@ -7,6 +7,7 @@
   --ig-navy: #00376b;
   --ig-blue: #0095f6;
   --ig-blue-disabled: rgb(175, 210, 248);
+  box-sizing: border-box;
 }
 
 body {
@@ -25,7 +26,7 @@ a {
 #root {
   display: flex;
   align-items: center;
-  justify-content: flex-start;
+  justify-content: space-between;
   flex-direction: column;
   width: 375px;
   background-color: var(--ig-background);
@@ -38,6 +39,11 @@ h1,
 h2,
 h3 {
   font-family: "Billabong";
+  margin: 0;
+}
+
+#main {
+  height: 85%;
 }
 
 .submitButton {

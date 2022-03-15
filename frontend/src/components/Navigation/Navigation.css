@@ -1,8 +1,9 @@
 nav {
     display: flex;
     align-items: center;
-    justify-content: center;
-    gap: 15px;
-    font-size: 20px;
-    margin: 0px 10px
+    justify-content: space-between;
+    font-size: 24px;
+    height: 7.5%;
+    padding:20px;
+    width: 100%;
 }
