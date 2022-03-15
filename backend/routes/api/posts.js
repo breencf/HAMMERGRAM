@@ -16,4 +16,18 @@ router.get(
     })
   );
 
+  router.delete(
+    "/:id",
+    asyncHandler(async (req, res) => {
+      const { id } = req.params;
+      const exists = await db.Post.findByPk(id)
+      if (exists) {
+        await db.Post.destroy({
+          where: { id },
+        });
+        res.json(exists.id);
+      }
+    })
+  );
+
 module.exports = router;

@@ -10,8 +10,7 @@ module.exports = {
           email: "james@suckling.com",
           username: "jimmysuckling",
           name: "James 'Jimmy the Hammer' Sucking",
-          image:
-            "https://scontent-bos3-1.cdninstagram.com/v/t51.2885-19/91805441_255856285575298_254154376208187392_n.jpg?stp=dst-jpg_s320x320&_nc_ht=scontent-bos3-1.cdninstagram.com&_nc_cat=110&_nc_ohc=PoZ-EAGnk1cAX_A1sBL&edm=ABfd0MgBAAAA&ccb=7-4&oh=00_AT_pWy_8BBRd6gJWZxI1B7KIUAcWr2GNlss-YhvBX9RwUg&oe=6235C745&_nc_sid=7bff83",
+          image: "https://hammergram.s3.amazonaws.com/icons/jsicon.jpg",
           bio: "Ornellaia Stan",
           hashedPassword: bcrypt.hashSync("password"),
           createdAt: new Date(),
@@ -21,7 +20,7 @@ module.exports = {
           email: "robert@parker.com",
           username: "rparker",
           name: "Robert Parker",
-          image: "",
+          image: "https://hammergram.s3.amazonaws.com/icons/rpicon.jpg",
           bio: "Must be 97 points to ride",
           hashedPassword: bcrypt.hashSync("password"),
           createdAt: new Date(),
@@ -31,8 +30,7 @@ module.exports = {
           email: "lebron@james.com",
           username: "kingjames",
           name: "👑",
-          image:
-            "https://scontent-bos3-1.cdninstagram.com/v/t51.2885-19/263570976_273354718170504_5597971410410838789_n.jpg?stp=dst-jpg_s320x320&_nc_ht=scontent-bos3-1.cdninstagram.com&_nc_cat=1&_nc_ohc=HPa8-8Xw-JgAX_BEa16&edm=ABfd0MgBAAAA&ccb=7-4&oh=00_AT9Zr6k_cznzby5kstrMIlkB1o1xpPIbKCcRgbwLpzpl9Q&oe=623784B8&_nc_sid=7bff83",
+          image: "https://hammergram.s3.amazonaws.com/icons/lbicon.jpg",
           bio: null,
           hashedPassword: bcrypt.hashSync("password"),
           createdAt: new Date(),
@@ -42,8 +40,7 @@ module.exports = {
           email: "josh@hart.com",
           username: "jhartcellars",
           name: "Jhart Cellars",
-          image:
-            "https://scontent-bos3-1.cdninstagram.com/v/t51.2885-19/106558462_265185668122786_4002296779210179198_n.jpg?stp=dst-jpg_s320x320&_nc_ht=scontent-bos3-1.cdninstagram.com&_nc_cat=110&_nc_ohc=3Lo2zzSU3a4AX99mRhK&edm=ABfd0MgBAAAA&ccb=7-4&oh=00_AT_JmVbggS-ksvo98OoA_e1G5oaVH1O3X9UvQ99BXTf0gw&oe=6236475A&_nc_sid=7bff83",
+          image: "https://hammergram.s3.amazonaws.com/icons/jhicon.jpg",
           bio: "Welcome to @jhart’s cellar 👋🏽, Bordeaux has my heart ❤️ 🇫🇷, Self-Proclaimed Master of Wine🍷, Check out some of my favs 👇🏽👇🏽",
           hashedPassword: bcrypt.hashSync("password"),
           createdAt: new Date(),
@@ -53,8 +50,7 @@ module.exports = {
           email: "carmelo@anthony.com",
           username: "carmeloanthony",
           name: "Carmelo Anthony",
-          image:
-            "https://scontent-bos3-1.cdninstagram.com/v/t51.2885-19/106698725_1171904809834471_7367484525560161424_n.jpg?stp=dst-jpg_s320x320&_nc_ht=scontent-bos3-1.cdninstagram.com&_nc_cat=1&_nc_ohc=_lEjM8GGUz0AX9SAP2D&edm=ABfd0MgBAAAA&ccb=7-4&oh=00_AT_GHjzoBmsDYGdKVnX4hEB089--JTdSA7UIA2WBM0pdXw&oe=6235E09A&_nc_sid=7bff83",
+          image: "https://hammergram.s3.amazonaws.com/icons/caicon.jpg",
           bio: "#STAYME70",
           hashedPassword: bcrypt.hashSync("password"),
           createdAt: new Date(),

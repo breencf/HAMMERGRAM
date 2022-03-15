@@ -5,7 +5,7 @@ nav {
     font-size: 24px;
     height: 7.5%;
     padding:20px;
-    width: 100%;
+    width: inherit;
     position: fixed;
     background-color: var(--ig-background);
 

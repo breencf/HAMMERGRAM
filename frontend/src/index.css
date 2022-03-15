@@ -17,11 +17,12 @@ body {
   background-color: #00376b;
   color: var(--ig-dark);
   margin: 0;
-  font-family: "BlinkMacSystemFont", "Segoe UI", "Roboto", Helvetica, Arial, sans-serif;
+  font-family: "BlinkMacSystemFont", "Segoe UI", "Roboto", Helvetica, Arial,
+    sans-serif;
   font-size: 14px;
+  width: 100%;
+  height: 100%;
 }
-
-
 
 a {
   color: var(--ig-blue);
@@ -33,10 +34,10 @@ a {
   align-items: center;
   justify-content: space-between;
   flex-direction: column;
-  width: 375px;
+  width: inherit;
   background-color: var(--ig-background);
   border-radius: 20px;
-  height: 667px;
+  height: inherit;
   /* width will need to be more flexible */
 }
 
