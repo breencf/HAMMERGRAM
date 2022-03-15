@@ -14,12 +14,19 @@ body {
   align-items: center;
   justify-content: center;
   background-color: #00376b;
+  color: var(--ig-dark);
+}
+
+a {
+  color: var(--ig-blue);
+  font-weight: bolder;
 }
 
 #root {
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
+  flex-direction: column;
   width: 375px;
   background-color: var(--ig-background);
   border-radius: 20px;
@@ -27,9 +34,10 @@ body {
   /* width will need to be more flexible */
 }
 
-h1 {
+h1,
+h2,
+h3 {
   font-family: "Billabong";
-  font-size: 72px;
 }
 
 .submitButton {
@@ -49,9 +57,14 @@ input {
   border: 1px solid var(--ig-light-gray);
   color: var(--ig-dark);
   margin-bottom: 5px;
+  width: 100%;
 }
 
 input::placeholder {
   color: var(--ig-light-gray);
   font-size: 12px;
+}
+
+hr {
+  width: 100%;
 }

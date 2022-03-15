@@ -2,7 +2,7 @@ import { login } from "../../store/session";
 import { useDispatch, useSelector } from "react-redux";
 import { useState } from "react";
 import { Redirect, Link, useHistory } from "react-router-dom";
-import "./LoginForm.css"
+import "./LoginForm.css";
 
 export const LoginForm = () => {
   const dispatch = useDispatch();
@@ -31,12 +31,10 @@ export const LoginForm = () => {
     );
   };
 
-
   return (
     <div className="loginPage">
       {/* <img src="../../../public/logo.png" /> */}
       <h1>Hammergram</h1>
-
       <form onSubmit={onSubmit}>
         <div>
           <ul>
@@ -68,13 +66,18 @@ export const LoginForm = () => {
         {/* <Link to="/signup">
           <h5>Click here to Signup</h5>
         </Link> */}
-        <button className="submitButton"  onClick={onSubmitDemo}>
+        <button className="submitButton" onClick={onSubmitDemo}>
           Demo User
         </button>
-        <button type="submit" disabled={password && credential ? false : true} className="submitButton">
+        <button
+          type="submit"
+          disabled={password && credential ? false : true}
+          className="submitButton"
+        >
           Login
         </button>
       </form>
+      Don't have an account? <Link to="/signup">Sign Up</Link>
     </div>
   );
 };
