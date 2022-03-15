@@ -18,7 +18,7 @@ export const OptionsMenu = ({ content, closeModal }) => {
         {/* Check the above to toggle follow/follow */}
         {user && content.userId === user.id && <li onClick={onClickDelete}>Delete</li>}
         <li>
-          <Link to={`/posts/${content.id}`}></Link>Go to Post
+          <Link to={`/posts/${content.id}`}>Go to Post</Link>
         </li>
         {/* <li><Link to=""></Link>Copy Link</li> */}
         <li onClick={() => closeModal()}>Cancel</li>

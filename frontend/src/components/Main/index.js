@@ -1,11 +1,19 @@
-import { Feed } from "../Feed"
-
+import { Feed } from "../Feed";
+import { Route, Switch } from "react-router-dom";
+import { PostPage } from "../SinglePost";
 export const Main = () => {
-    return(
-        <>
-        <div id="main">
+  return (
+    <>
+      <div id="main">
+        <Switch>
+          <Route exact path="/">
             <Feed />
-        </div>
-        </>
-    )
-}
+          </Route>
+          <Route exact path="/posts/:id">
+            <PostPage />
+          </Route>
+        </Switch>
+      </div>
+    </>
+  );
+};

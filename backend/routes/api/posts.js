@@ -16,6 +16,20 @@ router.get(
     })
   );
 
+  router.get(
+    "/:id",
+    asyncHandler(async (req, res, next) => {
+      const {id} = req.params
+      const post = await db.Post.findByPk(id, {
+        include: [
+          db.User
+        ],
+      });
+      console.log(post)
+      res.json(post);
+    })
+  );
+
   router.delete(
     "/:id",
     asyncHandler(async (req, res) => {

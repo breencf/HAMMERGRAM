@@ -11,7 +11,6 @@ export const Feed = () => {
     const posts = useSelector((s) => s.posts.feed)
     useEffect(() => {dispatch(loadPosts())},[dispatch])
 
-    console.log(posts)
 
     return(
         <div className='feed'>
