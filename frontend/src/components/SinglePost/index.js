@@ -47,7 +47,7 @@ export const PostPage = () => {
           <img className="userIcon" src={content?.User?.image} />
           {content?.User?.username}
         </div>
-        <button onClick={() => openModal()}>
+        <button className="button-none" onClick={() => openModal()}>
           <FaEllipsisH />
         </button>
       </div>

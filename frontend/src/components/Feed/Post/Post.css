@@ -9,7 +9,12 @@
     width: inherit;
 }
 
-
+.post-container {
+    background-color: white;
+    border: 1px solid var(--ig-light-gray);
+    margin: 10px 0px;
+    border-radius: 3px;
+}
 
 .post-top-left {
     display: flex;
