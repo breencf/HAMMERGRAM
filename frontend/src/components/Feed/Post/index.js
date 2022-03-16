@@ -36,7 +36,7 @@ export const Post = ({ content }) => {
           <img className="userIcon" src={content.User.image} />
           <div className="post-top-user-loc">
           <Link to={`/users/${content.User.id}`}>{content.User.username}</Link>
-          <p>{content.location}</p>
+          {content.location && <p>{content.location}</p>}
           </div>
         </div>
         <button className="button-none" onClick={() => openModal()}>

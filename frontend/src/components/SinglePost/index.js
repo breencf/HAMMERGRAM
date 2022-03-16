@@ -38,6 +38,8 @@ export const PostPage = () => {
 
   useEffect(() => {
     dispatch(loadOnePost(id));
+    console.log(id);
+    console.log(content);
   }, [dispatch, content?.id]);
 
   return (
@@ -46,10 +48,10 @@ export const PostPage = () => {
         <div className="post-top-left">
           <img className="userIcon" src={content?.User?.image} />
           <div className="post-top-user-loc">
-            <Link to={`/users/${content.User.id}`}>
-              {content.User.username}
+            <Link to={`/users/${content?.User?.id}`}>
+              {content?.User?.username}
             </Link>
-            <p>{content.location}</p>
+            {content?.location && <p>{content?.location}</p>}
           </div>
         </div>
         <button className="button-none" onClick={() => openModal()}>

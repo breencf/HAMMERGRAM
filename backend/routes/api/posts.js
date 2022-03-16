@@ -1,47 +1,43 @@
-const express = require('express')
-const asyncHandler = require('express-async-handler')
-const db = require('../../db/models')
+const express = require("express");
+const asyncHandler = require("express-async-handler");
+const db = require("../../db/models");
 const { requireAuth } = require("../../utils/auth");
-const router = express.Router()
+const router = express.Router();
 
 router.get(
-    "/",
-    asyncHandler(async (req, res, next) => {
-      const posts = await db.Post.findAll({
-        include: [
-          db.User
-        ],
-      });
-      res.json(posts);
-    })
-  );
+  "/",
+  asyncHandler(async (req, res, next) => {
+    const posts = await db.Post.findAll({
+      include: [db.User],
+    });
+    res.json(posts);
+  })
+);
 
-  router.get(
-    "/:id",
-    asyncHandler(async (req, res, next) => {
-      const {id} = req.params
-      const post = await db.Post.findByPk(id, {
-        include: [
-          db.User
-        ],
-      });
-      console.log(post)
-      res.json(post);
-    })
-  );
+router.get(
+  "/:id",
+  asyncHandler(async (req, res, next) => {
+    const { id } = req.params;
+    const post = await db.Post.findByPk(id, {
+      include: [db.User, db.Like, db.Comment],
+    });
+    console.log(post);
+    res.json(post);
+  })
+);
 
-  router.delete(
-    "/:id",
-    asyncHandler(async (req, res) => {
-      const { id } = req.params;
-      const exists = await db.Post.findByPk(id)
-      if (exists) {
-        await db.Post.destroy({
-          where: { id },
-        });
-        res.json(exists.id);
-      }
-    })
-  );
+router.delete(
+  "/:id",
+  asyncHandler(async (req, res) => {
+    const { id } = req.params;
+    const exists = await db.Post.findByPk(id);
+    if (exists) {
+      await db.Post.destroy({
+        where: { id },
+      });
+      res.json(exists.id);
+    }
+  })
+);
 
 module.exports = router;
