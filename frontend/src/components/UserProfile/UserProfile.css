@@ -57,12 +57,12 @@
 }
 
 .post-square {
-    height: auto;
-    width: 33%;
+    height: 100%;
+    width: 100%;
 }
 
 .post-square img {
-    height: inherit;
-    width: inherit;
+    width: 100%;
+    height: 100%;
     object-fit: cover;
 }

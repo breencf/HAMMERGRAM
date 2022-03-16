@@ -18,8 +18,8 @@ export const PostPage = () => {
   const { id } = useParams();
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const content = useSelector((state) => state.posts.current);
-  const likes = useSelector((state) => state.posts.feed[id].Likes);
-  const [likeCount, setLikeCount] = useState(likes.length);
+  const likes = useSelector((state) => state.posts.feed[id]?.Likes);
+  const [likeCount, setLikeCount] = useState(likes?.length);
   const [showEdit, setShowEdit] = useState(false)
   const dispatch = useDispatch();
   const openModal = () => setModalIsOpen(true);
@@ -44,8 +44,8 @@ export const PostPage = () => {
 
   useEffect(() => {
     if (likes) setLikeCount(likes.length);
-  }, [likes.length]);
-  
+  }, [likes?.length]);
+
   return (
     <>
     {showEdit && <EditPost content={content} hideForm={setShowEdit}/>}

@@ -8,7 +8,7 @@ import { likeButton, loadPosts } from "../../store/posts";
 export const LikeButton = ({ likes, postId }) => {
   const dispatch = useDispatch();
   const { id } = useSelector((state) => state.sessions?.user);
-  const likesState = useSelector((state) => state.posts.feed[postId].Likes);
+  const likesState = useSelector((state) => state.posts.feed[postId]?.Likes);
   const [dispatched, setDispatched] = useState(false)
 
   const [liked, setLiked] = useState(

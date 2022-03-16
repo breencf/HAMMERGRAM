@@ -1,9 +1,10 @@
 import { useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { loadProfile } from "../../store/user";
 import { BsGearWide, BsGrid3X3, BsCollection } from "react-icons/bs";
 import "./UserProfile.css";
+
 
 export const UserProfile = () => {
   const { id } = useParams();
@@ -42,10 +43,9 @@ export const UserProfile = () => {
             <BsGrid3X3/>
             <BsCollection/>
         </div>
-        <hr/>
         <div className="post-grid">
             {user?.Posts?.map((post) => {
-                return(<div className="post-square" key={post.id}><img src={post.image}/></div>)
+                return(<div className="post-square" key={post.id}><Link to={`/posts/${post.id}`}><img src={post.image}/></Link></div>)
             })}
         </div>
       </div>

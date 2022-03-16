@@ -8,8 +8,8 @@ export const SimpleCreateForm = () => {
   const { id } = useSelector((s) => s.sessions.user);
   const dispatch = useDispatch();
   const history = useHistory()
-  const [caption, setCaption] = useState(null);
-  const [location, setLocation] = useState(null);
+  const [caption, setCaption] = useState(undefined);
+  const [location, setLocation] = useState("");
   const [image, setImage] = useState("");
 
   const onSubmit = (e) => {
@@ -25,7 +25,7 @@ export const SimpleCreateForm = () => {
       <form onSubmit={onSubmit} id="createPostForm">
         <div className="form-top">
           <div className="form-image">
-            <img src={image} />
+            {image && <img src={image} />}
           </div>
           <textarea
             id="caption"
@@ -37,7 +37,7 @@ export const SimpleCreateForm = () => {
         </div>
         <hr/>
         <div className="form-bottom">
-        <label for="location">Add Image URL</label>
+        <label htmlFor="location">Add Image URL</label>
           <input
             id="image"
             label="text"
@@ -46,7 +46,7 @@ export const SimpleCreateForm = () => {
             placeholder="..."
           />
           <hr/>
-          <label for="location">Add Location</label>
+          <label htmlFor="location">Add Location</label>
           <input
             id="location"
             label="text"
