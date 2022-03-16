@@ -14,7 +14,7 @@ export const Feed = () => {
 
     return(
         <div className='feed'>
-        {posts.map((content) => {return <Post key={content.id} content={content}/> })}
+        {Object.values(posts).map((content) => {return <Post key={content.id} content={content}/> })}
         </div>
     )
 }

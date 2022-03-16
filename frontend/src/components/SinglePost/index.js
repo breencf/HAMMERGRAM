@@ -14,11 +14,13 @@ import { useSelector, useDispatch } from "react-redux";
 import { loadOnePost } from "../../store/posts";
 import { OptionsMenu } from "../Feed/Post/OptionsMenu";
 import { EditPost } from "./EditPost";
+import { LikeButton } from "../LikeButton";
 
 export const PostPage = () => {
   const { id } = useParams();
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const content = useSelector((state) => state.posts.current);
+  const [likeCount, setLikeCount] = useState(content?.Likes.length);
   const [showEdit, setShowEdit] = useState(false)
   const dispatch = useDispatch();
   const openModal = () => setModalIsOpen(true);
@@ -36,13 +38,14 @@ export const PostPage = () => {
     },
   };
 
-  console.log(id);
 
   useEffect(() => {
     dispatch(loadOnePost(id));
-    console.log(id);
-    console.log(content);
   }, [dispatch, content?.id]);
+
+  useEffect(() => {
+    setLikeCount(content?.Likes.length);
+  }, [content?.Likes.length]);
 
   return (
     <>
@@ -68,16 +71,14 @@ export const PostPage = () => {
       <div className="post-bottom">
         <div className="post-bottom-top">
           <div className="post-bottom-top-left">
-            <FaRegHeart />
+          {content && <LikeButton likes={content?.Likes} postId={content?.id} />}
             <FaRegCommentDots />
             <FaRegPaperPlane />
           </div>
           <FaRegBookmark />
         </div>
         <div className="post-bottom-bottom">
-          <div>
-            {content?.Likes.length} likes
-          </div>
+        <div>{likeCount} likes</div>
           <div>
             <Link to={`/users/${content?.User?.username}`}>
               {content?.User?.username}

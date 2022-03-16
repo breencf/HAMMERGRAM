@@ -121,13 +121,15 @@ export const likeButton =
     }
   };
 
-const initialState = { feed: [], current: null };
+const initialState = { feed: {}, current: null };
 let newState;
 export const postReducer = (state = initialState, action) => {
   switch (action.type) {
     case LOAD:
       newState = { ...state };
-      newState.feed = action.posts;
+      let flattened = {}
+      action.posts.map((post) => flattened[post.id] = post)
+      newState.feed = flattened;
       return newState;
     case LOAD_ONE:
       newState = { ...state };
@@ -135,30 +137,24 @@ export const postReducer = (state = initialState, action) => {
       return newState;
     case DELETE:
       newState = { ...state };
-      newState.feed = newState.feed.filter((post) => post.id !== action.id);
+      delete newState.feed[action.id]
       return newState;
     case UPDATE_ONE:
       newState = { ...state };
       newState.current = action.post;
-      newState.feed.map((post) => {
-        if (post.id === action.post.id) return (post = action.post);
-      });
+      newState.feed[action.post.id] = action.post;
       return newState;
     case CREATE:
       newState = { ...state };
-      newState.feed.unshift(action.post);
+      newState.feed[action.post.id] = action.post
       return newState;
     case LIKE:
       newState = { ...state };
       if (action.like !== "destroyed") {
-        newState.feed.map((post) => {
-          if (post.id === action.postId) post.Likes.push(action.like)
-        })
+        newState.feed[action.postId].Likes.push(action.like)
         if (newState.current && newState.current.id === action.postId) newState.current.Likes.push(action.like)
       } else {
-        newState.feed.filter((post) => {
-         if(post.id === action.postId) {return post.Likes.filter((like) => like.userId !== action.userId)}
-        })
+        newState.feed[action.postId].Likes = newState.feed[action.postId].Likes.filter((like) => like.userId !== action.userId);
         if (newState.current && newState.current.id === action.postId) newState.current.Likes.filter((like)=> like.userId !== action.userId)
       }
       return newState;
