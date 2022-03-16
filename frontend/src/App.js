@@ -1,7 +1,7 @@
 import { Route, Switch } from "react-router-dom";
 import {useState, useEffect} from 'react'
 import { LoginForm } from "./components/LoginPage";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import * as sessionActions from "./store/session";
 import { SignupForm } from "./components/SignupPage";
 import {NavigationBottom} from "./components/Navigation/NavigationBottom"
@@ -15,12 +15,17 @@ function App() {
     dispatch(sessionActions.restoreUser()).then(() => setIsLoaded(true));
   }, [dispatch]);
 
+  const user = useSelector((s) => s.sessions.user)
+
   return (
     isLoaded && (
+      <>
+      {user &&
       <>
       <NavigatonTop/>
       <Main />
       <NavigationBottom/>
+      </>}
       <Switch>
         <Route exact path="/">
         </Route>

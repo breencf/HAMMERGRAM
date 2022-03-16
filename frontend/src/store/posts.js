@@ -6,6 +6,8 @@ const LOAD_ONE = "posts/LOAD_ONE";
 const UPDATE_ONE = "posts/UPDATE_ONE";
 const CREATE = "posts/CREATE";
 const LIKE = "posts/LIKE";
+const CREATE_COMMENT = "comments/CREATE";
+const DELETE_COMMENT = "comments/DELETE";
 
 const load = (posts) => {
   return {
@@ -48,6 +50,20 @@ const likeUnlike = ({ userId, postId, like }) => {
     userId,
     postId,
     like,
+  };
+};
+
+const createComment = (newComment) => {
+  return {
+    type: CREATE,
+    newComment,
+  };
+};
+
+const deleteComment = (id) => {
+  return {
+    type: DELETE,
+    id,
   };
 };
 
@@ -118,9 +134,30 @@ export const likeButton =
     if (response.ok) {
       const like = await response.json();
       dispatch(likeUnlike({ userId, postId, like }));
-      return true
+      return true;
     }
   };
+
+export const createAComment = ({userId, postId, content}) => async (dispatch) => {
+  const response = await csrfFetch(
+    `/api/posts/${postId}/comments`,
+    {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({userId, postId, content}),
+    }
+  );
+  const newComment = await response.json();
+  dispatch(createComment(newComment));
+};
+
+export const deleteAComment = (id) => async (dispatch) => {
+  const response = await csrfFetch(`/api/posts/comments/${id}`, { method: "DELETE" });
+  if (response.ok) {
+    const deleted = await response.json();
+    dispatch(deleteComment(id));
+  }
+};
 
 const initialState = { feed: {}, current: null };
 let newState;
@@ -128,8 +165,8 @@ export const postReducer = (state = initialState, action) => {
   switch (action.type) {
     case LOAD:
       newState = { ...state };
-      let flattened = {}
-      action.posts.map((post) => flattened[post.id] = post)
+      let flattened = {};
+      action.posts.map((post) => (flattened[post.id] = post));
       newState.feed = flattened;
       return newState;
     case LOAD_ONE:
@@ -138,7 +175,7 @@ export const postReducer = (state = initialState, action) => {
       return newState;
     case DELETE:
       newState = { ...state };
-      delete newState.feed[action.id]
+      delete newState.feed[action.id];
       return newState;
     case UPDATE_ONE:
       newState = { ...state };
@@ -147,17 +184,31 @@ export const postReducer = (state = initialState, action) => {
       return newState;
     case CREATE:
       newState = { ...state };
-      newState.feed[action.post.id] = action.post
+      newState.feed[action.post.id] = action.post;
       return newState;
     case LIKE:
       newState = { ...state };
       if (action.like !== "destroyed") {
-        newState.feed[action.postId].Likes.push(action.like)
-        if (newState.current && newState.current.id === action.postId) newState.current.Likes.push(action.like)
+        newState.feed[action.postId].Likes.push(action.like);
+        if (newState.current && newState.current.id === action.postId)
+          newState.current.Likes.push(action.like);
       } else {
-        newState.feed[action.postId].Likes = newState.feed[action.postId].Likes.filter((like) => like.userId !== action.userId);
-        if (newState.current && newState.current.id === action.postId) newState.current.Likes.filter((like)=> like.userId !== action.userId)
+        newState.feed[action.postId].Likes = newState.feed[
+          action.postId
+        ].Likes.filter((like) => like.userId !== action.userId);
+        if (newState.current && newState.current.id === action.postId)
+          newState.current.Likes.filter(
+            (like) => like.userId !== action.userId
+          );
       }
+      return newState;
+    case CREATE_COMMENT:
+      newState = { ...state };
+      newState.feed[action.newComment.postId].Comments.push(action.newComment);
+      return newState;
+    case DELETE_COMMENT:
+      newState = { ...state };
+      newState.feed[action.postId].Comments.filter(comment => comment.id !== action.commentId);
       return newState;
     default:
       return state;

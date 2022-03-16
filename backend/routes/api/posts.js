@@ -92,4 +92,21 @@ router.post(
   })
 );
 
+router.post(
+  "/:id/comments",
+  asyncHandler(async (req, res) => {
+    const { userId, postId, content } = req.body;
+    const comment = await db.Comment.create({
+      userId,
+      postId,
+      content,
+    });
+
+    const newReview = await db.Review.findByPk(review.id, {
+      include: [db.User],
+    });
+    res.json(newReview);
+  })
+);
+
 module.exports = router;

@@ -17,7 +17,7 @@ import { SimpleCreateForm } from "./SimpleCreateForm";
 
 
 export const NavigationBottom = () => {
-
+  const sessionUser = useSelector((s) => s.sessions.user)
   return (
     <>
     <nav className="nav-bottom">
@@ -26,7 +26,7 @@ export const NavigationBottom = () => {
       <FaSearch />
       <Link to="/create"><FaPlusSquare /></Link>
       <FaHeart />
-      <FaUserCircle />
+      <Link to={`/users/${sessionUser.id}`}><FaUserCircle /></Link>
     </nav>
     </>
   );
