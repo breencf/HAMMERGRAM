@@ -5,7 +5,7 @@ const DELETE = "posts/DELETE";
 const LOAD_ONE = "posts/LOAD_ONE";
 const UPDATE_ONE = "posts/UPDATE_ONE";
 const CREATE = "posts/CREATE";
-const LIKE = "wineries/LIKE";
+const LIKE = "posts/LIKE";
 
 const load = (posts) => {
   return {
@@ -118,6 +118,7 @@ export const likeButton =
     if (response.ok) {
       const like = await response.json();
       dispatch(likeUnlike({ userId, postId, like }));
+      return true
     }
   };
 

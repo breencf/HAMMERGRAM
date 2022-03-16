@@ -8,6 +8,9 @@ import { likeButton, loadPosts } from "../../store/posts";
 export const LikeButton = ({ likes, postId }) => {
   const dispatch = useDispatch();
   const { id } = useSelector((state) => state.sessions?.user);
+  const likesState = useSelector((state) => state.posts.feed[postId].Likes);
+  const [dispatched, setDispatched] = useState(false)
+
   const [liked, setLiked] = useState(
     likes.filter((likeObj) => likeObj.userId === id).length
   );
@@ -16,8 +19,9 @@ export const LikeButton = ({ likes, postId }) => {
   const onClick = async (e) => {
     e.preventDefault();
     if (id) {
-      dispatch(likeButton({ userId: id, postId }));
+      const dispatched = dispatch(likeButton({ userId: id, postId }));
       setLiked(!liked);
+      setDispatched(dispatched)
     } else {
       history.push("/signup");
     }
@@ -25,7 +29,8 @@ export const LikeButton = ({ likes, postId }) => {
 
   useEffect(() => {
      dispatch(loadPosts());
-  }, [liked]);
+     setDispatched(false)
+  }, [dispatched]);
 
   return (
     <div>

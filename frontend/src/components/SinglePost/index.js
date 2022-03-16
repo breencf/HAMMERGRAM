@@ -1,10 +1,8 @@
 import {
-  FaRegHeart,
   FaRegCommentDots,
   FaEllipsisH,
   FaRegPaperPlane,
   FaRegBookmark,
-  FaHeart,
 } from "react-icons/fa";
 import "../Feed/Post/Post.css";
 import { Link, useParams } from "react-router-dom";
@@ -20,7 +18,8 @@ export const PostPage = () => {
   const { id } = useParams();
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const content = useSelector((state) => state.posts.current);
-  const [likeCount, setLikeCount] = useState(content?.Likes.length);
+  const likes = useSelector((state) => state.posts.feed[id].Likes);
+  const [likeCount, setLikeCount] = useState(likes.length);
   const [showEdit, setShowEdit] = useState(false)
   const dispatch = useDispatch();
   const openModal = () => setModalIsOpen(true);
@@ -44,9 +43,9 @@ export const PostPage = () => {
   }, [dispatch, content?.id]);
 
   useEffect(() => {
-    setLikeCount(content?.Likes.length);
-  }, [content?.Likes.length]);
-
+    if (likes) setLikeCount(likes.length);
+  }, [likes.length]);
+  
   return (
     <>
     {showEdit && <EditPost content={content} hideForm={setShowEdit}/>}

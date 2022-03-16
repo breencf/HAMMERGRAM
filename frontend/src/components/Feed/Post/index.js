@@ -12,10 +12,12 @@ import Modal from "react-modal";
 import { OptionsMenu } from "./OptionsMenu";
 import { useEffect, useState } from "react";
 import { LikeButton } from "../../LikeButton";
+import { useSelector } from "react-redux";
 
 export const Post = ({ content }) => {
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [likeCount, setLikeCount] = useState(content?.Likes.length);
+  const likes = useSelector((state) => state.posts.feed[content.id].Likes);
   const openModal = () => setModalIsOpen(true);
   const closeModal = () => setModalIsOpen(false);
   const modalStyle = {
@@ -32,9 +34,8 @@ export const Post = ({ content }) => {
   };
 
   useEffect(() => {
-    setLikeCount(content?.Likes.length);
-    console.log('in the useEffect')
-  }, [content.Likes.length]);
+    if (likes) setLikeCount(likes.length);
+  }, [likes.length]);
 
   return (
     <div className="post-container">
