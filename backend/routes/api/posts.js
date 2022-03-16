@@ -74,4 +74,21 @@ router.post(
   })
 );
 
+router.post(
+  "/:id/like",
+  asyncHandler(async (req, res) => {
+    const { userId, postId } = req.body;
+    const exists = await db.Like.findOne({
+      where: { postId, userId },
+    });
+    if (exists) {
+      await db.Like.destroy({ where: { postId, userId } });
+      res.json('destroyed');
+    } else {
+      await db.Like.create({ postId, userId });
+      res.json('liked');
+    }
+  })
+);
+
 module.exports = router;
