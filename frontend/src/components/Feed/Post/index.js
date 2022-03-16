@@ -10,10 +10,12 @@ import "./Post.css";
 import { Link } from "react-router-dom";
 import Modal from "react-modal";
 import { OptionsMenu } from "./OptionsMenu";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { LikeButton } from "../../LikeButton";
 
 export const Post = ({ content }) => {
   const [modalIsOpen, setModalIsOpen] = useState(false);
+  const [likeCount, setLikeCount] = useState(content?.Likes.length);
   const openModal = () => setModalIsOpen(true);
   const closeModal = () => setModalIsOpen(false);
   const modalStyle = {
@@ -29,14 +31,21 @@ export const Post = ({ content }) => {
     },
   };
 
+  useEffect(() => {
+    setLikeCount(content?.Likes.length);
+    console.log('in the useEffect')
+  }, [content.Likes.length]);
+
   return (
     <div className="post-container">
       <div className="post-top">
         <div className="post-top-left">
           <img className="userIcon" src={content.User.image} />
           <div className="post-top-user-loc">
-          <Link to={`/users/${content.User.id}`}>{content.User.username}</Link>
-          {content.location && <p>{content.location}</p>}
+            <Link to={`/users/${content.User.id}`}>
+              {content.User.username}
+            </Link>
+            {content.location && <p>{content.location}</p>}
           </div>
         </div>
         <button className="button-none" onClick={() => openModal()}>
@@ -49,16 +58,14 @@ export const Post = ({ content }) => {
       <div className="post-bottom">
         <div className="post-bottom-top">
           <div className="post-bottom-top-left">
-            <FaRegHeart />
+            <LikeButton likes={content?.Likes} postId={content.id} />
             <FaRegCommentDots />
             <FaRegPaperPlane />
           </div>
           <FaRegBookmark />
         </div>
         <div className="post-bottom-bottom">
-          <div>
-            <FaHeart /> {content?.Likes.length} likes
-          </div>
+          <div>{likeCount} likes</div>
           <div>
             <Link to={`/users/${content.User.username}`}>
               {content.User.username}
@@ -67,23 +74,28 @@ export const Post = ({ content }) => {
           </div>
           <div className="comments">
             {content?.Comments?.map((comment) => {
-              return comment && (
-                <div key={comment.id}>
-                  <Link to={`/users/${comment.userId}`}>{comment?.User?.username}</Link> {comment?.content}
-                </div>
+              return (
+                comment && (
+                  <div key={comment.id}>
+                    <Link to={`/users/${comment.userId}`}>
+                      {comment?.User?.username}
+                    </Link>{" "}
+                    {comment?.content}
+                  </div>
+                )
               );
             })}
           </div>
         </div>
       </div>
       <Modal
-            isOpen={modalIsOpen}
-            onRequestClose={closeModal}
-            style={modalStyle}
-            ariaHideApp={false}
-          >
-            <OptionsMenu content={content}/>
-          </Modal>
+        isOpen={modalIsOpen}
+        onRequestClose={closeModal}
+        style={modalStyle}
+        ariaHideApp={false}
+      >
+        <OptionsMenu content={content} />
+      </Modal>
     </div>
   );
 };

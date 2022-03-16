@@ -83,10 +83,11 @@ router.post(
     });
     if (exists) {
       await db.Like.destroy({ where: { postId, userId } });
-      res.json('destroyed');
+      await db.Post.findByPk(postId)
+      res.json("destroyed");
     } else {
-      await db.Like.create({ postId, userId });
-      res.json('liked');
+      const like = await db.Like.create({ postId, userId });
+      res.json(like);
     }
   })
 );

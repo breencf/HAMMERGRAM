@@ -76,7 +76,7 @@ export const PostPage = () => {
         </div>
         <div className="post-bottom-bottom">
           <div>
-            <FaHeart /> {content?.Likes.length} likes
+            {content?.Likes.length} likes
           </div>
           <div>
             <Link to={`/users/${content?.User?.username}`}>
