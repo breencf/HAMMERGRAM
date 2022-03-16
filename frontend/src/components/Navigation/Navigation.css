@@ -20,3 +20,65 @@ nav {
     top: 0;
     border-bottom: 1px solid var(--ig-dark)
 }
+
+/* Simple Create form */
+
+#createPostForm {
+    width: inherit;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+}
+
+.form-top {
+    display: flex;
+    align-items: flex-start;
+    width: 100%;
+    padding: 10px;
+    gap: 10px
+}
+
+.form-image {
+    width: 40px;
+    height: 40px;
+    background-color: var(--ig-dark);
+}
+
+.form-image img {
+    height: 50px;
+    width: 50px;
+    object-fit: cover;
+}
+
+.form-top #caption {
+    width: 80%;
+    border: none;
+    height: auto;
+    font-family: inherit;
+    font-size: inherit;
+}
+
+.form-bottom {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    padding: 10px;
+}
+
+.form-bottom input {
+    margin: 5px;
+    border: none;
+    padding: 5px;
+}
+
+.button-submit {
+    color: var(--ig-blue);
+    border: none;
+    background: none;
+    padding: 10px;
+    font-weight: bold;
+    font-size: 16px;
+
+}

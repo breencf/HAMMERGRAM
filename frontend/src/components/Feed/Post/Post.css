@@ -14,6 +14,7 @@
     border: 1px solid var(--ig-light-gray);
     margin: 10px 0px;
     border-radius: 3px;
+    height: inherit;
 }
 
 .post-top-left {
@@ -54,4 +55,23 @@
 
 .post-bottom-bottom > div {
     margin: 10px 0px
+}
+
+#updatePostForm {
+    width: 100%;
+    height: inherit;
+}
+
+#updatePostForm #location, #updatePostForm #caption {
+    padding: 10px 0px;
+    border: none;
+    margin: none;
+}
+
+#updatePostForm #caption {
+    width: 100%;
+    height: inherit;
+    font-family: inherit;
+    font-size: inherit;
+
 }

@@ -14,7 +14,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: #00376b;
+  background-color: var(--ig-background);
   color: var(--ig-dark);
   margin: 0;
   font-family: "BlinkMacSystemFont", "Segoe UI", "Roboto", Helvetica, Arial,
@@ -67,7 +67,7 @@ h3 {
   background-color: var(--ig-blue-disabled);
 }
 
-input {
+.loginPage input {
   padding: 9px 8px 7px 8px;
   border-radius: 3px;
   border: 1px solid var(--ig-light-gray);

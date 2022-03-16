@@ -13,11 +13,13 @@ import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { loadOnePost } from "../../store/posts";
 import { OptionsMenu } from "../Feed/Post/OptionsMenu";
+import { EditPost } from "./EditPost";
 
 export const PostPage = () => {
   const { id } = useParams();
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const content = useSelector((state) => state.posts.current);
+  const [showEdit, setShowEdit] = useState(false)
   const dispatch = useDispatch();
   const openModal = () => setModalIsOpen(true);
   const closeModal = () => setModalIsOpen(false);
@@ -43,7 +45,9 @@ export const PostPage = () => {
   }, [dispatch, content?.id]);
 
   return (
-    <div className="post-container">
+    <>
+    {showEdit && <EditPost content={content} hideForm={setShowEdit}/>}
+    {!showEdit && <div className="post-container">
       <div className="post-top">
         <div className="post-top-left">
           <img className="userIcon" src={content?.User?.image} />
@@ -97,8 +101,9 @@ export const PostPage = () => {
         style={modalStyle}
         ariaHideApp={false}
       >
-        {content && <OptionsMenu content={content} />}
+        {content && <OptionsMenu content={content} singlePost={true} closeModal={closeModal} setShowEdit={setShowEdit} />}
       </Modal>
-    </div>
+    </div>}
+    </>
   );
 };

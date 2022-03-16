@@ -4,6 +4,7 @@ const LOAD = "posts/LOAD";
 const DELETE = "posts/DELETE";
 const LOAD_ONE = "posts/LOAD_ONE";
 const UPDATE_ONE = "posts/UPDATE_ONE";
+const CREATE = "posts/CREATE"
 
 const load = (posts) => {
   return {
@@ -28,10 +29,17 @@ const del = (id) => {
 
 const update = (post) => {
   return {
-    type: update,
+    type: UPDATE_ONE,
     post,
   };
 };
+
+const create = post => {
+  return {
+    type: CREATE,
+    post
+  }
+}
 
 export const loadPosts = () => async (dispatch) => {
   const response = await fetch("/api/posts");
@@ -59,17 +67,26 @@ export const deletePost = (id) => async (dispatch) => {
   }
 };
 
-export const updatePost = (post) => async (dispatch) => {
-  const response = await csrfFetch(`/api/posts/${post.id}`, {
+export const updatePost = ({location, caption, id}) => async (dispatch) => {
+  const response = await csrfFetch(`/api/posts/${id}`, {
     method: "PUT",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(post),
+    body: JSON.stringify({location, caption, id}),
   });
   if (response.ok) {
     const updatedPost = await response.json();
-    dispatch(update(post));
+    dispatch(update(updatedPost));
   }
 };
+
+export const createPost = ({id, caption, image, location}) => async dispatch => {
+  const response = await csrfFetch(`/api/posts`, {method: "POST", headers: {"Content-Type": "application/json"}, body: JSON.stringify({id, caption, image, location})})
+
+  if (response.ok) {
+    const newPost = await response.json()
+    dispatch(create(newPost))
+  }
+}
 
 const initialState = { feed: [], current: null };
 let newState;
@@ -94,6 +111,10 @@ export const postReducer = (state = initialState, action) => {
         if (post.id === action.post.id) return (post = action.post);
       });
       return newState;
+    case CREATE:
+      newState = {...state};
+      newState.feed.unshift(action.post)
+      return newState
     default:
       return state;
   }

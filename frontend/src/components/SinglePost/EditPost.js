@@ -1,91 +1,88 @@
-import {
-  FaRegHeart,
-  FaRegCommentDots,
-  FaEllipsisH,
-  FaRegPaperPlane,
-  FaRegBookmark,
-  FaHeart,
-} from "react-icons/fa";
 import "../Feed/Post/Post.css";
 import { Link, useParams } from "react-router-dom";
 import Modal from "react-modal";
-import { useEffect, useState } from "react";
-import { useSelector, useDispatch } from "react-redux";
-import { loadOnePost } from "../../store/posts";
-import { OptionsMenu } from "../Feed/Post/OptionsMenu";
+import { useState } from "react";
+import { useDispatch } from "react-redux";
+import { updatePost } from "../../store/posts";
 
-export const EditPostPage = () => {
+export const EditPost = ({ content, hideForm }) => {
   const { id } = useParams();
   const [modalIsOpen, setModalIsOpen] = useState(false);
-  const content = useSelector((state) => state.posts.current);
   const dispatch = useDispatch();
-  const openModal = () => setModalIsOpen(true);
-  const closeModal = () => setModalIsOpen(false);
-  const modalStyle = {
-    content: {
-      top: "50%",
-      left: "50%",
-      right: "auto",
-      bottom: "auto",
-      marginRight: "-50%",
-      transform: "translate(-50%, -50%)",
-      backgroundColor: "black",
-      border: "none",
-    },
+  const [caption, setCaption] = useState(content.caption);
+  const [location, setLocation] = useState(content.location);
+  // const openModal = () => setModalIsOpen(true);
+  // const closeModal = () => setModalIsOpen(false);
+
+  // const modalStyle = {
+  //   content: {
+  //     top: "50%",
+  //     left: "50%",
+  //     right: "auto",
+  //     bottom: "auto",
+  //     marginRight: "-50%",
+  //     transform: "translate(-50%, -50%)",
+  //     backgroundColor: "black",
+  //     border: "none",
+  //   },
+  // };
+
+  // useEffect(() => {
+  //   dispatch(loadOnePost(id));
+  // }, [dispatch, content?.id]);
+
+  const onSubmit = (e) => {
+    e.preventDefault();
+    dispatch(updatePost({ location, caption, id: content.id }));
+    hideForm();
   };
-
-  console.log(id);
-
-  useEffect(() => {
-    dispatch(loadOnePost(id));
-  }, [dispatch, content?.id]);
 
   return (
     <div className="post-container">
-      <div className="post-top">
-        <div className="post-top-left">
-          <img className="userIcon" src={content?.User?.image} />
-          <div className="post-top-user-loc">
-            {content?.User?.username}
-            {content.location}
-          </div>
-        </div>
-        <button className="button-none" onClick={() => openModal()}>
-          <FaEllipsisH />
-        </button>
-      </div>
-      <div className="post-image">
-        <img src={content?.image} />
-      </div>
-      <div className="post-bottom">
-        <div className="post-bottom-top">
-          <div className="post-bottom-top-left">
-            <FaRegHeart />
-            <FaRegCommentDots />
-            <FaRegPaperPlane />
-          </div>
-          <FaRegBookmark />
-        </div>
-        <div className="post-bottom-bottom">
-          <div>
-            <FaHeart /> {content?.Likes.length} likes
-          </div>
-          <div>
-            <Link to={`/users/${content?.User?.username}`}>
+      <form onSubmit={onSubmit} id="updatePostForm">
+        <div className="post-top">
+          <div className="post-top-left">
+            <img className="userIcon" src={content?.User?.image} />
+            <div className="post-top-user-loc">
               {content?.User?.username}
-            </Link>
-            {content?.caption}
+              <input
+                id="location"
+                label="text"
+                onChange={(e) => setLocation(e.target.value)}
+                value={location}
+                placeholder="Add Location"
+              />
+            </div>
+          </div>
+          <button type="submit" className="button-none">
+            Done
+          </button>
+        </div>
+        <div className="post-image">
+          <img src={content?.image} />
+        </div>
+        <div className="post-bottom">
+          {/* <div className="post-bottom-bottom"> */}
+            <div>
+              <textarea
+                id="caption"
+                label="text"
+                onChange={(e) => setCaption(e.target.value)}
+                value={caption}
+                placeholder="Write a caption..."
+              />
+            {/* </div> */}
           </div>
         </div>
-      </div>
-      <Modal
+        {/* <Modal
         isOpen={modalIsOpen}
         onRequestClose={closeModal}
         style={modalStyle}
         ariaHideApp={false}
       >
-        {content && <OptionsMenu content={content} />}
-      </Modal>
+        <p>update location modal</p>
+      </Modal> */}
+      </form>
     </div>
   );
 };

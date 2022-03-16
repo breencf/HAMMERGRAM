@@ -9,6 +9,7 @@ router.get(
   asyncHandler(async (req, res, next) => {
     const posts = await db.Post.findAll({
       include: [db.User, db.Like, { model: db.Comment, include: [db.User] }],
+      order: [["createdAt", "DESC"]],
     });
     res.json(posts);
   })
@@ -43,22 +44,33 @@ router.delete(
 router.put(
   "/:id",
   asyncHandler(async (req, res) => {
-    const post = req.body;
+    const { location, caption } = req.body;
     const { id } = req.params;
     const exists = await db.Post.findByPk(id);
     if (exists) {
       await exists.update({
-        image: post.image,
-        location: post.location,
+        location: location,
         lat: null,
         lng: null,
-        caption: post.caption,
+        caption: caption,
       });
       const postToReturn = await db.Post.findByPk(exists.id, {
-        include: [db.User, db.Like, db.Comment],
+        include: [db.User, db.Like, { model: db.Comment, include: [db.User] }],
       });
       res.json(postToReturn);
     } else res.json("The specified post couldn't be found");
+  })
+);
+
+router.post(
+  "/",
+  asyncHandler(async (req, res) => {
+    const { id, caption, location, image } = req.body;
+    const post = await db.Post.create({ userId: id, caption, image, location });
+    const postToReturn = await db.Post.findByPk(post.id, {
+      include: [db.User, db.Like, { model: db.Comment, include: [db.User] }],
+    });
+    res.json(postToReturn);
   })
 );
 
