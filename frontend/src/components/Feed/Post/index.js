@@ -34,7 +34,10 @@ export const Post = ({ content }) => {
       <div className="post-top">
         <div className="post-top-left">
           <img className="userIcon" src={content.User.image} />
-          {content.User.username}
+          <div className="post-top-user-loc">
+          <Link to={`/users/${content.User.id}`}>{content.User.username}</Link>
+          <p>{content.location}</p>
+          </div>
         </div>
         <button className="button-none" onClick={() => openModal()}>
           <FaEllipsisH />

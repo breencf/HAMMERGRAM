@@ -9,8 +9,9 @@ export const Main = () => {
           <Route exact path="/">
             <Feed />
           </Route>
-          <Route exact path="/posts/:id">
-            <PostPage />
+          <Route path="/posts/:id">
+            <h1>hello</h1>
+            {/* <PostPage /> */}
           </Route>
         </Switch>
       </div>

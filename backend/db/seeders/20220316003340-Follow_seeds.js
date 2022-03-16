@@ -1,0 +1,316 @@
+"use strict";
+
+module.exports = {
+  up: (queryInterface, Sequelize) => {
+    return queryInterface.bulkInsert(
+      "Follows",
+      [
+        {
+          followingUserId: 2,
+          followerUserId: 5,
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
+        {
+          followingUserId: 3,
+          followerUserId: 4,
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
+        {
+          followingUserId: 4,
+          followerUserId: 3,
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
+        {
+          followingUserId: 5,
+          followerUserId: 4,
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
+        // {
+        //   followingUserId: 6,
+        //   followerUserId: 1,
+        //   createdAt: new Date(),
+        //   updatedAt: new Date(),
+        // },
+        {
+          followingUserId: 1,
+          followerUserId: 2,
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
+        {
+          followingUserId: 3,
+          followerUserId: 5,
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
+        {
+          followingUserId: 4,
+          followerUserId: 5,
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
+        // {
+        //   followingUserId: 5,
+        //   followerUserId: 2,
+        //   createdAt: new Date(),
+        //   updatedAt: new Date(),
+        // },
+        // {
+        //   followingUserId: 6,
+        //   followerUserId: 2,
+        //   createdAt: new Date(),
+        //   updatedAt: new Date(),
+        // },
+        // {
+        //   followingUserId: 7,
+        //   followerUserId: 2,
+        //   createdAt: new Date(),
+        //   updatedAt: new Date(),
+        // },
+        // {
+        //   followingUserId: 8,
+        //   followerUserId: 2,
+        //   createdAt: new Date(),
+        //   updatedAt: new Date(),
+        // },
+        // {
+        //   followingUserId: 9,
+        //   followerUserId: 2,
+        //   createdAt: new Date(),
+        //   updatedAt: new Date(),
+        // },
+        // {
+        //   followingUserId: 10,
+        //   followerUserId: 2,
+        //   createdAt: new Date(),
+        //   updatedAt: new Date(),
+        // },
+        // {
+        //   followingUserId: 9,
+        //   followerUserId: 3,
+        //   createdAt: new Date(),
+        //   updatedAt: new Date(),
+        // },
+        // {
+        //   followingUserId: 4,
+        //   followerUserId: 3,
+        //   createdAt: new Date(),
+        //   updatedAt: new Date(),
+        // },
+        // {
+        //   followingUserId: 6,
+        //   followerUserId: 4,
+        //   createdAt: new Date(),
+        //   updatedAt: new Date(),
+        // },
+        // {
+        //   followingUserId: 7,
+        //   followerUserId: 4,
+        //   createdAt: new Date(),
+        //   updatedAt: new Date(),
+        // },
+        {
+          followingUserId: 1,
+          followerUserId: 4,
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
+        // {
+        //   followingUserId: 3,
+        //   followerUserId: 4,
+        //   createdAt: new Date(),
+        //   updatedAt: new Date(),
+        // },
+        // {
+        //   followingUserId: 10,
+        //   followerUserId: 5,
+        //   createdAt: new Date(),
+        //   updatedAt: new Date(),
+        // },
+        {
+          followingUserId: 1,
+          followerUserId: 5,
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
+        // {
+        //   followingUserId: 7,
+        //   followerUserId: 5,
+        //   createdAt: new Date(),
+        //   updatedAt: new Date(),
+        // },
+        // {
+        //   followingUserId: 4,
+        //   followerUserId: 5,
+        //   createdAt: new Date(),
+        //   updatedAt: new Date(),
+        // },
+        // {
+        //   followingUserId: 3,
+        //   followerUserId: 5,
+        //   createdAt: new Date(),
+        //   updatedAt: new Date(),
+        // },
+        // {
+        //   followingUserId: 9,
+        //   followerUserId: 6,
+        //   createdAt: new Date(),
+        //   updatedAt: new Date(),
+        // },
+        // {
+        //   followingUserId: 7,
+        //   followerUserId: 6,
+        //   createdAt: new Date(),
+        //   updatedAt: new Date(),
+        // },
+        // {
+        //   followingUserId: 5,
+        //   followerUserId: 6,
+        //   createdAt: new Date(),
+        //   updatedAt: new Date(),
+        // },
+        // {
+        //   followingUserId: 2,
+        //   followerUserId: 6,
+        //   createdAt: new Date(),
+        //   updatedAt: new Date(),
+        // },
+        {
+          followingUserId: 4,
+          followerUserId: 1,
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
+        {
+          followingUserId: 1,
+          followerUserId: 3,
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
+        // {
+        //   followingUserId: 10,
+        //   followerUserId: 6,
+        //   createdAt: new Date(),
+        //   updatedAt: new Date(),
+        // },
+        // {
+        //   followingUserId: 10,
+        //   followerUserId: 7,
+        //   createdAt: new Date(),
+        //   updatedAt: new Date(),
+        // },
+        // {
+        //   followingUserId: 1,
+        //   followerUserId: 2,
+        //   createdAt: new Date(),
+        //   updatedAt: new Date(),
+        // },
+        {
+          followingUserId: 2,
+          followerUserId: 1,
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
+        {
+          followingUserId: 3,
+          followerUserId: 1,
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
+        {
+          followingUserId: 5,
+          followerUserId: 1,
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
+        // {
+        //   followingUserId: 1,
+        //   followerUserId: 9,
+        //   createdAt: new Date(),
+        //   updatedAt: new Date(),
+        // },
+        {
+          followingUserId: 3,
+          followerUserId: 2,
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
+        {
+          followingUserId: 5,
+          followerUserId: 2,
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
+        // {
+        //   followingUserId: 7,
+        //   followerUserId: 9,
+        //   createdAt: new Date(),
+        //   updatedAt: new Date(),
+        // },
+        // {
+        //   followingUserId: 8,
+        //   followerUserId: 9,
+        //   createdAt: new Date(),
+        //   updatedAt: new Date(),
+        // },
+        // {
+        //   followingUserId: 10,
+        //   followerUserId: 9,
+        //   createdAt: new Date(),
+        //   updatedAt: new Date(),
+        // },
+        {
+          followingUserId: 2,
+          followerUserId: 3,
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
+        {
+          followingUserId: 4,
+          followerUserId: 2,
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
+        {
+          followingUserId: 2,
+          followerUserId: 4,
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
+        // {
+        //   followingUserId: 8,
+        //   followerUserId: 10,
+        //   createdAt: new Date(),
+        //   updatedAt: new Date(),
+        // },
+        {
+          followingUserId: 5,
+          followerUserId: 3,
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
+        // {
+        //   followingUserId: 9,
+        //   followerUserId: 10,
+        //   createdAt: new Date(),
+        //   updatedAt: new Date(),
+        // },
+        // {
+        //   followingUserId: 6,
+        //   followerUserId: 10,
+        //   createdAt: new Date(),
+        //   updatedAt: new Date(),
+        // },
+      ],
+      {}
+    );
+  },
+
+  down: (queryInterface, Sequelize) => {
+    return queryInterface.bulkDelete("Follows", null, {});
+  },
+};

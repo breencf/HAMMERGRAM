@@ -22,6 +22,10 @@
     gap: 10px;
 }
 
+.post-top-user-loc {
+    display: flex;
+    flex-direction: column;
+}
 .post-top {
     margin: 15px;
     display: flex;

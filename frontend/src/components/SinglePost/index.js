@@ -12,7 +12,7 @@ import Modal from "react-modal";
 import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { loadOnePost } from "../../store/posts";
-import {OptionsMenu} from '../Feed/Post/OptionsMenu'
+import { OptionsMenu } from "../Feed/Post/OptionsMenu";
 
 export const PostPage = () => {
   const { id } = useParams();
@@ -34,7 +34,7 @@ export const PostPage = () => {
     },
   };
 
-  console.log(id)
+  console.log(id);
 
   useEffect(() => {
     dispatch(loadOnePost(id));
@@ -45,7 +45,12 @@ export const PostPage = () => {
       <div className="post-top">
         <div className="post-top-left">
           <img className="userIcon" src={content?.User?.image} />
-          {content?.User?.username}
+          <div className="post-top-user-loc">
+            <Link to={`/users/${content.User.id}`}>
+              {content.User.username}
+            </Link>
+            <p>{content.location}</p>
+          </div>
         </div>
         <button className="button-none" onClick={() => openModal()}>
           <FaEllipsisH />
