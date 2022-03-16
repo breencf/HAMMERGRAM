@@ -27,7 +27,7 @@ module.exports = {
           updatedAt: new Date(),
         },
         {
-          postId: 3,
+          postId: 8,
           commentId: null,
           userId: 1,
           createdAt: new Date(),
@@ -105,7 +105,7 @@ module.exports = {
           updatedAt: new Date(),
         },
         {
-          postId: 3,
+          postId: 8,
           commentId: null,
           userId: 2,
           createdAt: new Date(),
@@ -183,7 +183,7 @@ module.exports = {
           updatedAt: new Date(),
         },
         {
-          postId: 3,
+          postId: 8,
           commentId: null,
           userId: 3,
           createdAt: new Date(),
@@ -261,7 +261,7 @@ module.exports = {
           updatedAt: new Date(),
         },
         {
-          postId: 3,
+          postId: 8,
           commentId: null,
           userId: 4,
           createdAt: new Date(),
@@ -339,7 +339,7 @@ module.exports = {
           updatedAt: new Date(),
         },
         {
-          postId: 3,
+          postId: 8,
           commentId: null,
           userId: 5,
           createdAt: new Date(),

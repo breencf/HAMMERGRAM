@@ -72,13 +72,22 @@ export const PostPage = () => {
         </div>
         <div className="post-bottom-bottom">
           <div>
-            <FaHeart /> likes
+            <FaHeart /> {content?.Likes.length} likes
           </div>
           <div>
             <Link to={`/users/${content?.User?.username}`}>
               {content?.User?.username}
             </Link>
             {content?.caption}
+          </div>
+          <div className="comments">
+            {content?.Comments?.map((comment) => {
+              return comment && (
+                <div key={comment.id}>
+                  <Link to={`/users/${comment.userId}`}>{comment?.User?.username}</Link> {comment?.content}
+                </div>
+              );
+            })}
           </div>
         </div>
       </div>
