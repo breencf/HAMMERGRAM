@@ -6,7 +6,7 @@ export const NavigatonTop = () => {
     return (
         <nav className='nav-top'>
             <FaCamera/>
-            <Link to="/"><h2>Hammergram</h2></Link>
+            <Link to="/"><img className='logo' src="https://hammergram.s3.amazonaws.com/icons/hammergram-logo.png"/></Link>
             <FaCommentDots/>
         </nav>
     )

@@ -11,6 +11,11 @@ nav {
 
 }
 
+.logo {
+    max-height: 40px;
+    margin-top: 15px;
+}
+
 .nav-bottom {
     bottom: 0;
     border-top: 1px solid var(--ig-dark);

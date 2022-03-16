@@ -44,8 +44,9 @@ a {
 h1,
 h2,
 h3 {
-  font-family: "Billabong";
+  font-family: inherit;
   margin: 0;
+  font-weight: 400;
 }
 
 #main {

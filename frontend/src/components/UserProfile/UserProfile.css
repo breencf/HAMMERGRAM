@@ -1,0 +1,68 @@
+.profileContainer {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.profile-top {
+  display: flex;
+  margin: 16px 16px 16px 24px;
+  gap: 20px;
+}
+
+.profile-user {
+  height: 20%;
+  width: 20%;
+  border-radius: 50%;
+}
+
+.profile-header {
+  display: flex;
+  flex-direction: column;
+  width: 70%;
+}
+
+.editButton {
+  border: 1px solid var(--ig-light-gray);
+  border-radius: 5px;
+  font-weight: 500;
+  padding: 5px;
+  margin: 5px;
+  background: none;
+}
+
+.name-bio {
+ margin:24px 16px;
+}
+
+.post-follows-container {
+    margin:16px;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+.post-follows {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.post-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr;
+    gap: 5px 5px;
+}
+
+.post-square {
+    height: auto;
+    width: 33%;
+}
+
+.post-square img {
+    height: inherit;
+    width: inherit;
+    object-fit: cover;
+}
