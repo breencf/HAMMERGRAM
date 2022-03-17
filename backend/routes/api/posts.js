@@ -102,10 +102,10 @@ router.post(
       content,
     });
 
-    const newReview = await db.Review.findByPk(review.id, {
+    const newComment = await db.Comment.findByPk(comment.id, {
       include: [db.User],
     });
-    res.json(newReview);
+    res.json(newComment);
   })
 );
 

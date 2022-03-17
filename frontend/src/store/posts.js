@@ -55,7 +55,7 @@ const likeUnlike = ({ userId, postId, like }) => {
 
 const createComment = (newComment) => {
   return {
-    type: CREATE,
+    type: CREATE_COMMENT,
     newComment,
   };
 };
@@ -149,6 +149,7 @@ export const createAComment = ({userId, postId, content}) => async (dispatch) =>
   );
   const newComment = await response.json();
   dispatch(createComment(newComment));
+  return true
 };
 
 export const deleteAComment = (id) => async (dispatch) => {

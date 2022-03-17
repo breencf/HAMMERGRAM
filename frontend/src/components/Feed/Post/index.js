@@ -1,11 +1,10 @@
 import {
-  FaRegHeart,
   FaRegCommentDots,
   FaEllipsisH,
   FaRegPaperPlane,
   FaRegBookmark,
-  FaHeart,
 } from "react-icons/fa";
+import {BsChat} from 'react-icons/bs'
 import "./Post.css";
 import { Link } from "react-router-dom";
 import Modal from "react-modal";
@@ -60,7 +59,7 @@ export const Post = ({ content }) => {
         <div className="post-bottom-top">
           <div className="post-bottom-top-left">
             <LikeButton likes={content?.Likes} postId={content.id} />
-            <FaRegCommentDots />
+            <Link to={`/posts/${content.id}/comments`}><FaRegCommentDots /></Link>
             <FaRegPaperPlane />
           </div>
           <FaRegBookmark />
