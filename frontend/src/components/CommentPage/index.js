@@ -21,7 +21,7 @@ export const CommentPage = () => {
     const created = dispatch(
       createAComment({ postId: id, userId: user.id, content: comment })
     );
-    setUpdated(created);
+    created.then(obj => setUpdated(created));
     setComment("")
   };
 

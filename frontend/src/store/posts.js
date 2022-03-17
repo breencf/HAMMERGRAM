@@ -149,15 +149,15 @@ export const createAComment = ({userId, postId, content}) => async (dispatch) =>
   );
   const newComment = await response.json();
   dispatch(createComment(newComment));
-  return true
+  return newComment
 };
 
 export const deleteAComment = (id) => async (dispatch) => {
   const response = await csrfFetch(`/api/posts/comments/${id}`, { method: "DELETE" });
   if (response.ok) {
     const deletedComment = await response.json();
-    dispatch(deleteComment(deletedComment));
-    return true
+    dispatch(deleteComment(deletedComment))
+    return deletedComment
   }
 };
 

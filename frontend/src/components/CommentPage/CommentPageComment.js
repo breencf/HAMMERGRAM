@@ -14,21 +14,22 @@ export const CommentPageComment = ({ comment, setUpdated }) => {
   const onDelete = (e) => {
     e.preventDefault();
     const d = dispatch(deleteAComment(comment.id));
-    // if (d) setUpdated(d);
+    d.then(obj => setDeleted(true))
+
   };
 
-//   useEffect(() => {
-//     if (deleted) {
-//         console.log('=============')
-//         console.log('=============')
-//         console.log('=============')
-//         console.log('=============')
-//         console.log('=============')
-//         console.log('calling loadOnePost in single comment component')
-//     //   dispatch(loadOnePost(comment.postId));
-//       setDeleted(false);
-//     }
-//   }, [deleted]);
+  useEffect(() => {
+    if (deleted) {
+        console.log('=============')
+        console.log('=============')
+        console.log('=============')
+        console.log('=============')
+        console.log('=============')
+
+      dispatch(loadOnePost(comment.postId));
+      setDeleted(false);
+    }
+  }, [deleted]);
 
 
   return (
