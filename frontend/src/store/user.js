@@ -1,3 +1,5 @@
+import { csrfFetch } from "./csrf";
+
 const LOAD_PROFILE = "users/LOAD";
 const FOLLOW = "posts/FOLLOW";
 
@@ -14,17 +16,18 @@ export const loadProfile = (id) => async (dispatch) => {
   }
 };
 
-const followUnfollow = (follow) => {
+const followUnfollow = (follow, followingUserId) => {
   return {
     type: FOLLOW,
     follow,
+    followingUserId
   };
 };
 
 export const followButton =
   ({ followingUserId, followerUserId }) =>
   async (dispatch) => {
-    const response = await csrfFetch(`/api/users/${followerUserId}/like`, {
+    const response = await csrfFetch(`/api/users/${followerUserId}/follow`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ followingUserId, followerUserId }),
@@ -32,7 +35,7 @@ export const followButton =
 
     if (response.ok) {
       const follow = await response.json();
-      dispatch(followUnfollow(follow));
+      dispatch(followUnfollow(follow, followingUserId));
       return true;
     }
   };
@@ -48,18 +51,13 @@ export const userReducer = (state = initialState, action) => {
       return newState;
     case FOLLOW:
       newState = { ...state };
-      if (action.like !== "destroyed") {
-        newState.Follows.push(action.like);
-        if (newState.current && newState.current.id === action.postId)
-          newState.current.Likes.push(action.like);
+      if (action.follow !== "destroyed") {
+        newState.Followers.push(action.follow);
       } else {
-        newState.feed[action.postId].Likes = newState.feed[
-          action.postId
-        ].Likes.filter((like) => like.userId !== action.userId);
-        if (newState.current && newState.current.id === action.postId)
-          newState.current.likes = newState.current.Likes.filter(
-            (like) => like.userId !== action.userId
-          );
+        console.log(action.follow)
+        newState.Followers = newState.Followers.filter(
+          (f) => f.followingUserId !== action.followingUserId
+        );
       }
       return newState;
     default:
