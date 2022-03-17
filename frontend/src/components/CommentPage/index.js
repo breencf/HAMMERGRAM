@@ -11,11 +11,9 @@ export const CommentPage = () => {
   const user = useSelector((s) => s.sessions.user);
   const [comment, setComment] = useState("");
   const [updated, setUpdated] = useState(false);
-  console.log(id);
 
   useEffect(() => {
     dispatch(loadOnePost(id));
-    console.log(post);
   }, [dispatch, id]);
 
   const onSubmit = (e) => {
@@ -24,6 +22,7 @@ export const CommentPage = () => {
       createAComment({ postId: id, userId: user.id, content: comment })
     );
     setUpdated(created);
+    setComment("")
   };
 
   useEffect(() => {
@@ -39,7 +38,7 @@ export const CommentPage = () => {
         <CommentPageComment comment={post} />
         <hr />
         {post?.Comments.map((comment) => {
-          return <CommentPageComment key={comment.id} comment={comment} />;
+          return <CommentPageComment key={comment.id} comment={comment} setUpdated={setUpdated} />;
         })}
       </div>
       <div>

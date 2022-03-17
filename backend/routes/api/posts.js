@@ -109,4 +109,21 @@ router.post(
   })
 );
 
+router.delete(
+  "/comments/:id",
+  asyncHandler(async (req, res) => {
+    const { id } = req.params;
+    const exists = await db.Comment.findOne({
+      where: { id },
+    });
+    if (exists) {
+      await db.Comment.destroy({
+        where: { id },
+      });
+      res.json(exists);
+    }
+  })
+);
+
+
 module.exports = router;

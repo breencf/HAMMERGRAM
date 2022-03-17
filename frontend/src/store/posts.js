@@ -60,10 +60,10 @@ const createComment = (newComment) => {
   };
 };
 
-const deleteComment = (id) => {
+const deleteComment = (deletedComment) => {
   return {
-    type: DELETE,
-    id,
+    type: DELETE_COMMENT,
+    deletedComment,
   };
 };
 
@@ -155,8 +155,9 @@ export const createAComment = ({userId, postId, content}) => async (dispatch) =>
 export const deleteAComment = (id) => async (dispatch) => {
   const response = await csrfFetch(`/api/posts/comments/${id}`, { method: "DELETE" });
   if (response.ok) {
-    const deleted = await response.json();
-    dispatch(deleteComment(id));
+    const deletedComment = await response.json();
+    dispatch(deleteComment(deletedComment));
+    return true
   }
 };
 
@@ -198,18 +199,18 @@ export const postReducer = (state = initialState, action) => {
           action.postId
         ].Likes.filter((like) => like.userId !== action.userId);
         if (newState.current && newState.current.id === action.postId)
-          newState.current.Likes.filter(
+          newState.current.likes = newState.current.Likes.filter(
             (like) => like.userId !== action.userId
           );
       }
       return newState;
     case CREATE_COMMENT:
       newState = { ...state };
-      newState.feed[action.newComment.postId].Comments.push(action.newComment);
+      newState.current.Comments.push(action.newComment);
       return newState;
     case DELETE_COMMENT:
       newState = { ...state };
-      newState.feed[action.postId].Comments.filter(comment => comment.id !== action.commentId);
+      newState.current.Comments = newState.current.Comments.filter(comment => comment.id !== action.deletedComment.postId)
       return newState;
     default:
       return state;
