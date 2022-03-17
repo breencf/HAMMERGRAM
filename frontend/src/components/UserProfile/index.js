@@ -40,7 +40,7 @@ export const UserProfile = () => {
             <h1>
               {user?.username} <BsGearWide onClick={openModal} />
             </h1>
-            <button className="editButton">Edit Profile</button>
+            {id === user.id ? <button className="editButton">Edit Profile</button> : <button className="submitButton">Follow</button>}
           </div>
         </div>
         <div className="name-bio">

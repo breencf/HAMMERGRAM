@@ -56,4 +56,21 @@ router.get(
   })
 );
 
+router.post(
+  "/:id/follow",
+  asyncHandler(async (req, res) => {
+    const { followerUserId, followingUserId  } = req.body;
+    const exists = await db.Follow.findOne({
+      where: { followerUserId, followingUserId },
+    });
+    if (exists) {
+      await db.Like.destroy({ where: { followerUserId, followingUserId } });
+      res.json("destroyed");
+    } else {
+      const follow = await db.Follow.create({ followerUserId, followingUserId });
+      res.json(follow);
+    }
+  })
+);
+
 module.exports = router;
