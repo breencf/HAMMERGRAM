@@ -16,10 +16,11 @@ export const endSession = () => {
   };
 };
 
-const followUnfollow = (follow, followingUserId) => {
+const followUnfollow = ({ follow, followedUserId, followingUserId }) => {
   return {
     type: FOLLOW,
     follow,
+    followedUserId,
     followingUserId,
   };
 };
@@ -35,7 +36,7 @@ export const followButton =
 
     if (response.ok) {
       const follow = await response.json();
-      dispatch(followUnfollow(follow, followingUserId));
+      dispatch(followUnfollow({ follow, followedUserId, followingUserId }));
       return true;
     }
   };
@@ -99,10 +100,13 @@ export default function sessionReducer(state = initialState, action) {
       if (action.follow !== "destroyed") {
         newState.user.Followings.push(action.follow);
       } else {
-        newState.user.Followings = newState.user.Followings.filter(
-          (f) => f.followedUserId !== action.followedUserId
-        );
+        newState.user.Followings = newState.user.Followings.filter((f) => {
+          return f.followedUserId !== action.followedUserId;
+        });
       }
+      console.log(
+        `user ${action.followingUserId} followed or unfollowed user ${action.followedUserId}`
+      );
       console.log(newState.user.Followings);
       return newState;
     default:

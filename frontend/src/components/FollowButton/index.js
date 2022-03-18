@@ -8,9 +8,11 @@ export const FollowButton = ({ followedUserId }) => {
   const [followToggle, setFollowToggle] = useState(false);
   const { user } = useSelector((s) => s.sessions);
 
+
+
   useEffect(() => {
     setFollowToggle(
-      user?.Followings?.find((follow) => follow.followingUserId === user.id)
+      user?.Followings?.find((follow) => follow.followedUserId === followedUserId)
     );
   }, [user?.Followings.length]);
 

@@ -33,7 +33,7 @@ export const UserProfile = () => {
     dispatch(loadProfile(id));
   }, [dispatch, id]);
 
-  useEffect(() => {setFollowerCount(user?.Followers?.length)}, [user?.Followers?.length])
+  useEffect(() => {if(user?.Followers) setFollowerCount(user?.Followers?.length)}, [user?.Followers?.length])
 
   return (
     <>
