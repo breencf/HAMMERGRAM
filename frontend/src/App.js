@@ -28,6 +28,7 @@ function App() {
       </>}
       <Switch>
         <Route exact path="/">
+          <LoginForm />
         </Route>
         <Route path="/login">
           <LoginForm />

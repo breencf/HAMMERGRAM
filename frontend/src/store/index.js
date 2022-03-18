@@ -4,6 +4,7 @@ import thunk from "redux-thunk";
 import sessionReducer from "./session";
 import { postReducer } from "./posts";
 import { userReducer } from "./user";
+import searchReducer from "./search";
 let enhancer;
 
 if (process.env.NODE_ENV === "production") {
@@ -22,7 +23,8 @@ const configureStore = (preloadedState) => {
 const rootReducer = combineReducers({
   sessions: sessionReducer,
   posts: postReducer,
-  users: userReducer
+  users: userReducer,
+  search: searchReducer
 });
 
 export default configureStore;

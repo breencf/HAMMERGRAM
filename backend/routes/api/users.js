@@ -6,6 +6,8 @@ const { setTokenCookie, requireAuth } = require("../../utils/auth");
 const { User } = require("../../db/models");
 const db = require("../../db/models");
 const router = express.Router();
+const Sequelize = require("sequelize");
+const Op = Sequelize.Op;
 
 const validateSignup = [
   check("email")
@@ -59,19 +61,63 @@ router.get(
 router.post(
   "/:id/follow",
   asyncHandler(async (req, res) => {
-    const { followerUserId, followingUserId  } = req.body;
-    console.log(followerUserId, followingUserId)
+    const { followedUserId, followingUserId } = req.body;
+    console.log(followedUserId, followingUserId);
     const exists = await db.Follow.findOne({
-      where: { followerUserId, followingUserId },
+      where: { followedUserId, followingUserId },
     });
-    console.log(exists)
+    console.log(exists);
     if (exists) {
-      await db.Follow.destroy({ where: { followerUserId, followingUserId } });
+      await db.Follow.destroy({ where: { followedUserId, followingUserId } });
       res.json("destroyed");
     } else {
-      const follow = await db.Follow.create({ followerUserId, followingUserId });
+      const follow = await db.Follow.create({
+        followedUserId,
+        followingUserId,
+      });
       res.json(follow);
     }
+  })
+);
+
+router.get(
+  "/:id/activity",
+  asyncHandler(async (req, res) => {
+    const { id } = req.params;
+
+    const likes = await db.Like.findAll({
+      include: [{ model: db.Post, where: { userId: id } }, db.User],
+    });
+    const comments = await db.Comment.findAll({
+      include: [{ model: db.Post, where: { userId: id } }, db.User],
+    });
+    const follows = await db.Follow.findAll({
+      where: { followedUserId: id },
+      include: [{ model: db.User, as: "Followings" }],
+    });
+
+    const activities = [...likes, ...comments, ...follows].sort(
+      (a, b) => a - b
+    );
+
+    res.json(activities);
+  })
+);
+
+router.post(
+  "/search",
+  asyncHandler(async (req, res) => {
+    const {value} = req.body;
+    let data = await db.User.findAll({
+      where: {
+        [Op.or]: [
+          { name: { [Op.like]: `%${value}%` } },
+          { username: { [Op.like]: `%${value}%` } },
+        ],
+      },
+    });
+
+    res.json(data);
   })
 );
 

@@ -23,9 +23,9 @@ export const NavigationBottom = () => {
     <nav className="nav-bottom">
       {/* <h2>Hammergram</h2> */}
       <Link to="/"><FaHome /></Link>
-      <FaSearch />
+      <Link to="/search"><FaSearch /></Link>
       <Link to="/create"><FaPlusSquare /></Link>
-      <FaHeart />
+      <Link to="/activity"><FaHeart /></Link>
       <Link to={`/users/${sessionUser.id}`}><FaUserCircle /></Link>
     </nav>
     </>

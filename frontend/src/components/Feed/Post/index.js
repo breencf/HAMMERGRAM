@@ -12,6 +12,10 @@ import { OptionsMenu } from "./OptionsMenu";
 import { useEffect, useState } from "react";
 import { LikeButton } from "../../LikeButton";
 import { useSelector } from "react-redux";
+import dayjs from "dayjs";
+let relativeTime = require('dayjs/plugin/relativeTime')
+dayjs.extend(relativeTime)
+
 
 export const Post = ({ content }) => {
   const [modalIsOpen, setModalIsOpen] = useState(false);
@@ -86,6 +90,8 @@ export const Post = ({ content }) => {
               );
             })}
           </div>
+          {dayjs(content?.createdAt).fromNow()}
+
         </div>
       </div>
       <Modal

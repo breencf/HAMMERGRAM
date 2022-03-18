@@ -34,7 +34,10 @@ export const LoginForm = () => {
   return (
     <div className="loginPage">
       {/* <img src="../../../public/logo.png" /> */}
-      <h1>Hammergram</h1>
+      <img
+        className="logo"
+        src="https://hammergram.s3.amazonaws.com/icons/hammergram-logo.png"
+      />
       <form onSubmit={onSubmit}>
         <div>
           <ul>

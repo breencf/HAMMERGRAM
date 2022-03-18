@@ -1,6 +1,7 @@
 "use strict";
 const { Validator } = require("sequelize");
 const bcrypt = require("bcryptjs");
+const db = require("../models");
 
 module.exports = (sequelize, DataTypes) => {
   const User = sequelize.define(
@@ -105,14 +106,12 @@ module.exports = (sequelize, DataTypes) => {
     User.hasMany(models.Like, { foreignKey: "userId" });
     User.hasMany(models.Follow, {
       as: "Followers",
-      foreignKey: "followerUserId",
+      foreignKey: "followedUserId",
     });
     User.hasMany(models.Follow, {
       as: "Followings",
       foreignKey: "followingUserId",
     });
-
-
   };
   return User;
 };

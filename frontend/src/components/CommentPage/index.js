@@ -21,14 +21,14 @@ export const CommentPage = () => {
     const created = dispatch(
       createAComment({ postId: id, userId: user.id, content: comment })
     );
-    created.then(obj => setUpdated(created));
-    setComment("")
+    created.then((obj) => setUpdated(created));
+    setComment("");
   };
 
   useEffect(() => {
     if (updated) {
       dispatch(loadOnePost(id));
-      setUpdated(false)
+      setUpdated(false);
     }
   }, [updated]);
 
@@ -38,7 +38,13 @@ export const CommentPage = () => {
         <CommentPageComment comment={post} />
         <hr />
         {post?.Comments.map((comment) => {
-          return <CommentPageComment key={comment.id} comment={comment} setUpdated={setUpdated} />;
+          return (
+            <CommentPageComment
+              key={comment.id}
+              comment={comment}
+              setUpdated={setUpdated}
+            />
+          );
         })}
       </div>
       <div>
@@ -47,13 +53,14 @@ export const CommentPage = () => {
           <img src={user.image} className="userIcon" />
           <form onSubmit={onSubmit}>
             <input
+              required
               type="text"
               id="comment"
               value={comment}
               onChange={(e) => setComment(e.target.value)}
               placeholder="Add a comment..."
             />
-            <button type="submit" className="button-submit">
+            <button type="submit" className="button-submit" disabled={comment? false: true}>
               Post
             </button>
           </form>
