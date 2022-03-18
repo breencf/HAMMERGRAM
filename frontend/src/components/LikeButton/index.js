@@ -20,8 +20,8 @@ export const LikeButton = ({ likes, postId }) => {
     e.preventDefault();
     if (id) {
       const dispatched = dispatch(likeButton({ userId: id, postId }));
+      dispatched.then((e) => setDispatched(e))
       setLiked(!liked);
-      setDispatched(dispatched)
     } else {
       history.push("/signup");
     }

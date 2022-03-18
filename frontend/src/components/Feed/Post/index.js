@@ -67,7 +67,7 @@ export const Post = ({ content }) => {
         <div className="post-bottom-bottom">
           <div>{likeCount} likes</div>
           <div>
-            <Link to={`/users/${content.User.username}`}>
+            <Link to={`/users/${content.User.id}`}>
               {content.User.username}
             </Link>
             {content.caption}

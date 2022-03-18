@@ -71,7 +71,7 @@ export const PostPage = () => {
         <div className="post-bottom-top">
           <div className="post-bottom-top-left">
           {content && <LikeButton likes={content?.Likes} postId={content?.id} />}
-          <Link to={`/posts/${content.id}/comments`}><FaRegCommentDots /></Link>            <FaRegPaperPlane />
+          <Link to={`/posts/${content?.id}/comments`}><FaRegCommentDots /></Link>            <FaRegPaperPlane />
           </div>
           <FaRegBookmark />
         </div>
