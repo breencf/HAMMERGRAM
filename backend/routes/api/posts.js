@@ -3,6 +3,7 @@ const asyncHandler = require("express-async-handler");
 const db = require("../../db/models");
 const { requireAuth } = require("../../utils/auth");
 const router = express.Router();
+const {singlePublicFileUpload, singleMulterUpload} = require("../../awss3")
 
 router.get(
   "/",
@@ -63,7 +64,7 @@ router.put(
 );
 
 router.post(
-  "/",
+  "/", singleMulterUpload("image"),
   asyncHandler(async (req, res) => {
     const { id, caption, location, image } = req.body;
     const post = await db.Post.create({ userId: id, caption, image, location });
