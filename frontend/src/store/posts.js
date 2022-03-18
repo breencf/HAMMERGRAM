@@ -110,11 +110,25 @@ export const updatePost =
 export const createPost =
   ({ id, caption, image, location }) =>
   async (dispatch) => {
+
+    const formData = new FormData()
+    formData.append('id', id)
+    formData.append('caption', caption)
+    formData.append('location', location)
+    formData.append('image', image)
+
+    //for multiple
+    // if (images && images.length !== 0) {
+    //   for (var i = 0; i < images.length; i++) {
+    //     formData.append("images", images[i]);
+    //   }
+    // }
+
     const response = await csrfFetch(`/api/posts`, {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ id, caption, image, location }),
-    });
+      headers: { "Content-Type": "multipart/form-data" },
+      body: formData},
+    );
 
     if (response.ok) {
       const newPost = await response.json();

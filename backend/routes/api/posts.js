@@ -66,8 +66,9 @@ router.put(
 router.post(
   "/", singleMulterUpload("image"),
   asyncHandler(async (req, res) => {
-    const { id, caption, location, image } = req.body;
-    const post = await db.Post.create({ userId: id, caption, image, location });
+    const { id, caption, location} = req.body;
+    const postImageURL = await singlePublicFileUpload(req.file)
+    const post = await db.Post.create({ userId: id, caption, image: postImageURL, location });
     const postToReturn = await db.Post.findByPk(post.id, {
       include: [db.User, db.Like, { model: db.Comment, include: [db.User] }],
     });
