@@ -1,18 +1,19 @@
 import { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { followButton, loadProfile } from "../../store/user";
+import { loadProfile } from "../../store/user";
+import { followButton } from "../../store/session";
 import { BsGearWide, BsGrid3X3, BsCollection } from "react-icons/bs";
 import "./UserProfile.css";
 import Modal from "react-modal";
 import { ProfileMenu } from "./ProfileMenu";
+import { FollowButton } from "../FollowButton";
 export const UserProfile = () => {
   const { id } = useParams();
   const dispatch = useDispatch();
-  const loggedIn = useSelector((s) => s.sessions.user);
   const user = useSelector((s) => s.users.profile);
   const [modalIsOpen, setModalIsOpen] = useState(false);
-  const [followToggle, setFollowToggle] = useState(false);
+  const [followerCount, setFollowerCount] = useState(0)
   const openModal = () => setModalIsOpen(true);
   const closeModal = () => setModalIsOpen(false);
   const modalStyle = {
@@ -32,11 +33,7 @@ export const UserProfile = () => {
     dispatch(loadProfile(id));
   }, [dispatch, id]);
 
-  useEffect(() => {
-    setFollowToggle(
-      user?.Followers?.find((follow) => follow.followingUserId === loggedIn.id)
-    );
-  }, [user]);
+  useEffect(() => {setFollowerCount(user?.Followers?.length)}, [user?.Followers?.length])
 
   return (
     <>
@@ -51,19 +48,7 @@ export const UserProfile = () => {
             {id === user.id ? (
               <button className="editButton">Edit Profile</button>
             ) : (
-              <button
-                className="submitButton"
-                onClick={() => {
-                  dispatch(
-                    followButton({
-                      followingUserId: loggedIn.id,
-                      followedUserId: user.id,
-                    })
-                  );
-                }}
-              >
-                {followToggle ? "Unfollow" : "Follow"}
-              </button>
+              <FollowButton followedUserId={id}/>
             )}
           </div>
         </div>
@@ -77,7 +62,7 @@ export const UserProfile = () => {
             <span>{user?.Posts?.length}</span> posts
           </div>
           <div className="post-follows">
-            <span>{user?.Followers?.length}</span> followers
+            <span>{followerCount}</span> followers
           </div>
           <div className="post-follows">
             <span>{user?.Followings?.length}</span> following

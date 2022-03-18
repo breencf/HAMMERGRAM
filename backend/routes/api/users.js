@@ -107,7 +107,7 @@ router.get(
 router.post(
   "/search",
   asyncHandler(async (req, res) => {
-    const {value} = req.body;
+    const { value } = req.body;
     let data = await db.User.findAll({
       where: {
         [Op.or]: [
@@ -118,6 +118,19 @@ router.post(
     });
 
     res.json(data);
+  })
+);
+
+router.get(
+  "/:id/followers",
+  asyncHandler(async (req, res) => {
+    const { id } = req.params;
+    const followers = await db.Follow.findAll({
+      where: { followedUserId: id },
+      include: [{ model: db.User, as: "Followings" }],
+    });
+
+    res.json(followers);
   })
 );
 

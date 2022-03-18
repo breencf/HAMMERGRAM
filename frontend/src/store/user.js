@@ -1,21 +1,21 @@
 import { csrfFetch } from "./csrf";
-
 const LOAD_PROFILE = "users/LOAD_PROFILE";
-const FOLLOW = "posts/FOLLOW";
 const LOAD_ACTIVITY = "users/LOAD_ACTIVITY";
-const LOAD_FOLLOWING = "users/LOAD_FOLLOWING";
+const LOAD_FOLLOWERS = "users/LOAD_FOLLOWERS";
+
 
 const load = (profile) => {
   return { type: LOAD_PROFILE, profile };
 };
 
-const followUnfollow = (follow, followingUserId) => {
+
+const lFollowers = (followers) => {
   return {
-    type: FOLLOW,
-    follow,
-    followingUserId,
-  };
-};
+    type: LOAD_FOLLOWERS,
+    followers,
+  }
+}
+
 
 const lActivity = (activity) => {
   return {
@@ -34,21 +34,14 @@ export const loadActivity = (id) => async (dispatch) => {
   }
 };
 
-export const followButton =
-  ({ followingUserId, followedUserId }) =>
-  async (dispatch) => {
-    const response = await csrfFetch(`/api/users/${followedUserId}/follow`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ followingUserId, followedUserId }),
-    });
+export const loadFollowers = id => async dispatch => {
+  const response = await fetch(`/api/users/${id}/followers`)
+  if (response.ok) {
+    const followers = await response.json()
+    dispatch (lFollowers(followers))
+  }
+}
 
-    if (response.ok) {
-      const follow = await response.json();
-      dispatch(followUnfollow(follow, followingUserId));
-      return true;
-    }
-  };
 
 export const loadProfile = (id) => async (dispatch) => {
   const response = await fetch(`/api/users/${id}`);
@@ -68,20 +61,14 @@ export const userReducer = (state = initialState, action) => {
       newState = { ...state };
       newState.profile = action.profile;
       return newState;
-    case FOLLOW:
-      newState = { ...state };
-      if (action.follow !== "destroyed") {
-        newState.profile.Followers.push(action.follow);
-      } else {
-        console.log(action.follow);
-        newState.profile.Followers = newState.profile.Followers.filter(
-          (f) => f.followingUserId !== action.followingUserId
-        );
-      }
-      return newState;
     case LOAD_ACTIVITY:
       newState = { ...state };
       newState.activity = action.activity;
+      return newState
+    case LOAD_FOLLOWERS:
+      newState = {...state}
+      newState.profile.Followers = action.followers
+      console.log(newState.profile.Followers)
       return newState
     default:
       return state;

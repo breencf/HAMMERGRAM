@@ -4,7 +4,7 @@ const { check } = require("express-validator");
 const { handleValidationErrors } = require("../../utils/validation");
 
 const { setTokenCookie, restoreUser } = require("../../utils/auth");
-const { User } = require("../../db/models");
+const { User, Follow } = require("../../db/models");
 
 const router = express.Router();
 
@@ -36,7 +36,19 @@ router.post(
     }
 
     await setTokenCookie(res, user);
-    return res.json({ user });
+    const userWithFollowing = await User.findByPk(user.id, {
+      include: {
+        model: Follow,
+        as: "Followings",
+        where: { followingUserId: user.id },
+      },
+    });
+    console.log("====================");
+    console.log(user);
+    console.log("====================");
+    console.log(userWithFollowing.Followings);
+    console.log("====================");
+    return res.json({ user: userWithFollowing });
   })
 );
 //logout
@@ -54,8 +66,16 @@ router.get(
   asyncHandler(async (req, res) => {
     const { user } = req;
     if (user) {
+      const userWithFollowing = await User.findByPk(user.id, {
+        include: {
+          model: Follow,
+          as: "Followings",
+          where: { followingUserId: user.id },
+        },
+      });
       return res.json({
-        user: user.toSafeObject(),
+        // user: user.toSafeObject(),
+        user: userWithFollowing,
       });
     } else return res.json({});
   })

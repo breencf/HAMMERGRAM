@@ -2,7 +2,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { deletePost } from "../../../store/posts";
 import { useState, useEffect } from "react";
-import { followButton } from "../../../store/user";
+import { followButton } from "../../../store/session";
 
 export const OptionsMenu = ({
   content,
