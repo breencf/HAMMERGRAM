@@ -52,7 +52,7 @@ export const loadProfile = (id) => async (dispatch) => {
   }
 };
 
-const initialState = { profile: {}, activity: [] };
+const initialState = { profile: {}, activity: [], profileFollowers: [] };
 let newState;
 
 export const userReducer = (state = initialState, action) => {
@@ -67,7 +67,7 @@ export const userReducer = (state = initialState, action) => {
       return newState
     case LOAD_FOLLOWERS:
       newState = {...state}
-      newState.profile.Followers = action.followers
+      newState.profileFollowers = action.followers
       console.log(newState.profile.Followers)
       return newState
     default:

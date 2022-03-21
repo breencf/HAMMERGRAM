@@ -5,7 +5,6 @@ const DELETE = "posts/DELETE";
 const LOAD_ONE = "posts/LOAD_ONE";
 const UPDATE_ONE = "posts/UPDATE_ONE";
 const CREATE = "posts/CREATE";
-const LIKE = "posts/LIKE";
 const CREATE_COMMENT = "comments/CREATE";
 const DELETE_COMMENT = "comments/DELETE";
 
@@ -41,15 +40,6 @@ const create = (post) => {
   return {
     type: CREATE,
     post,
-  };
-};
-
-const likeUnlike = ({ userId, postId, like }) => {
-  return {
-    type: LIKE,
-    userId,
-    postId,
-    like,
   };
 };
 
@@ -110,12 +100,11 @@ export const updatePost =
 export const createPost =
   ({ id, caption, image, location }) =>
   async (dispatch) => {
-
-    const formData = new FormData()
-    formData.append('id', id)
-    formData.append('caption', caption)
-    formData.append('location', location)
-    formData.append('image', image)
+    const formData = new FormData();
+    formData.append("id", id);
+    formData.append("caption", caption);
+    formData.append("location", location);
+    formData.append("image", image);
 
     //for multiple
     // if (images && images.length !== 0) {
@@ -127,8 +116,8 @@ export const createPost =
     const response = await csrfFetch(`/api/posts`, {
       method: "POST",
       headers: { "Content-Type": "multipart/form-data" },
-      body: formData},
-    );
+      body: formData,
+    });
 
     if (response.ok) {
       const newPost = await response.json();
@@ -136,42 +125,27 @@ export const createPost =
     }
   };
 
-export const likeButton =
-  ({ userId, postId }) =>
+export const createAComment =
+  ({ userId, postId, content }) =>
   async (dispatch) => {
-    const response = await csrfFetch(`/api/posts/${postId}/like`, {
+    const response = await csrfFetch(`/api/posts/${postId}/comments`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ userId, postId }),
+      body: JSON.stringify({ userId, postId, content }),
     });
-
-    if (response.ok) {
-      const like = await response.json();
-      dispatch(likeUnlike({ userId, postId, like }));
-      return true;
-    }
+    const newComment = await response.json();
+    dispatch(createComment(newComment));
+    return newComment;
   };
 
-export const createAComment = ({userId, postId, content}) => async (dispatch) => {
-  const response = await csrfFetch(
-    `/api/posts/${postId}/comments`,
-    {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({userId, postId, content}),
-    }
-  );
-  const newComment = await response.json();
-  dispatch(createComment(newComment));
-  return newComment
-};
-
 export const deleteAComment = (id) => async (dispatch) => {
-  const response = await csrfFetch(`/api/posts/comments/${id}`, { method: "DELETE" });
+  const response = await csrfFetch(`/api/posts/comments/${id}`, {
+    method: "DELETE",
+  });
   if (response.ok) {
     const deletedComment = await response.json();
-    dispatch(deleteComment(deletedComment))
-    return deletedComment
+    dispatch(deleteComment(deletedComment));
+    return deletedComment;
   }
 };
 
@@ -202,29 +176,15 @@ export const postReducer = (state = initialState, action) => {
       newState = { ...state };
       newState.feed[action.post.id] = action.post;
       return newState;
-    case LIKE:
-      newState = { ...state };
-      if (action.like !== "destroyed") {
-        newState.feed[action.postId].Likes.push(action.like);
-        if (newState.current && newState.current.id === action.postId)
-          newState.current.Likes.push(action.like);
-      } else {
-        newState.feed[action.postId].Likes = newState.feed[
-          action.postId
-        ].Likes.filter((like) => like.userId !== action.userId);
-        if (newState.current && newState.current.id === action.postId)
-          newState.current.likes = newState.current.Likes.filter(
-            (like) => like.userId !== action.userId
-          );
-      }
-      return newState;
     case CREATE_COMMENT:
       newState = { ...state };
       newState.current.Comments.push(action.newComment);
       return newState;
     case DELETE_COMMENT:
       newState = { ...state };
-      newState.current.Comments = newState.current.Comments.filter(comment => comment.id !== action.deletedComment.postId)
+      newState.current.Comments = newState.current.Comments.filter(
+        (comment) => comment.id !== action.deletedComment.postId
+      );
       return newState;
     default:
       return state;

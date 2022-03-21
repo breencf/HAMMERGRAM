@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { deletePost } from "../../../store/posts";
 import { useState, useEffect } from "react";
 import { followButton } from "../../../store/session";
+import { FollowButton } from "../../FollowButton";
 
 export const OptionsMenu = ({
   content,
@@ -28,9 +29,11 @@ export const OptionsMenu = ({
   return (
     <div className="options-menu">
       <ul>
-        <li>
-          {/* <button className="submitButton" onClick={() => {dispatch(followButton({followingUserId: user.id, followedUserId: profileUser.id}))}}>{followToggle? "Unfollow" : "Follow"}</button> */}
-        </li>
+
+          {user.id !== content.userId && (
+            <li><FollowButton followedUserId={content.userId} /></li>
+          )}
+
         {/* Check the above to toggle follow/follow */}
         {content.userId === user.id && singlePost && (
           <li

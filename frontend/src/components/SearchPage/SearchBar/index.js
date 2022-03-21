@@ -2,6 +2,7 @@ import { useDispatch } from "react-redux";
 import { useState } from "react";
 import { searchVal } from "../../../store/search";
 import { FaSearch } from "react-icons/fa";
+import "./SearchBar.css"
 
 export const SearchBar = () => {
   const dispatch = useDispatch();
@@ -18,14 +19,15 @@ export const SearchBar = () => {
 
   return (
     <div id="search">
-      <FaSearch id="search-icon" />
+
       <form onSubmit={handlesubmit}>
+      <FaSearch id="search-icon" />
         <input
           onChange={(e) => {
             setName(e.target.value);
             if(e.target.value.length > 2) dispatch(searchVal(e.target.value));
           }}
-          placeholder="Artists, songs, or playlists"
+          placeholder="Search for a user..."
           value={name}
           type="text"
           name="name"

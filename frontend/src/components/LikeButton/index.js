@@ -3,25 +3,28 @@ import { useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
 import { FaRegHeart, FaHeart } from "react-icons/fa";
 import "./LikeButton.css";
-import { likeButton, loadPosts } from "../../store/posts";
+import { loadPosts } from "../../store/posts";
+import { likeButton } from "../../store/session";
 
-export const LikeButton = ({ likes, postId }) => {
+export const LikeButton = ({ postId }) => {
   const dispatch = useDispatch();
-  const { id } = useSelector((state) => state.sessions?.user);
-  const likesState = useSelector((state) => state.posts.feed[postId]?.Likes);
+  const { user, likes } = useSelector((state) => state.sessions);
+  const likeCount = useSelector((state) => state.posts.feed[postId]?.Likes);
   const [dispatched, setDispatched] = useState(false)
-
-  const [liked, setLiked] = useState(
-    likes.filter((likeObj) => likeObj.userId === id).length
-  );
+  const [likeToggle, setLikeToggle] = useState(false)
   const history = useHistory();
+
+
+  useEffect(() => setLikeToggle(likes[postId]), [Object.values(likes).length])
+
+
 
   const onClick = async (e) => {
     e.preventDefault();
-    if (id) {
-      const dispatched = dispatch(likeButton({ userId: id, postId }));
+    if (user.id) {
+      const dispatched = dispatch(likeButton({ userId: user.id, postId }));
       dispatched.then((e) => setDispatched(e))
-      setLiked(!liked);
+      setLikeToggle(!likeToggle);
     } else {
       history.push("/signup");
     }
@@ -35,7 +38,7 @@ export const LikeButton = ({ likes, postId }) => {
   return (
     <div>
       <button className="likeButton" type="button" onClick={onClick}>
-        {liked ? <FaHeart /> : <FaRegHeart />}
+        {likeToggle ? <FaHeart /> : <FaRegHeart />}
       </button>
     </div>
   );

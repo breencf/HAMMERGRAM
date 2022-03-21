@@ -1,0 +1,27 @@
+#search {
+    width: 90%;
+    display: flex;
+    padding: 10px;
+    border: 1px solid var(--ig-light-gray);
+    border-radius: 14px;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 10px;
+    background-color: white;
+}
+
+#search form {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+}
+
+
+
+#search input {
+    border: none;
+    height: 24px;
+    background-color: inherit;
+    font-size: 18px;
+}

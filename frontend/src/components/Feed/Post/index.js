@@ -62,7 +62,7 @@ export const Post = ({ content }) => {
       <div className="post-bottom">
         <div className="post-bottom-top">
           <div className="post-bottom-top-left">
-            <LikeButton likes={content?.Likes} postId={content.id} />
+            <LikeButton postId={content.id} />
             <Link to={`/posts/${content.id}/comments`}><FaRegCommentDots /></Link>
             <FaRegPaperPlane />
           </div>
@@ -100,7 +100,7 @@ export const Post = ({ content }) => {
         style={modalStyle}
         ariaHideApp={false}
       >
-        <OptionsMenu content={content} />
+        <OptionsMenu content={content} closeModal={closeModal} />
       </Modal>
     </div>
   );

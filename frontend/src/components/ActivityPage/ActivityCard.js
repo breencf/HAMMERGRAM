@@ -1,6 +1,8 @@
 import dayjs from "dayjs";
 import { Link } from "react-router-dom";
+import { bindActionCreators } from "redux";
 import "../CommentPage/CommentPage.css";
+import { FollowButton } from "../FollowButton";
 import "./ActivityCard.css"
 let relativeTime = require('dayjs/plugin/relativeTime')
 dayjs.extend(relativeTime)
@@ -33,7 +35,7 @@ else {
     <div>
       {phrase === "liked your post" && <img className="activity-image" src={activity.Post.image}/>}
       {phrase[0] === "c" && <img className="activity-image" src={activity.Post.image}/>}
-      {phrase[0] === "s" && <button className="submitButton">Follow</button>}
+      {phrase[0] === "s" && <FollowButton followedUserId={activity.followingUserId} />}
 
       </div>
     </div>
