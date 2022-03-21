@@ -32,8 +32,8 @@ export const PostPage = () => {
       bottom: "auto",
       marginRight: "-50%",
       transform: "translate(-50%, -50%)",
-      backgroundColor: "black",
-      border: "none",
+      border: "1px solid var(--ig-light-gray)",
+      padding: "0px"
     },
   };
 

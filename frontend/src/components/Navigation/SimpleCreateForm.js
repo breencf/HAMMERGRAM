@@ -26,10 +26,15 @@ export const SimpleCreateForm = () => {
 
   return (
     <div className="post-container">
-      <h4>New Post</h4>
       <hr />
       <form onSubmit={onSubmit} id="createPostForm">
-        <div className="form-top">
+      <div className="form-bottom">
+        <label htmlFor="image">Add Image</label>
+          <input type="file" onChange={updateFile} />
+          <hr />
+
+          <label htmlFor="caption">Add a Caption(optional)</label>
+
           <textarea
             id="caption"
             label="text"
@@ -37,14 +42,8 @@ export const SimpleCreateForm = () => {
             value={caption}
             placeholder="Write a caption..."
           />
-        </div>
         <hr />
-        <div className="form-bottom">
-          <label htmlFor="location">Add Image URL</label>
-          <hr />
-          <input type="file" onChange={updateFile} />
-          <hr />
-          <hr />
+
           <label htmlFor="location">Add Location</label>
           <input
             id="location"

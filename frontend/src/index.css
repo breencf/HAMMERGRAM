@@ -14,7 +14,6 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: var(--ig-background);
   color: var(--ig-dark);
   margin: 0;
   font-family: "BlinkMacSystemFont", "Segoe UI", "Roboto", Helvetica, Arial,
@@ -25,8 +24,26 @@ body {
 }
 
 a {
-  color: var(--ig-blue);
+  color: var(--ig-dark);
   font-weight: bolder;
+  text-decoration: none;
+  margin-right: 5px;
+}
+
+.lb {
+  color: var(--ig-blue)
+}
+
+.red {
+  color: #ed4956;
+  font-weight: bold !important;
+  padding: 0px !important
+}
+
+.op-fol {
+  color: var(--ig-blue);
+  font-weight: bold;
+  padding: 0px !important;
 }
 
 #root {
@@ -49,6 +66,19 @@ h3 {
   font-weight: 400;
 }
 
+h4 {
+  font-family: inherit;
+  margin: 0;
+  font-weight: 500;
+  font-size: 18px;
+}
+
+p {
+  color: #8e8e8e;
+  margin-top: 5px;
+  margin-bottom: 0px;
+}
+
 #main {
   margin-top: 70px;
   margin-bottom: 70px;
@@ -60,8 +90,23 @@ h3 {
 .submitButton {
   width: 100%;
   border: none;
+  padding: 5px;
+  color: white;
+  font-weight: bolder;
   border-radius: 3px;
   background-color: var(--ig-blue);
+  margin: 5px;
+}
+
+.submittedButton {
+  width: 100%;
+  border: 1px solid var(--ig-light-gray);
+  padding: 5px;
+  color: var(--ig-dark);
+  font-weight: bolder;
+  border-radius: 3px;
+  background-color: white;
+  margin: 5px;
 }
 
 .submitButton:disabled {
@@ -96,4 +141,30 @@ hr {
   border: none;
   padding: 10px;
   background-color: inherit;
+}
+
+#createPostForm {
+  border-bottom: 1px solid var(--ig-light-gray);
+}
+
+
+
+
+.options-menu ul {
+  list-style-type: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-inline-start: 0px;
+  justify-content: center;
+  margin: 0px;
+}
+
+.options-menu li {
+  padding: 15px 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-bottom: 1px solid var(--ig-light-gray);
+  width: 100%;
 }

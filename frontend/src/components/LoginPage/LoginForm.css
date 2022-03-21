@@ -4,7 +4,21 @@
   align-items: center;
   justify-content: center;
   background-color: var(--ig-background);
-  margin: 20px
+  margin-top: 200px;
+  width: 80%;
 }
 
-form {width: 80%;}
+.login-logo {
+  max-height: 60px;
+}
+
+.loginPage form {
+  width: 80%;
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+}
+
+.loginPage input {
+  background-color: rgba(var(--b3f,250,250,250),1);
+}

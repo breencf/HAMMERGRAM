@@ -35,7 +35,7 @@ export const LoginForm = () => {
     <div className="loginPage">
       {/* <img src="../../../public/logo.png" /> */}
       <img
-        className="logo"
+        className="login-logo"
         src="https://hammergram.s3.amazonaws.com/icons/hammergram-logo.png"
       />
       <form onSubmit={onSubmit}>
@@ -47,40 +47,45 @@ export const LoginForm = () => {
           </ul>
         </div>
         <div>
-          <input
-            id="credential"
-            type="text"
-            onChange={(e) => setCredential(e.target.value)}
-            value={credential}
-            required
-            placeholder="Username or email"
-          />
-        </div>
-        <div>
-          <input
-            id="password"
-            type="password"
-            onChange={(e) => setPassword(e.target.value)}
-            value={password}
-            required
-            placeholder="Password"
-          />
+          <div>
+            <input
+              id="credential"
+              type="text"
+              onChange={(e) => setCredential(e.target.value)}
+              value={credential}
+              required
+              placeholder="Username or email"
+            />
+          </div>
+          <div>
+            <input
+              id="password"
+              type="password"
+              onChange={(e) => setPassword(e.target.value)}
+              value={password}
+              required
+              placeholder="Password"
+            />
+          </div>
         </div>
         {/* <Link to="/signup">
           <h5>Click here to Signup</h5>
         </Link> */}
-        <button className="submitButton" onClick={onSubmitDemo}>
-          Demo User
-        </button>
-        <button
-          type="submit"
-          disabled={password && credential ? false : true}
-          className="submitButton"
-        >
-          Login
-        </button>
+        <div>
+          <button className="submitButton" onClick={onSubmitDemo}>
+            Demo User
+          </button>
+          <br />
+          <button
+            type="submit"
+            disabled={password && credential ? false : true}
+            className="submitButton"
+          >
+            Log in
+          </button>
+        </div>
       </form>
-      Don't have an account? <Link to="/signup">Sign Up</Link>
+      <p>Don't have an account? <Link className="lb" to="/signup">Sign Up</Link></p>
     </div>
   );
 };

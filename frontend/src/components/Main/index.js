@@ -18,21 +18,20 @@ export const Main = () => {
           <Route exact path="/posts/:id">
             <PostPage />
           </Route>
-          <Route exact path ="/create">
+          <Route exact path="/create">
             <SimpleCreateForm />
           </Route>
           <Route exact path="/users/:id">
-            <UserProfile/>
+            <UserProfile />
           </Route>
-          <Route exact path ="/posts/:id/comments">
-            <CommentPage/>
+          <Route exact path="/posts/:id/comments">
+            <CommentPage />
           </Route>
           <Route exact path="/activity">
             <ActivityPage />
           </Route>
           <Route exact path="/search">
-            <SearchBar/>
-            <SearchResults/>
+            <SearchResults />
           </Route>
         </Switch>
       </div>

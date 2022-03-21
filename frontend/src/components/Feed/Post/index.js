@@ -31,8 +31,8 @@ export const Post = ({ content }) => {
       bottom: "auto",
       marginRight: "-50%",
       transform: "translate(-50%, -50%)",
-      backgroundColor: "black",
-      border: "none",
+      border: "1px solid var(--ig-light-gray)",
+      padding: "0px"
     },
   };
 
@@ -69,7 +69,7 @@ export const Post = ({ content }) => {
           <FaRegBookmark />
         </div>
         <div className="post-bottom-bottom">
-          <div>{likeCount} likes</div>
+          <div><p>{likeCount} likes</p></div>
           <div>
             <Link to={`/users/${content.User.id}`}>
               {content.User.username}
@@ -90,7 +90,7 @@ export const Post = ({ content }) => {
               );
             })}
           </div>
-          {dayjs(content?.createdAt).fromNow()}
+          <p className="from-now">{dayjs(content?.createdAt).fromNow()}</p>
 
         </div>
       </div>

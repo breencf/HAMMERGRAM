@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import { followButton } from "../../store/session";
 import { loadFollowers } from "../../store/user";
 
-export const FollowButton = ({ followedUserId }) => {
+export const FollowButton = ({ followedUserId, options}) => {
   const dispatch = useDispatch();
   const [followToggle, setFollowToggle] = useState(false);
   const { user, following } = useSelector((s) => s.sessions);
@@ -16,8 +16,8 @@ useEffect (() => {
 
   return (
     <>
-      <button
-        className="submitButton"
+      {!options && <button
+        className={followToggle? "submittedButton": "submitButton"}
         onClick={() => {
           dispatch(
             followButton({
@@ -28,7 +28,20 @@ useEffect (() => {
         }}
       >
         {followToggle ? "Unfollow" : "Follow"}
-      </button>
+      </button>}
+      {options && <button
+        className={followToggle? "button-none red": "button-none op-fol"}
+        onClick={() => {
+          dispatch(
+            followButton({
+              followingUserId: user.id,
+              followedUserId,
+            })
+          );
+        }}
+      >
+        {followToggle ? "Unfollow" : "Follow"}
+      </button>}
     </>
   );
 };

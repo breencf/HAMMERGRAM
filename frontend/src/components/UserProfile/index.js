@@ -11,10 +11,10 @@ import { FollowButton } from "../FollowButton";
 export const UserProfile = () => {
   const { id } = useParams();
   const dispatch = useDispatch();
-  const {profile, profileFollowers} = useSelector((s) => s.users);
-  const {following} = useSelector((s) => s.sessions)
+  const { profile, profileFollowers } = useSelector((s) => s.users);
+  const { following } = useSelector((s) => s.sessions);
   const [modalIsOpen, setModalIsOpen] = useState(false);
-  const [followerCount, setFollowerCount] = useState(0)
+  const [followerCount, setFollowerCount] = useState(0);
   const openModal = () => setModalIsOpen(true);
   const closeModal = () => setModalIsOpen(false);
   const modalStyle = {
@@ -25,18 +25,25 @@ export const UserProfile = () => {
       bottom: "auto",
       marginRight: "-50%",
       transform: "translate(-50%, -50%)",
-      backgroundColor: "black",
-      border: "none",
+      border: "1px solid var(--ig-light-gray)",
+      padding: "0px"
     },
   };
+
+
+
 
   useEffect(() => {
     dispatch(loadProfile(id));
   }, [dispatch, id]);
 
-  useEffect(() => {if(profileFollowers) setFollowerCount(profileFollowers?.length)}, [profileFollowers?.length])
+  useEffect(() => {
+    if (profileFollowers) setFollowerCount(profileFollowers?.length);
+  }, [profileFollowers?.length]);
 
-  useEffect(() => {dispatch(loadFollowers(id))}, [Object.values(following).length])
+  useEffect(() => {
+    dispatch(loadFollowers(id));
+  }, [Object.values(following).length]);
 
   return (
     <>
@@ -48,27 +55,27 @@ export const UserProfile = () => {
             <h1>
               {profile?.username} <BsGearWide onClick={openModal} />
             </h1>
-            {id === profile.id ? (
+            {+id === profile.id ? (
               <button className="editButton">Edit Profile</button>
             ) : (
-              <FollowButton followedUserId={id}/>
+              <FollowButton followedUserId={id} />
             )}
           </div>
         </div>
         <div className="name-bio">
           <p>{profile.name}</p>
-          <p>{profile.bio}</p>
+          {profile.bio}
         </div>
         <hr />
         <div className="post-follows-container">
           <div className="post-follows">
-            <span>{profile?.Posts?.length}</span> posts
+            <span>{profile?.Posts?.length}</span> <p>posts</p>
           </div>
           <div className="post-follows">
-            <span>{followerCount}</span> followers
+            <span>{followerCount}</span> <p>followers</p>
           </div>
           <div className="post-follows">
-            <span>{profile?.Followings?.length}</span> following
+            <span>{profile?.Followings?.length}</span> <p>following</p>
           </div>
         </div>
         <hr />

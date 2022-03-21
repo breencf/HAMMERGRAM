@@ -18,15 +18,14 @@ nav {
 
 .nav-bottom {
     bottom: 0;
-    border-top: 1px solid var(--ig-dark);
 }
 
 .nav-top {
     top: 0;
     display: flex;
     align-items: center;
-    justify-content: space-evenly;
-    border-bottom: 1px solid var(--ig-dark)
+    justify-content: space-between;
+    border-bottom: 1px solid var(--ig-light-gray);
 }
 
 /* Simple Create form */
@@ -60,12 +59,13 @@ nav {
     object-fit: cover;
 }
 
-.form-top #caption {
+.form-bottom #caption {
     width: 80%;
     border: none;
     height: auto;
     font-family: inherit;
     font-size: inherit;
+    margin: 10px 0px
 }
 
 .form-bottom {

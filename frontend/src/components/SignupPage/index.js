@@ -35,8 +35,10 @@ export const SignupForm = () => {
 
   return (
     <div className="loginPage">
-      <h1>Hammergram</h1>
-      <h4>Sign up to see hammers and bottle shots from your friends</h4>
+      <img
+        className="login-logo"
+        src="https://hammergram.s3.amazonaws.com/icons/hammergram-logo.png"
+      />
       <form onSubmit={onSubmit}>
         <div>
           <ul className="signupErrors">
@@ -45,6 +47,7 @@ export const SignupForm = () => {
             ))}
           </ul>
         </div>
+        <div>
         <div>
           <input
             id="email"
@@ -90,9 +93,10 @@ export const SignupForm = () => {
             placeholder="Confirm Password"
           />
         </div>
+        </div>
         <button className="submitButton">Sign up</button>
       </form>
-      Have an account? <Link to="/login">Log in</Link>
+      Have an account? <Link to="/login" className="lb">Log in</Link>
     </div>
   );
 };

@@ -120,10 +120,10 @@ export default function sessionReducer(state = initialState, action) {
     case START:
       newState = { ...state }; //Object.assign({}, state)
       newState.user = action.user;
-      action.following.forEach(
+      if(action.following) {action.following.forEach(
         (obj) => (newState.following[obj.followedUserId] = obj)
       );
-      action.likes.forEach((obj) => (newState.likes[obj.postId] = obj));
+      action.likes.forEach((obj) => (newState.likes[obj.postId] = obj))};
       return newState;
     case END:
       newState = { ...state };

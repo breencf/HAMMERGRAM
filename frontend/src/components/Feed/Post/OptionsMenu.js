@@ -31,7 +31,7 @@ export const OptionsMenu = ({
       <ul>
 
           {user.id !== content.userId && (
-            <li><FollowButton followedUserId={content.userId} /></li>
+            <li className><FollowButton followedUserId={content.userId} options={true} /></li>
           )}
 
         {/* Check the above to toggle follow/follow */}
