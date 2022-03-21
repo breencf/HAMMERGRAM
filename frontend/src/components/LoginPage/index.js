@@ -19,8 +19,10 @@ export const LoginForm = () => {
     setErrors([]);
     return dispatch(login({ credential, password })).catch(async (res) => {
       const data = await res.json();
-      if (data && data.errors) setErrors(data.errors);
-      else history.push("/");
+      if (data && data.errors) {
+        setErrors(data.errors);
+        console.log(data.errors);
+      } else history.push("/");
     });
   };
 
@@ -85,7 +87,12 @@ export const LoginForm = () => {
           </button>
         </div>
       </form>
-      <p>Don't have an account? <Link className="lb" to="/signup">Sign Up</Link></p>
+      <p>
+        Don't have an account?{" "}
+        <Link className="lb" to="/signup">
+          Sign Up
+        </Link>
+      </p>
     </div>
   );
 };
