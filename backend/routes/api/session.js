@@ -35,6 +35,8 @@ router.post(
       e.errors = ["The provided credentials were invalid"];
       return next(e);
     }
+    console.log("=================");
+    console.log(user);
 
     await setTokenCookie(res, user);
     const following = await db.Follow.findAll({
@@ -42,6 +44,9 @@ router.post(
     });
     const likes = await db.Like.findAll({ where: { userId: user.id } });
 
+    console.log(following);
+    console.log("===========");
+    console.log(likes);
     return res.json({ user, following, likes });
   })
 );
