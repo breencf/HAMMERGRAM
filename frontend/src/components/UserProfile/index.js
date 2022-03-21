@@ -12,7 +12,7 @@ export const UserProfile = () => {
   const { id } = useParams();
   const dispatch = useDispatch();
   const { profile, profileFollowers } = useSelector((s) => s.users);
-  const { following } = useSelector((s) => s.sessions);
+  const { following, user } = useSelector((s) => s.sessions);
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [followerCount, setFollowerCount] = useState(0);
   const openModal = () => setModalIsOpen(true);
@@ -50,9 +50,9 @@ export const UserProfile = () => {
 
           <div className="profile-header">
             <h1>
-              {profile?.username} <BsGearWide onClick={openModal} />
+              {profile?.username} {parseInt(id) === user.id && <BsGearWide onClick={openModal} />}
             </h1>
-            {id === profile.id.toString() ? (
+            {parseInt(id) === user.id ? (
               <button className="editButton">Edit Profile</button>
             ) : (
               <FollowButton followedUserId={id} />

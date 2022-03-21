@@ -12,7 +12,6 @@ export const OptionsMenu = ({
   setShowEdit,
 }) => {
   const { user } = useSelector((state) => state.sessions);
-  console.log(content);
   const [followToggle, setFollowToggle] = useState(false);
   const dispatch = useDispatch();
 
@@ -29,10 +28,11 @@ export const OptionsMenu = ({
   return (
     <div className="options-menu">
       <ul>
-
-          {user.id !== content.userId && (
-            <li className><FollowButton followedUserId={content.userId} options={true} /></li>
-          )}
+        {user.id !== content.userId && (
+          <li className>
+            <FollowButton followedUserId={content.userId} options={true} />
+          </li>
+        )}
 
         {/* Check the above to toggle follow/follow */}
         {content.userId === user.id && singlePost && (

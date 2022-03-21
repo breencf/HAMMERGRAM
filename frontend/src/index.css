@@ -27,17 +27,17 @@ a {
   color: var(--ig-dark);
   font-weight: bolder;
   text-decoration: none;
-  margin-right: 5px;
+  margin-right: 2px;
 }
 
 .lb {
-  color: var(--ig-blue)
+  color: var(--ig-blue);
 }
 
 .red {
   color: #ed4956;
   font-weight: bold !important;
-  padding: 0px !important
+  padding: 0px !important;
 }
 
 .op-fol {
@@ -129,6 +129,7 @@ input::placeholder {
 
 hr {
   width: 100%;
+  color: var(--ig-light-gray);
 }
 
 .userIcon {
@@ -146,9 +147,6 @@ hr {
 #createPostForm {
   border-bottom: 1px solid var(--ig-light-gray);
 }
-
-
-
 
 .options-menu ul {
   list-style-type: none;
