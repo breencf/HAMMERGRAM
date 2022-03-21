@@ -3,7 +3,7 @@ const asyncHandler = require("express-async-handler");
 const db = require("../../db/models");
 const { requireAuth } = require("../../utils/auth");
 const router = express.Router();
-const {singlePublicFileUpload, singleMulterUpload} = require("../../awss3")
+const { singlePublicFileUpload, singleMulterUpload } = require("../../awss3");
 
 router.get(
   "/",
@@ -23,7 +23,6 @@ router.get(
     const post = await db.Post.findByPk(id, {
       include: [db.User, db.Like, { model: db.Comment, include: [db.User] }],
     });
-    console.log(post);
     res.json(post);
   })
 );
@@ -64,11 +63,17 @@ router.put(
 );
 
 router.post(
-  "/", singleMulterUpload("image"),
+  "/",
+  singleMulterUpload("image"),
   asyncHandler(async (req, res) => {
-    const { id, caption, location} = req.body;
-    const postImageURL = await singlePublicFileUpload(req.file)
-    const post = await db.Post.create({ userId: id, caption, image: postImageURL, location });
+    const { id, caption, location } = req.body;
+    const postImageURL = await singlePublicFileUpload(req.file);
+    const post = await db.Post.create({
+      userId: id,
+      caption,
+      image: postImageURL,
+      location,
+    });
     const postToReturn = await db.Post.findByPk(post.id, {
       include: [db.User, db.Like, { model: db.Comment, include: [db.User] }],
     });
@@ -85,7 +90,7 @@ router.post(
     });
     if (exists) {
       await db.Like.destroy({ where: { postId, userId } });
-      await db.Post.findByPk(postId)
+      await db.Post.findByPk(postId);
       res.json("destroyed");
     } else {
       const like = await db.Like.create({ postId, userId });
@@ -126,6 +131,5 @@ router.delete(
     }
   })
 );
-
 
 module.exports = router;

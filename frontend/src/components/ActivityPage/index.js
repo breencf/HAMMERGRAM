@@ -12,16 +12,11 @@ export const ActivityPage = () => {
   const dispatch = useDispatch();
   const { id } = useSelector((s) => s.sessions.user);
   const {activity}  = useSelector((s) => s.users);
-  console.log(id);
 
 
   useEffect(() => {
     dispatch(loadActivity(id));
   }, [dispatch, id]);
-
-  useEffect(() => {
-    console.log(activity)
-  }, [activity]);
 
   return (
     <div className="activity-page">

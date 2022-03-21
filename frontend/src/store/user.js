@@ -26,10 +26,8 @@ const lActivity = (activity) => {
 
 export const loadActivity = (id) => async (dispatch) => {
   const response = await fetch(`/api/users/${id}/activity`);
-  console.log("thunk");
   if (response.ok) {
     const activity = await response.json();
-    console.log(activity);
     dispatch(lActivity(activity));
   }
 };
@@ -68,7 +66,6 @@ export const userReducer = (state = initialState, action) => {
     case LOAD_FOLLOWERS:
       newState = {...state}
       newState.profileFollowers = action.followers
-      console.log(newState.profile.Followers)
       return newState
     default:
       return state;

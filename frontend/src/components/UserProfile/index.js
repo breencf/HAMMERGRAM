@@ -26,12 +26,9 @@ export const UserProfile = () => {
       marginRight: "-50%",
       transform: "translate(-50%, -50%)",
       border: "1px solid var(--ig-light-gray)",
-      padding: "0px"
+      padding: "0px",
     },
   };
-
-
-
 
   useEffect(() => {
     dispatch(loadProfile(id));
@@ -55,7 +52,7 @@ export const UserProfile = () => {
             <h1>
               {profile?.username} <BsGearWide onClick={openModal} />
             </h1>
-            {+id === profile.id ? (
+            {id === profile.id.toString() ? (
               <button className="editButton">Edit Profile</button>
             ) : (
               <FollowButton followedUserId={id} />

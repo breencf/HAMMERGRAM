@@ -62,11 +62,9 @@ router.post(
   "/:id/follow",
   asyncHandler(async (req, res) => {
     const { followedUserId, followingUserId } = req.body;
-    console.log(followedUserId, followingUserId);
     const exists = await db.Follow.findOne({
       where: { followedUserId, followingUserId },
     });
-    console.log(exists);
     if (exists) {
       await db.Follow.destroy({ where: { followedUserId, followingUserId } });
       res.json("destroyed");

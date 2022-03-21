@@ -9,7 +9,6 @@ export const NavigatonTop = () => {
   const location = useLocation();
   const {username} = useSelector(s => s.users.profile)
 
-  console.log(location.pathname);
 
   const split = location.pathname.split("/");
 

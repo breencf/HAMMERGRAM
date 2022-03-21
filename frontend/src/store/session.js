@@ -80,7 +80,6 @@ export const login = (user) => async (dispatch) => {
     }),
   });
   const data = await response.json();
-  console.log(data);
   dispatch(startSession(data.user, data.following, data.likes));
   return response;
 };
@@ -88,7 +87,6 @@ export const login = (user) => async (dispatch) => {
 export const restoreUser = () => async (dispatch) => {
   const response = await csrfFetch("/api/session");
   const data = await response.json();
-  console.log(data);
   dispatch(startSession(data.user, data.following, data.likes));
   return response;
 };
@@ -120,10 +118,12 @@ export default function sessionReducer(state = initialState, action) {
     case START:
       newState = { ...state }; //Object.assign({}, state)
       newState.user = action.user;
-      if(action.following) {action.following.forEach(
-        (obj) => (newState.following[obj.followedUserId] = obj)
-      );
-      action.likes.forEach((obj) => (newState.likes[obj.postId] = obj))};
+      if (action.following && action.likes) {
+        action.following.forEach(
+          (obj) => (newState.following[obj.followedUserId] = obj)
+        );
+        action.likes.forEach((obj) => (newState.likes[obj.postId] = obj));
+      }
       return newState;
     case END:
       newState = { ...state };
