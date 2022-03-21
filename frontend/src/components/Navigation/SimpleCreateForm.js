@@ -2,31 +2,34 @@ import { useState } from "react";
 import "./Navigation.css";
 import { useSelector, useDispatch } from "react-redux";
 import { createPost } from "../../store/posts";
-import {useHistory} from 'react-router-dom'
+import { useHistory } from "react-router-dom";
 
 export const SimpleCreateForm = () => {
   const { id } = useSelector((s) => s.sessions.user);
   const dispatch = useDispatch();
-  const history = useHistory()
+  const history = useHistory();
   const [caption, setCaption] = useState(undefined);
   const [location, setLocation] = useState("");
-  const [image, setImage] = useState("");
+  const [image, setImage] = useState(null);
 
   const onSubmit = (e) => {
     e.preventDefault();
-    dispatch(createPost({id, caption, location, image}))
-    history.push("/")
+    dispatch(createPost({ id, caption, location, image }));
+    history.push("/");
+  };
+
+  const updateFile = (e) => {
+    const file = e.target.files[0];
+    if (file) setImage(file);
+    console.log(image);
   };
 
   return (
     <div className="post-container">
-        <h4>New Post</h4>
-        <hr/>
+      <h4>New Post</h4>
+      <hr />
       <form onSubmit={onSubmit} id="createPostForm">
         <div className="form-top">
-          <div className="form-image">
-            {image && <img src={image} />}
-          </div>
           <textarea
             id="caption"
             label="text"
@@ -35,17 +38,13 @@ export const SimpleCreateForm = () => {
             placeholder="Write a caption..."
           />
         </div>
-        <hr/>
+        <hr />
         <div className="form-bottom">
-        <label htmlFor="location">Add Image URL</label>
-          <input
-            id="image"
-            label="text"
-            onChange={(e) => setImage(e.target.value)}
-            value={image}
-            placeholder="..."
-          />
-          <hr/>
+          <label htmlFor="location">Add Image URL</label>
+          <hr />
+          <input type="file" onChange={updateFile} />
+          <hr />
+          <hr />
           <label htmlFor="location">Add Location</label>
           <input
             id="location"
@@ -55,9 +54,11 @@ export const SimpleCreateForm = () => {
             placeholder="..."
           />
         </div>
-        <hr/>
+        <hr />
         <div>
-            <button className="button-submit" type="submit">Share</button>
+          <button className="button-submit" type="submit">
+            Share
+          </button>
         </div>
       </form>
     </div>
