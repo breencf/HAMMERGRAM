@@ -119,19 +119,20 @@ export default function sessionReducer(state = initialState, action) {
       newState = { ...state }; //Object.assign({}, state)
       newState.user = action.user;
       if (action.following && action.likes) {
-        console.log(action.following)
-        console.log(action.likes)
-        action.following.forEach(
-          (obj) => (newState.following[obj.followedUserId] = obj)
-        );
+        console.log(action.following);
+        console.log(action.likes);
+        action.following.forEach((obj) => {
+          console.log(obj);
+          newState.following[obj.followedUserId] = obj;
+        });
         action.likes.forEach((obj) => (newState.likes[obj.postId] = obj));
       }
       return newState;
     case END:
       newState = { ...state };
       delete newState.user;
-      delete newState.following;
-      delete newState.likes;
+      newState.following = {};
+      newState.likes = {};
       return newState;
     case FOLLOW:
       newState = { ...state };

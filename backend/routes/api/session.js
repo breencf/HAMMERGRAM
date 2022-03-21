@@ -34,20 +34,21 @@ router.post(
       e.title = "Login Failed";
       e.errors = ["The provided credentials were invalid"];
       return next(e);
+    } else {
+      console.log("=================");
+      console.log(user);
+
+      await setTokenCookie(res, user);
+      const following = await db.Follow.findAll({
+        where: { followingUserId: user.id },
+      });
+      const likes = await db.Like.findAll({ where: { userId: user.id } });
+
+      console.log(following);
+      console.log("===========");
+      console.log(likes);
+      return res.json({ user, following, likes });
     }
-    console.log("=================");
-    console.log(user);
-
-    await setTokenCookie(res, user);
-    const following = await db.Follow.findAll({
-      where: { followingUserId: user.id },
-    });
-    const likes = await db.Like.findAll({ where: { userId: user.id } });
-
-    console.log(following);
-    console.log("===========");
-    console.log(likes);
-    return res.json({ user, following, likes });
   })
 );
 //logout
