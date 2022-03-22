@@ -7,8 +7,7 @@ import { useSelector } from "react-redux";
 
 export const NavigatonTop = () => {
   const location = useLocation();
-  const {username} = useSelector(s => s.users.profile)
-
+  const { username } = useSelector((s) => s.users.profile);
 
   const split = location.pathname.split("/");
 
@@ -26,11 +25,36 @@ export const NavigatonTop = () => {
           <FaCommentDots />
         </>
       )}
-      {location.pathname !== "/" && !Number.isInteger(parseInt(split[split.length -1])) &&  split[split.length-1] !== "search" && <><div></div><h1><h4>{split[split.length - 1]}</h4></h1><div></div></>}
-      {split[split.length - 1] === "search" && <><div></div><SearchBar/><div></div></>}
-      {split[split.length -2] ==="users" && <><div></div><h4>{username}</h4><div></div></>}
-      {split[split.length -2] ==="posts" && <><div></div><h4>Photo</h4><div></div></>}
+      {location.pathname !== "/" &&
+        !Number.isInteger(parseInt(split[split.length - 1])) &&
+        split[split.length - 1] !== "search" && (
+          <>
+            <div></div>
+            <h4>{split[split.length - 1]}</h4>
+            <div></div>
+          </>
+        )}
+      {split[split.length - 1] === "search" && (
+        <>
+          <div></div>
+          <SearchBar />
+          <div></div>
+        </>
+      )}
+      {split[split.length - 2] === "users" && (
+        <>
+          <div></div>
+          <h4>{username}</h4>
+          <div></div>
+        </>
+      )}
+      {split[split.length - 2] === "posts" && (
+        <>
+          <div></div>
+          <h4>Photo</h4>
+          <div></div>
+        </>
+      )}
     </nav>
-
   );
 };

@@ -4,10 +4,13 @@ import { useDispatch, useSelector } from "react-redux";
 import { loadFollowers, loadProfile } from "../../store/user";
 import { followButton } from "../../store/session";
 import { BsGearWide, BsGrid3X3, BsCollection } from "react-icons/bs";
+import { Grid } from "./Grid";
 import "./UserProfile.css";
 import Modal from "react-modal";
 import { ProfileMenu } from "./ProfileMenu";
 import { FollowButton } from "../FollowButton";
+import { Post } from "../Feed/Post";
+
 export const UserProfile = () => {
   const { id } = useParams();
   const dispatch = useDispatch();
@@ -15,6 +18,7 @@ export const UserProfile = () => {
   const { following, user } = useSelector((s) => s.sessions);
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [followerCount, setFollowerCount] = useState(0);
+  const [gridFeed, setGridFeed] = useState("g");
   const openModal = () => setModalIsOpen(true);
   const closeModal = () => setModalIsOpen(false);
   const modalStyle = {
@@ -29,6 +33,8 @@ export const UserProfile = () => {
       padding: "0px",
     },
   };
+
+  console.log(profile.Posts);
 
   useEffect(() => {
     dispatch(loadProfile(id));
@@ -50,7 +56,8 @@ export const UserProfile = () => {
 
           <div className="profile-header">
             <h1>
-              {profile?.username} {parseInt(id) === user.id && <BsGearWide onClick={openModal} />}
+              {profile?.username}{" "}
+              {parseInt(id) === user.id && <BsGearWide onClick={openModal} />}
             </h1>
             {parseInt(id) === user.id ? (
               <button className="editButton">Edit Profile</button>
@@ -77,11 +84,15 @@ export const UserProfile = () => {
         </div>
         <hr />
         <div className="post-follows-container">
-          <BsGrid3X3 />
-          <BsCollection />
+          <BsGrid3X3 onClick={() => setGridFeed("g")} />
+          <BsCollection onClick={() => setGridFeed("f")} />
         </div>
-        <div className="post-grid">
-          {profile?.Posts?.map((post) => {
+        {gridFeed === "g" && (
+          <Grid posts={profile?.Posts?.sort((a, b) => b.id - a.id)} />
+        )}
+        {gridFeed === "f" &&
+          profile?.Posts.map((post) => <Post content={post} />)}
+        {/* {profile?.Posts?.map((post) => {
             return (
               <div className="post-square" key={post.id}>
                 <Link to={`/posts/${post.id}`}>
@@ -89,8 +100,7 @@ export const UserProfile = () => {
                 </Link>
               </div>
             );
-          })}
-        </div>
+          })} */}
       </div>
       <Modal
         isOpen={modalIsOpen}

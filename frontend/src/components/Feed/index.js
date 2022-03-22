@@ -9,12 +9,13 @@ import "./Feed.css"
 export const Feed = () => {
     const dispatch = useDispatch()
     const posts = useSelector((s) => s.posts.feed)
-    useEffect(() => {dispatch(loadPosts())},[dispatch])
+    useEffect(() => {dispatch(loadPosts())},[dispatch, posts?.length])
+
 
 
     return(
         <div className='feed'>
-        {Object.values(posts).map((content) => {return <Post key={content.id} content={content}/> })}
+        {Object.values(posts).sort((a,b) => b.id - a.id).map((content) => {return <Post key={content.id} content={content}/> })}
         </div>
     )
 }

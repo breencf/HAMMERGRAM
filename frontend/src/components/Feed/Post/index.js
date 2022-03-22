@@ -4,7 +4,6 @@ import {
   FaRegPaperPlane,
   FaRegBookmark,
 } from "react-icons/fa";
-import {BsChat} from 'react-icons/bs'
 import "./Post.css";
 import { Link } from "react-router-dom";
 import Modal from "react-modal";
@@ -13,14 +12,13 @@ import { useEffect, useState } from "react";
 import { LikeButton } from "../../LikeButton";
 import { useSelector } from "react-redux";
 import dayjs from "dayjs";
-let relativeTime = require('dayjs/plugin/relativeTime')
-dayjs.extend(relativeTime)
-
+let relativeTime = require("dayjs/plugin/relativeTime");
+dayjs.extend(relativeTime);
 
 export const Post = ({ content }) => {
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [likeCount, setLikeCount] = useState(content?.Likes.length);
-  const likes = useSelector((state) => state.posts.feed[content.id].Likes);
+  const likes = useSelector((state) => state.posts.feed[content.id]?.Likes);
   const openModal = () => setModalIsOpen(true);
   const closeModal = () => setModalIsOpen(false);
   const modalStyle = {
@@ -31,14 +29,14 @@ export const Post = ({ content }) => {
       bottom: "auto",
       marginRight: "-50%",
       transform: "translate(-50%, -50%)",
-      border: "1px solid var(--ig-light-gray)",
-      padding: "0px"
+      border: "1px solid var(--ig-light-gray",
+      padding: "0px",
     },
   };
 
   useEffect(() => {
     if (likes) setLikeCount(likes.length);
-  }, [likes.length]);
+  }, [likes?.length]);
 
   return (
     <div className="post-container">
@@ -63,13 +61,17 @@ export const Post = ({ content }) => {
         <div className="post-bottom-top">
           <div className="post-bottom-top-left">
             <LikeButton postId={content.id} />
-            <Link to={`/posts/${content.id}/comments`}><FaRegCommentDots /></Link>
+            <Link to={`/posts/${content.id}/comments`}>
+              <FaRegCommentDots />
+            </Link>
             <FaRegPaperPlane />
           </div>
           <FaRegBookmark />
         </div>
         <div className="post-bottom-bottom">
-          <div><p>{likeCount} likes</p></div>
+          <div>
+            <p>{likeCount} likes</p>
+          </div>
           <div>
             <Link to={`/users/${content.User.id}`}>
               {content.User.username}
@@ -91,7 +93,6 @@ export const Post = ({ content }) => {
             })}
           </div>
           <p className="from-now">{dayjs(content?.createdAt).fromNow()}</p>
-
         </div>
       </div>
       <Modal

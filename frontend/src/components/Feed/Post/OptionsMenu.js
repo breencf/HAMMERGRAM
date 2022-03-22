@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from "react-redux";
-import { Link } from "react-router-dom";
-import { deletePost } from "../../../store/posts";
+import { Link, useHistory } from "react-router-dom";
+import { deletePost, loadPosts } from "../../../store/posts";
 import { useState, useEffect } from "react";
 import { followButton } from "../../../store/session";
 import { FollowButton } from "../../FollowButton";
@@ -11,6 +11,7 @@ export const OptionsMenu = ({
   singlePost,
   setShowEdit,
 }) => {
+  const history = useHistory();
   const { user } = useSelector((state) => state.sessions);
   const [followToggle, setFollowToggle] = useState(false);
   const dispatch = useDispatch();
@@ -22,14 +23,16 @@ export const OptionsMenu = ({
   // }, [profileUser])
 
   const onClickDelete = () => {
-    dispatch(deletePost(content.id));
+    dispatch(deletePost(content.id)).then(() => dispatch(loadPosts()));
+    closeModal();
+    history.push("/");
   };
 
   return (
     <div className="options-menu">
       <ul>
         {user.id !== content.userId && (
-          <li className>
+          <li>
             <FollowButton followedUserId={content.userId} options={true} />
           </li>
         )}

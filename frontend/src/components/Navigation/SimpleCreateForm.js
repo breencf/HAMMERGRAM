@@ -1,20 +1,22 @@
 import { useState } from "react";
 import "./Navigation.css";
 import { useSelector, useDispatch } from "react-redux";
-import { createPost } from "../../store/posts";
+import { createPost, loadPosts } from "../../store/posts";
 import { useHistory } from "react-router-dom";
 
 export const SimpleCreateForm = () => {
   const { id } = useSelector((s) => s.sessions.user);
   const dispatch = useDispatch();
   const history = useHistory();
-  const [caption, setCaption] = useState(undefined);
+  const [caption, setCaption] = useState("");
   const [location, setLocation] = useState("");
   const [image, setImage] = useState(null);
 
   const onSubmit = (e) => {
     e.preventDefault();
-    dispatch(createPost({ id, caption, location, image }));
+    dispatch(createPost({ id, caption, location, image })).then(() =>
+      dispatch(loadPosts())
+    );
     history.push("/");
   };
 
@@ -27,8 +29,8 @@ export const SimpleCreateForm = () => {
     <div className="post-container">
       <hr />
       <form onSubmit={onSubmit} id="createPostForm">
-      <div className="form-bottom">
-        <label htmlFor="image">Add Image</label>
+        <div className="form-bottom">
+          <label htmlFor="image">Add Image</label>
           <input type="file" onChange={updateFile} />
           <hr />
 
@@ -41,7 +43,7 @@ export const SimpleCreateForm = () => {
             value={caption}
             placeholder="Write a caption..."
           />
-        <hr />
+          <hr />
 
           <label htmlFor="location">Add Location</label>
           <input

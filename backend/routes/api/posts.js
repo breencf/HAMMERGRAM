@@ -10,9 +10,10 @@ router.get(
   asyncHandler(async (req, res, next) => {
     const posts = await db.Post.findAll({
       include: [db.User, db.Like, { model: db.Comment, include: [db.User] }],
-      order: [["createdAt", "DESC"]],
     });
-    res.json(posts);
+
+    const sortedPosts = posts.sort((a, b) => b.id - a.id);
+    res.json(sortedPosts);
   })
 );
 
@@ -33,6 +34,8 @@ router.delete(
     const { id } = req.params;
     const exists = await db.Post.findByPk(id);
     if (exists) {
+      await db.Comment.destroy({ where: { postId: id } });
+      await db.Like.destroy({ where: { postId: id } });
       await db.Post.destroy({
         where: { id },
       });

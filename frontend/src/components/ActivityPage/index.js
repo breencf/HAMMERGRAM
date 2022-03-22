@@ -6,13 +6,12 @@ import { deleteAComment, loadOnePost } from "../../store/posts";
 import { useState, useEffect } from "react";
 import { loadActivity } from "../../store/user";
 import { ActivityCard } from "./ActivityCard";
-import "./ActivityCard.css"
+import "./ActivityCard.css";
 
 export const ActivityPage = () => {
   const dispatch = useDispatch();
   const { id } = useSelector((s) => s.sessions.user);
-  const {activity}  = useSelector((s) => s.users);
-
+  const { activity } = useSelector((s) => s.users);
 
   useEffect(() => {
     dispatch(loadActivity(id));
@@ -20,8 +19,8 @@ export const ActivityPage = () => {
 
   return (
     <div className="activity-page">
-      {activity.map((eve) => {
-        return <ActivityCard activity={eve}/>
+      {activity.map((eve, index) => {
+        return <ActivityCard key={eve.id + index / 7} activity={eve} />;
       })}
     </div>
   );

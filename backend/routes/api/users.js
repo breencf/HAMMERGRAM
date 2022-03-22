@@ -51,7 +51,7 @@ router.get(
       include: [
         { model: db.Follow, as: "Followers" },
         { model: db.Follow, as: "Followings" },
-        db.Post,
+        { model: db.Post, include: [db.Like] },
       ],
     });
     res.json(user);
@@ -95,7 +95,7 @@ router.get(
     });
 
     const activities = [...likes, ...comments, ...follows].sort(
-      (a, b) => a - b
+      (a, b) => b.createdAt - a.createdAt
     );
 
     res.json(activities);
