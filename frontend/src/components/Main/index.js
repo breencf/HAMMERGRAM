@@ -7,13 +7,24 @@ import { CommentPage } from "../CommentPage";
 import { ActivityPage } from "../ActivityPage";
 import { SearchResults } from "../SearchPage/SearchResults";
 import { UserList } from "../UserList";
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect } from "react";
+import { loadPosts } from "../../store/posts";
 export const Main = () => {
+
+  const dispatch = useDispatch();
+  const posts = useSelector((s) => s.posts.feed);
+  const user = useSelector((s) => s.sessions.user);
+  useEffect(() => {
+    dispatch(loadPosts(user.id));
+  }, [dispatch, posts?.length]);
+
   return (
     <>
       <div id="main">
         <Switch>
           <Route exact path="/">
-            <Feed />
+            <Feed posts={Object.values(posts)}/>
           </Route>
           <Route exact path="/posts/:id">
             <PostPage />

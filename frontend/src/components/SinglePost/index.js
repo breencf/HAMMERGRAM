@@ -102,7 +102,7 @@ export const PostPage = () => {
               <FaRegBookmark />
             </div>
             <div className="post-bottom-bottom">
-              <div><Link to={`/posts/${content.id}/likes`}>{likeCount} likes</Link></div>
+              <div><Link to={`/posts/${content?.id}/likes`}>{likeCount} likes</Link></div>
               <div>
                 <Link to={`/users/${content?.User?.username}`}>
                   {content?.User?.username}

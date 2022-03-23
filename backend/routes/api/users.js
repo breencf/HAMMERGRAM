@@ -51,7 +51,7 @@ router.get(
       include: [
         { model: db.Follow, as: "Followers" },
         { model: db.Follow, as: "Followings" },
-        { model: db.Post, include: [db.Like] },
+        { model: db.Post, include: [db.Like, db.User] },
       ],
     });
     res.json(user);

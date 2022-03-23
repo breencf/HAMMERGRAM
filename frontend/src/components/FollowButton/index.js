@@ -4,45 +4,47 @@ import { followButton } from "../../store/session";
 import { loadFollowers } from "../../store/user";
 import { loadPosts } from "../../store/posts";
 
-export const FollowButton = ({ followedUserId, options}) => {
+export const FollowButton = ({ followedUserId, options }) => {
   const dispatch = useDispatch();
   const [followToggle, setFollowToggle] = useState(false);
   const { user, following } = useSelector((s) => s.sessions);
 
-
-
-useEffect (() => {
-  setFollowToggle(following[followedUserId])
-},[Object.values(following).length])
+  useEffect(() => {
+    setFollowToggle(following[followedUserId]);
+  }, [Object.values(following).length]);
 
   return (
     <>
-      {!options && <button
-        className={followToggle? "submittedButton": "submitButton"}
-        onClick={() => {
-          dispatch(
-            followButton({
-              followingUserId: user.id,
-              followedUserId,
-            })
-          );
-        }}
-      >
-        {followToggle ? "Unfollow" : "Follow"}
-      </button>}
-      {options && <button
-        className={followToggle? "button-none red": "button-none op-fol"}
-        onClick={() => {
-          dispatch(
-            followButton({
-              followingUserId: user.id,
-              followedUserId,
-            })
-          ).then(() => dispatch(loadPosts(user.id)));
-        }}
-      >
-        {followToggle ? "Unfollow" : "Follow"}
-      </button>}
+      {!options && (
+        <button
+          className={followToggle ? "submittedButton" : "submitButton"}
+          onClick={() => {
+            dispatch(
+              followButton({
+                followingUserId: user.id,
+                followedUserId,
+              })
+            ).then(() => dispatch(loadPosts(user.id)));
+          }}
+        >
+          {followToggle ? "Unfollow" : "Follow"}
+        </button>
+      )}
+      {options && (
+        <button
+          className={followToggle ? "button-none red" : "button-none op-fol"}
+          onClick={() => {
+            dispatch(
+              followButton({
+                followingUserId: user.id,
+                followedUserId,
+              })
+            ).then(() => dispatch(loadPosts(user.id)));
+          }}
+        >
+          {followToggle ? "Unfollow" : "Follow"}
+        </button>
+      )}
     </>
   );
 };

@@ -95,7 +95,7 @@ export const Post = ({ content }) => {
         </div>
         <div className="post-bottom-bottom">
           <div>
-            <Link to={`/posts/${content.id}/likes`}>{likeCount} likes</Link>
+            <Link to={`/posts/${content?.id}/likes`}>{likeCount} likes</Link>
           </div>
           <div>
             <Link to={`/users/${content.User.id}`}>

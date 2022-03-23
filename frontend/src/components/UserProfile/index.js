@@ -9,7 +9,7 @@ import "./UserProfile.css";
 import Modal from "react-modal";
 import { ProfileMenu } from "./ProfileMenu";
 import { FollowButton } from "../FollowButton";
-import { Post } from "../Feed/Post";
+import { Feed } from "../Feed";
 
 export const UserProfile = () => {
   const { id } = useParams();
@@ -52,7 +52,7 @@ export const UserProfile = () => {
     <>
       <div className="profile-container">
         <div className="profile-top">
-          <img className="profile-user" src={profile?.image} />
+          <div className="profile-user"><img src={profile?.image} /></div>
 
           <div className="profile-header">
             <h1>
@@ -94,17 +94,8 @@ export const UserProfile = () => {
         {gridFeed === "g" && (
           <Grid posts={profile?.Posts?.sort((a, b) => b.id - a.id)} />
         )}
-        {gridFeed === "f" &&
-          profile?.Posts.map((post) => <Post content={post} />)}
-        {/* {profile?.Posts?.map((post) => {
-            return (
-              <div className="post-square" key={post.id}>
-                <Link to={`/posts/${post.id}`}>
-                  <img src={post.image} />
-                </Link>
-              </div>
-            );
-          })} */}
+        {gridFeed === "f" && <Feed posts={profile?.Posts?.sort((a, b) => b.id - a.id)}/>}
+
       </div>
       <Modal
         isOpen={modalIsOpen}
