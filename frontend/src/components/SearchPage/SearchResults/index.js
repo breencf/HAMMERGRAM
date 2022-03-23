@@ -10,7 +10,7 @@ export const SearchResults = () => {
 
     return (
         <div>
-            {window.searchName.length > 3 && results.map ((result) => {
+            {window.searchName.length > 2 && results.map ((result) => {
                 return(<Link key={result.id} to={`/users/${result.id}`}><div className="activity-card">
                 <div className="activity-card-left">
                     <img className="userIcon" src={result.image}/>
