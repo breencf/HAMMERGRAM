@@ -74,6 +74,18 @@
   width: 33vw;
 }
 
+@media (min-width: 500px) {
+  .post-square {
+    height: 166px;
+    width: 166px;
+  }
+}
+
+.post-square a {
+  width: inherit;
+  height: inherit;
+}
+
 .post-square img {
   width: 100%;
   height: 100%;

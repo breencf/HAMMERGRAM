@@ -70,6 +70,10 @@ nav {
   margin: 10px 0px;
 }
 
+.form-bottom #location {
+  font-size: 14px !important;
+}
+
 .form-bottom {
   display: flex;
   flex-direction: column;

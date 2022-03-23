@@ -1,6 +1,7 @@
 import { csrfFetch } from "./csrf";
 
 const LOAD = "posts/LOAD";
+const LOADRANDOM = "posts/LOADRANDOM";
 const DELETE = "posts/DELETE";
 const LOAD_ONE = "posts/LOAD_ONE";
 const UPDATE_ONE = "posts/UPDATE_ONE";
@@ -15,6 +16,12 @@ const load = (posts) => {
   };
 };
 
+const loadRandom = (posts) => {
+  return {
+    type: LOADRANDOM,
+    posts,
+  };
+};
 const load_one = (post) => {
   return {
     type: LOAD_ONE,
@@ -63,6 +70,15 @@ export const loadPosts = (id) => async (dispatch) => {
   if (response.ok) {
     const posts = await response.json();
     dispatch(load(posts));
+  }
+};
+
+export const loadRandomPosts = (id) => async (dispatch) => {
+  const response = await fetch(`/api/posts/random/${id}`);
+
+  if (response.ok) {
+    const posts = await response.json();
+    dispatch(loadRandom(posts));
   }
 };
 
@@ -149,7 +165,7 @@ export const deleteAComment = (id) => async (dispatch) => {
   }
 };
 
-const initialState = { feed: {}, current: null };
+const initialState = { feed: {}, current: null, explore:{} };
 let newState;
 export const postReducer = (state = initialState, action) => {
   switch (action.type) {
@@ -158,6 +174,12 @@ export const postReducer = (state = initialState, action) => {
       let flattened = {};
       action.posts.map((post) => (flattened[post.id] = post));
       newState.feed = flattened;
+      return newState;
+    case LOADRANDOM:
+      newState = { ...state };
+      let randomflattened = {};
+      action.posts.map((post) => (randomflattened[post.id] = post));
+      newState.explore = randomflattened;
       return newState;
     case LOAD_ONE:
       newState = { ...state };

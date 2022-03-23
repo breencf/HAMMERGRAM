@@ -41,7 +41,7 @@ export const NavigatonTop = () => {
           <div></div>
         </>
       )}
-      {split[split.length - 2] === "users" && (
+      {split[split.length - 2].toLowerCase() === "users"  && (
         <>
           <div></div>
           <h4>{username}</h4>

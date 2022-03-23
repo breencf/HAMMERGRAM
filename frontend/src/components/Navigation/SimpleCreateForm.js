@@ -17,7 +17,7 @@ export const SimpleCreateForm = () => {
     dispatch(createPost({ id, caption, location, image })).then(() =>
       dispatch(loadPosts(id))
     );
-    history.push("/");
+    history.push(`/users/${id}`);
   };
 
   const updateFile = (e) => {
@@ -30,7 +30,9 @@ export const SimpleCreateForm = () => {
       <hr />
       <form onSubmit={onSubmit} id="createPostForm">
         <div className="form-bottom">
-          <label htmlFor="image" className={image? null : "red"}>Add Image</label>
+          <label htmlFor="image" className={image ? null : "red"}>
+            Add Image
+          </label>
           <input
             type="file"
             onChange={updateFile}
@@ -60,7 +62,11 @@ export const SimpleCreateForm = () => {
         </div>
         <hr />
         <div>
-          <button className="button-submit" type="submit" disabled={image? false: true}>
+          <button
+            className="button-submit"
+            type="submit"
+            disabled={image ? false : true}
+          >
             Share
           </button>
         </div>
