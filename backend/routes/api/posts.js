@@ -23,10 +23,26 @@ router.get(
       include: [db.User, db.Like, { model: db.Comment, include: [db.User] }],
     });
 
-
-
     const sortedPosts = posts.sort((a, b) => b.id - a.id);
     res.json(sortedPosts);
+  })
+);
+
+router.get(
+  "/random/:id",
+  asyncHandler(async (req, res, next) => {
+    const { id } = req.params;
+
+    const postsFromStrangers = await db.Post.findAll({
+      where: {
+        [Op.not]: [{ userId: id }],
+      },
+      include: [db.User, db.Like, { model: db.Comment, include: [db.User] }],
+    });
+
+    console.log(postsFromStrangers);
+
+    res.json(postsFromStrangers);
   })
 );
 
@@ -35,7 +51,11 @@ router.get(
   asyncHandler(async (req, res, next) => {
     const { id } = req.params;
     const post = await db.Post.findByPk(id, {
-      include: [db.User, {model: db.Like, include: [db.User]}, { model: db.Comment, include: [db.User] }],
+      include: [
+        db.User,
+        { model: db.Like, include: [db.User] },
+        { model: db.Comment, include: [db.User] },
+      ],
     });
     res.json(post);
   })
