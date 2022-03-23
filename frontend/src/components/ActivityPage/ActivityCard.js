@@ -1,6 +1,5 @@
 import dayjs from "dayjs";
 import { Link } from "react-router-dom";
-import { bindActionCreators } from "redux";
 import "../CommentPage/CommentPage.css";
 import { FollowButton } from "../FollowButton";
 import "./ActivityCard.css"

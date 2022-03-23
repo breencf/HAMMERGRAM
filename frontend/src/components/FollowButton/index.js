@@ -2,6 +2,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { useState, useEffect } from "react";
 import { followButton } from "../../store/session";
 import { loadFollowers } from "../../store/user";
+import { loadPosts } from "../../store/posts";
 
 export const FollowButton = ({ followedUserId, options}) => {
   const dispatch = useDispatch();
@@ -37,7 +38,7 @@ useEffect (() => {
               followingUserId: user.id,
               followedUserId,
             })
-          );
+          ).then(() => dispatch(loadPosts(user.id)));
         }}
       >
         {followToggle ? "Unfollow" : "Follow"}

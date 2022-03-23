@@ -1,92 +1,97 @@
 nav {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    font-size: 24px;
-    height: 70px;
-    padding:20px;
-    width: inherit;
-    position: fixed;
-    background-color: var(--ig-background);
-
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 24px;
+  height: 70px;
+  padding: 20px;
+  width: inherit;
+  position: fixed;
+  background-color: var(--ig-background);
 }
 
 .logo {
-    max-height: 40px;
-    margin-top: 15px;
+  max-height: 40px;
+  margin-top: 15px;
 }
 
 .nav-bottom {
-    bottom: 0;
+  bottom: 0;
+  z-index: 30;
 }
 
 .nav-top {
-    top: 0;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    border-bottom: 1px solid var(--ig-light-gray);
+  z-index: 30;
+  top: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid var(--ig-light-gray);
 }
 
 /* Simple Create form */
 
 #createPostForm {
-    width: inherit;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    height: 100%;
+  width: inherit;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
 }
 
 .form-top {
-    display: flex;
-    align-items: flex-start;
-    width: 100%;
-    padding: 10px;
-    gap: 10px
+  display: flex;
+  align-items: flex-start;
+  width: 100%;
+  padding: 10px;
+  gap: 10px;
 }
 
 .form-image {
-    width: 40px;
-    height: 40px;
-    background-color: var(--ig-dark);
+  width: 40px;
+  height: 40px;
+  background-color: var(--ig-dark);
 }
 
 .form-image img {
-    height: 50px;
-    width: 50px;
-    object-fit: cover;
+  height: 50px;
+  width: 50px;
+  object-fit: cover;
 }
 
-.form-bottom #caption {
-    width: 80%;
-    border: none;
-    height: auto;
-    font-family: inherit;
-    font-size: inherit;
-    margin: 10px 0px
+.form-bottom #caption,
+.form-bottom #location {
+  width: 80%;
+  border: none;
+  height: auto;
+  font-family: inherit;
+  font-size: inherit;
+  margin: 10px 0px;
 }
 
 .form-bottom {
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    padding: 10px;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  padding: 10px;
 }
 
 .form-bottom input {
-    margin: 5px;
-    border: none;
-    padding: 5px;
+  margin: 5px;
+  border: none;
+  padding: 5px;
 }
 
 .button-submit {
-    color: var(--ig-blue);
-    border: none;
-    background: none;
-    padding: 10px;
-    font-weight: bold;
-    font-size: 16px;
+  color: var(--ig-blue);
+  border: none;
+  background: none;
+  padding: 10px;
+  font-weight: bold;
+  font-size: 16px;
+}
 
+.button-submit:disabled {
+  color: var(--ig-blue-disabled);
 }

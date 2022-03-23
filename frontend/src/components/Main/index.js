@@ -5,8 +5,8 @@ import { SimpleCreateForm } from "../Navigation/SimpleCreateForm";
 import { UserProfile } from "../UserProfile";
 import { CommentPage } from "../CommentPage";
 import { ActivityPage } from "../ActivityPage";
-import { SearchBar } from "../SearchPage/SearchBar";
 import { SearchResults } from "../SearchPage/SearchResults";
+import { UserList } from "../UserList";
 export const Main = () => {
   return (
     <>
@@ -32,6 +32,15 @@ export const Main = () => {
           </Route>
           <Route exact path="/search">
             <SearchResults />
+          </Route>
+          <Route exact path="/users/:id/followers">
+            <UserList/>
+          </Route>
+          <Route exact path="/users/:id/following">
+            <UserList/>
+          </Route>
+          <Route exact path="/posts/:id/likes">
+            <UserList/>
           </Route>
         </Switch>
       </div>

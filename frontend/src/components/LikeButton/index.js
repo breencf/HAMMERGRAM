@@ -31,7 +31,7 @@ export const LikeButton = ({ postId }) => {
   };
 
   useEffect(() => {
-     if(dispatched) dispatch(loadPosts());
+     if(dispatched) dispatch(loadPosts(user.id));
      setDispatched(false)
   }, [dispatched]);
 

@@ -57,8 +57,8 @@ const deleteComment = (deletedComment) => {
   };
 };
 
-export const loadPosts = () => async (dispatch) => {
-  const response = await fetch("/api/posts");
+export const loadPosts = (id) => async (dispatch) => {
+  const response = await fetch(`/api/posts/feed/${id}`);
 
   if (response.ok) {
     const posts = await response.json();

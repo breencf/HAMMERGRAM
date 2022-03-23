@@ -23,7 +23,7 @@ export const OptionsMenu = ({
   // }, [profileUser])
 
   const onClickDelete = () => {
-    dispatch(deletePost(content.id)).then(() => dispatch(loadPosts()));
+    dispatch(deletePost(content.id)).then(() => dispatch(loadPosts(content.userId)));
     closeModal();
     history.push("/");
   };

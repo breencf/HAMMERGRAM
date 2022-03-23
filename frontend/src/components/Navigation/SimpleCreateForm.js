@@ -15,7 +15,7 @@ export const SimpleCreateForm = () => {
   const onSubmit = (e) => {
     e.preventDefault();
     dispatch(createPost({ id, caption, location, image })).then(() =>
-      dispatch(loadPosts())
+      dispatch(loadPosts(id))
     );
     history.push("/");
   };
@@ -30,18 +30,22 @@ export const SimpleCreateForm = () => {
       <hr />
       <form onSubmit={onSubmit} id="createPostForm">
         <div className="form-bottom">
-          <label htmlFor="image">Add Image</label>
-          <input type="file" onChange={updateFile} />
+          <label htmlFor="image" className={image? null : "red"}>Add Image</label>
+          <input
+            type="file"
+            onChange={updateFile}
+            accept=".jpg, .jpeg, .gif, .png, .tiff"
+          />
           <hr />
 
-          <label htmlFor="caption">Add a Caption(optional)</label>
+          <label htmlFor="caption">Add a Caption</label>
 
           <textarea
             id="caption"
             label="text"
             onChange={(e) => setCaption(e.target.value)}
             value={caption}
-            placeholder="Write a caption..."
+            placeholder="Optional"
           />
           <hr />
 
@@ -51,12 +55,12 @@ export const SimpleCreateForm = () => {
             label="text"
             onChange={(e) => setLocation(e.target.value)}
             value={location}
-            placeholder="..."
+            placeholder="Optional"
           />
         </div>
         <hr />
         <div>
-          <button className="button-submit" type="submit">
+          <button className="button-submit" type="submit" disabled={image? false: true}>
             Share
           </button>
         </div>

@@ -4,13 +4,26 @@ const db = require("../../db/models");
 const { requireAuth } = require("../../utils/auth");
 const router = express.Router();
 const { singlePublicFileUpload, singleMulterUpload } = require("../../awss3");
+const Sequelize = require("sequelize");
+const Op = Sequelize.Op;
 
 router.get(
-  "/",
+  "/feed/:id",
   asyncHandler(async (req, res, next) => {
+    const { id } = req.params;
+
+    const following = await db.Follow.findAll({
+      where: { followingUserId: id },
+    });
+
+    idArr = following.map((follow) => follow.followedUserId);
+
     const posts = await db.Post.findAll({
+      where: { userId: idArr },
       include: [db.User, db.Like, { model: db.Comment, include: [db.User] }],
     });
+
+
 
     const sortedPosts = posts.sort((a, b) => b.id - a.id);
     res.json(sortedPosts);
@@ -22,7 +35,7 @@ router.get(
   asyncHandler(async (req, res, next) => {
     const { id } = req.params;
     const post = await db.Post.findByPk(id, {
-      include: [db.User, db.Like, { model: db.Comment, include: [db.User] }],
+      include: [db.User, {model: db.Like, include: [db.User]}, { model: db.Comment, include: [db.User] }],
     });
     res.json(post);
   })

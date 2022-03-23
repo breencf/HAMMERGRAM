@@ -75,12 +75,16 @@ export const UserProfile = () => {
           <div className="post-follows">
             <span>{profile?.Posts?.length}</span> <p>posts</p>
           </div>
-          <div className="post-follows">
-            <span>{followerCount}</span> <p>followers</p>
-          </div>
-          <div className="post-follows">
-            <span>{profile?.Followings?.length}</span> <p>following</p>
-          </div>
+          <Link to={`/users/${id}/followers`}>
+            <div className="post-follows">
+              <span>{followerCount}</span> <p>followers</p>
+            </div>
+          </Link>
+          <Link to={`/users/${id}/following`}>
+            <div className="post-follows">
+              <span>{profile?.Followings?.length}</span> <p>following</p>
+            </div>
+          </Link>
         </div>
         <hr />
         <div className="post-follows-container">

@@ -123,12 +123,33 @@ router.get(
   "/:id/followers",
   asyncHandler(async (req, res) => {
     const { id } = req.params;
-    const followers = await db.Follow.findAll({
-      where: { followedUserId: id },
-      include: [{ model: db.User, as: "Followings" }],
+    const follows = await db.Follow.findAll({
+      where: { followedUserId: id }
     });
 
+    followersArr = follows.map((follow) => follow.followingUserId);
+    console.log(followersArr);
+    const followers = await db.User.findAll({ where: {id: {[Op.in]: followersArr }}});
+
+    console.log(followers);
     res.json(followers);
+  })
+);
+
+router.get(
+  "/:id/following",
+  asyncHandler(async (req, res) => {
+    const { id } = req.params;
+    const followings = await db.Follow.findAll({
+      where: { followingUserId: id }
+    });
+
+    followingsArr = followings.map((follow) => follow.followedUserId);
+    console.log(followersArr);
+    const following = await db.User.findAll({ where: {id: {[Op.in]: followingsArr }}});
+
+    console.log(following);
+    res.json(following);
   })
 );
 

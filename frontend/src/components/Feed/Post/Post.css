@@ -1,11 +1,23 @@
 .post-image {
   width: 100%;
+  position: relative;
 }
 
 .post-image img {
   object-fit: cover;
   height: auto;
   width: inherit;
+}
+
+.post-image .bigHeart {
+  position: absolute;
+  top: 35%;
+  left: 35%;
+  right: auto;
+  bottom: auto;
+  z-index: 2;
+  font-size: 140px;
+  color: white;
 }
 
 .post-container {
@@ -74,10 +86,9 @@
   font-size: inherit;
 }
 
-
 .post-bottom p {
   font-weight: bold;
-  color: var(--ig-dark)
+  color: var(--ig-dark);
 }
 
 .from-now {

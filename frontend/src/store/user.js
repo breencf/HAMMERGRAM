@@ -2,6 +2,7 @@ import { csrfFetch } from "./csrf";
 const LOAD_PROFILE = "users/LOAD_PROFILE";
 const LOAD_ACTIVITY = "users/LOAD_ACTIVITY";
 const LOAD_FOLLOWERS = "users/LOAD_FOLLOWERS";
+const LOAD_FOLLOWING = "users/LOAD_FOLLOWING";
 
 
 const load = (profile) => {
@@ -13,6 +14,13 @@ const lFollowers = (followers) => {
   return {
     type: LOAD_FOLLOWERS,
     followers,
+  }
+}
+
+const lFollowing = (following) => {
+  return {
+    type: LOAD_FOLLOWING,
+    following,
   }
 }
 
@@ -40,6 +48,14 @@ export const loadFollowers = id => async dispatch => {
   }
 }
 
+export const loadFollowing = id => async dispatch => {
+  const response = await fetch(`/api/users/${id}/following`)
+  if (response.ok) {
+    const followers = await response.json()
+    dispatch (lFollowing(followers))
+  }
+}
+
 
 export const loadProfile = (id) => async (dispatch) => {
   const response = await fetch(`/api/users/${id}`);
@@ -50,7 +66,7 @@ export const loadProfile = (id) => async (dispatch) => {
   }
 };
 
-const initialState = { profile: {}, activity: [], profileFollowers: [] };
+const initialState = { profile: {}, activity: [], profileFollowers: [], profileFollowing:[] };
 let newState;
 
 export const userReducer = (state = initialState, action) => {
@@ -66,7 +82,11 @@ export const userReducer = (state = initialState, action) => {
     case LOAD_FOLLOWERS:
       newState = {...state}
       newState.profileFollowers = action.followers
-      return newState
+      return newState;
+      case LOAD_FOLLOWING:
+        newState = {...state}
+        newState.profileFollowing = action.following
+        return newState
     default:
       return state;
   }
