@@ -23,6 +23,20 @@ body {
   height: 100vh;
 }
 
+.nofollowing {
+  margin-top: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--ig-blue);
+  padding: 20px;
+  border-radius: 24px;
+}
+
+.nofollowing h1 {
+  text-align: center;
+}
+
 a {
   color: var(--ig-dark);
   font-weight: bolder;
@@ -122,7 +136,8 @@ p {
   width: 100%;
 }
 
-input::placeholder, textarea::placeholder {
+input::placeholder,
+textarea::placeholder {
   color: var(--ig-light-gray);
   font-size: 14px;
 }

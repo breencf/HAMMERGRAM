@@ -8,6 +8,8 @@ export const Feed = ({posts}) => {
 
   return (
     <div className="feed">
+
+      {!posts.length && <div className="nofollowing"><h1>Check out the search page to discover some users to follow!</h1></div>}
       {posts
         .sort((a, b) => b.id - a.id)
         .map((content) => {
