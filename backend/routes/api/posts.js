@@ -38,10 +38,26 @@ router.get(
         [Op.not]: [{ userId: id }],
       },
       include: [db.User, db.Like, { model: db.Comment, include: [db.User] }],
-      limit: 18,
     });
 
-    res.json(postsFromStrangers);
+    const shuffleArray = (array) => {
+      let curId = array.length;
+      // There remain elements to shuffle
+      while (0 !== curId) {
+        // Pick a remaining element
+        let randId = Math.floor(Math.random() * curId);
+        curId -= 1;
+        // Swap it with the current element.
+        let tmp = array[curId];
+        array[curId] = array[randId];
+        array[randId] = tmp;
+      }
+      return array;
+    };
+
+    const shuffled = shuffleArray(postsFromStrangers);
+
+    res.json(shuffled.slice(0, 18));
   })
 );
 
