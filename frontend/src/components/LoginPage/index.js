@@ -92,6 +92,10 @@ export const LoginForm = () => {
           Sign Up
         </Link>
       </p>
+      <div className="about">
+        <p>Hammergram is an instagram clone built as part of App Academy's 24 week Js/Py Software Engineering Bootcamp.</p>
+        <p>This project uses Javascript, Express.JS, Sequelize, and PostgreSQL in the backend, and uses React, Javascript, and Redux in the frontend, along with plain CSS.</p>
+      </div>
     </div>
   );
 };

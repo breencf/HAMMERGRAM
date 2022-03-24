@@ -181,3 +181,10 @@ hr {
   border-bottom: 1px solid var(--ig-light-gray);
   width: 100%;
 }
+
+.about {
+  width: 500px;
+  margin: 30px;
+  text-align: center;
+  color: var(--ig-light-gray);
+}

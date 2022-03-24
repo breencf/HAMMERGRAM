@@ -1,4 +1,4 @@
-import { FaCamera, FaCommentDots } from "react-icons/fa";
+import { FaCamera, FaCommentDots, FaGithub, FaLinkedin } from "react-icons/fa";
 import "./Navigation.css";
 import { Link, useLocation } from "react-router-dom";
 import { useEffect } from "react";
@@ -16,14 +16,18 @@ export const NavigatonTop = () => {
     <nav className="nav-top">
       {location.pathname === "/" && (
         <>
-          <FaCamera />
+          <a target="_blank" href="https://www.github.com/breencf">
+            <FaGithub />
+          </a>
           <Link to="/">
             <img
               className="logo"
               src="https://hammergram.s3.amazonaws.com/icons/hammergram-logo.png"
             />
           </Link>
-          <FaCommentDots />
+          <a target="_blank" href="https://www.linkedin.com/in/breencf">
+            <FaLinkedin />
+          </a>
         </>
       )}
       {location.pathname !== "/" &&
