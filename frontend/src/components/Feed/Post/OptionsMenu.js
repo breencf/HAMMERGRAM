@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from "react-redux";
-import { Link, useHistory } from "react-router-dom";
+import { Link, useHistory, useParams } from "react-router-dom";
 import { deletePost, loadPosts } from "../../../store/posts";
 import { useState, useEffect } from "react";
 import { followButton } from "../../../store/session";
@@ -12,6 +12,7 @@ export const OptionsMenu = ({
   setShowEdit,
 }) => {
   const history = useHistory();
+  const params = useParams()
   const { user } = useSelector((state) => state.sessions);
   const [followToggle, setFollowToggle] = useState(false);
   const dispatch = useDispatch();
@@ -49,9 +50,9 @@ export const OptionsMenu = ({
           </li>
         )}
         {content.userId === user.id && <li onClick={onClickDelete}>Delete</li>}
-        <li>
+        {+params.id !== content.id &&<li>
           <Link to={`/posts/${content.id}`}>Go to Post</Link>
-        </li>
+        </li>}
         {/* <li><Link to=""></Link>Copy Link</li> */}
         <li onClick={() => closeModal()}>Cancel</li>
       </ul>
