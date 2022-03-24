@@ -128,10 +128,8 @@ router.get(
     });
 
     followersArr = follows.map((follow) => follow.followingUserId);
-    console.log(followersArr);
     const followers = await db.User.findAll({ where: {id: {[Op.in]: followersArr }}});
 
-    console.log(followers);
     res.json(followers);
   })
 );
@@ -145,10 +143,8 @@ router.get(
     });
 
     followingsArr = followings.map((follow) => follow.followedUserId);
-    console.log(followersArr);
     const following = await db.User.findAll({ where: {id: {[Op.in]: followingsArr }}});
 
-    console.log(following);
     res.json(following);
   })
 );

@@ -38,10 +38,8 @@ router.get(
         [Op.not]: [{ userId: id }],
       },
       include: [db.User, db.Like, { model: db.Comment, include: [db.User] }],
-      limit: 18
+      limit: 18,
     });
-
-    console.log(postsFromStrangers);
 
     res.json(postsFromStrangers);
   })

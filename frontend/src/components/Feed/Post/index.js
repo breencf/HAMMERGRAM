@@ -50,7 +50,6 @@ export const Post = ({ content }) => {
     onDClick();
   });
   const onDClick = () => {
-    console.log("double clicked");
     setShowHeart(true);
     dispatch(likeButton({ userId: user.id, postId: content.id })).then(() =>
       dispatch(loadPosts(user.id))

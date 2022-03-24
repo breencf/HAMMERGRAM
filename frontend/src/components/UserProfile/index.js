@@ -34,7 +34,6 @@ export const UserProfile = () => {
     },
   };
 
-  console.log(profile.Posts);
 
   useEffect(() => {
     dispatch(loadProfile(id));
@@ -60,7 +59,8 @@ export const UserProfile = () => {
               {parseInt(id) === user.id && <BsGearWide onClick={openModal} />}
             </h1>
             {parseInt(id) === user.id ? (
-              <button className="editButton">Edit Profile</button>
+              // <button className="editButton">Edit Profile</button>
+              null
             ) : (
               <FollowButton followedUserId={id} />
             )}

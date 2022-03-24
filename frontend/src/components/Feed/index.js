@@ -6,7 +6,6 @@ import "./Feed.css";
 
 export const Feed = ({posts}) => {
 
-  console.log(posts)
   return (
     <div className="feed">
       {posts

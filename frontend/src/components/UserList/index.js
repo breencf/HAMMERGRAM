@@ -31,7 +31,6 @@ export const UserList = () => {
   useEffect(() => {if(url === "following") setToBeMapped(following)}, [following])
   useEffect(() => {if(url === "likes") setToBeMapped(likes?.map((obj) => obj.User))}, [likes])
 
-  useEffect(() => {console.log(toBeMapped)}, [toBeMapped])
 
 
 
