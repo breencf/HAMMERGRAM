@@ -1,6 +1,7 @@
 .feed {
   overflow-y: scroll;
   height: 100%;
+  padding-bottom: 100px;
 }
 
 .options-menu-cover {
