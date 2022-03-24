@@ -93,7 +93,7 @@ module.exports = {
           email: "cj@cj.com",
           username: "cjmc",
           name: "Cj McCollum",
-          image: "https://hammergram.s3.amazonaws.com/cj2.png",
+          image: "https://hammergram.s3.amazonaws.com/cj2.jpg",
           bio: "NO Pelicans Guard, Winemaker @ McCollum Heritage 91 Cellars",
 
           hashedPassword: bcrypt.hashSync("password"),
@@ -104,7 +104,7 @@ module.exports = {
           email: "d@wade.com",
           username: "dwade",
           name: "Dwayne Wade",
-          image: "https://hammergram.s3.amazonaws.com/dw1.png",
+          image: "https://hammergram.s3.amazonaws.com/dw1.jpg",
           bio: "Aspiring winemaker @DWadeCellars",
 
           hashedPassword: bcrypt.hashSync("password"),
