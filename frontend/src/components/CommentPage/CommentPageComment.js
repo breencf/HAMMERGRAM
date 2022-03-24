@@ -3,11 +3,11 @@ import { FaHeart, FaRegTimesCircle } from "react-icons/fa";
 import "./CommentPage.css";
 import { LikeButton } from "../LikeButton";
 import { useDispatch, useSelector } from "react-redux";
-import { deleteAComment, loadOnePost } from "../../store/posts";
+import { deleteAComment, loadOnePost, loadPosts } from "../../store/posts";
 import { useState, useEffect } from "react";
 import dayjs from "dayjs";
-let relativeTime = require('dayjs/plugin/relativeTime')
-dayjs.extend(relativeTime)
+let relativeTime = require("dayjs/plugin/relativeTime");
+dayjs.extend(relativeTime);
 
 export const CommentPageComment = ({ comment, setUpdated }) => {
   const dispatch = useDispatch();
@@ -16,9 +16,9 @@ export const CommentPageComment = ({ comment, setUpdated }) => {
 
   const onDelete = (e) => {
     e.preventDefault();
-    const d = dispatch(deleteAComment(comment.id));
-    d.then(obj => setDeleted(true))
-
+    dispatch(deleteAComment(comment.id))
+      .then((obj) => setDeleted(true))
+      .then(() => dispatch(loadPosts(id)));
   };
 
   useEffect(() => {
@@ -27,7 +27,6 @@ export const CommentPageComment = ({ comment, setUpdated }) => {
       setDeleted(false);
     }
   }, [deleted]);
-
 
   return (
     <div className="comment-page-comment">
@@ -38,7 +37,7 @@ export const CommentPageComment = ({ comment, setUpdated }) => {
         <br />
         {dayjs(comment?.createdAt).fromNow()}
       </div>
-      {comment?.content && <LikeButton likes={[]} postId={comment?.postId} />}
+      {/* {comment?.content && <LikeButton likes={[]} postId={comment?.postId} />} */}
       {comment?.content && comment.userId === id && (
         <FaRegTimesCircle onClick={onDelete} />
       )}

@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
-import { createAComment, loadOnePost } from "../../store/posts";
+import { createAComment, loadOnePost, loadPosts } from "../../store/posts";
 import { CommentPageComment } from "./CommentPageComment";
 
 export const CommentPage = () => {
@@ -21,7 +21,7 @@ export const CommentPage = () => {
     const created = dispatch(
       createAComment({ postId: id, userId: user.id, content: comment })
     );
-    created.then((obj) => setUpdated(created));
+    created.then((obj) => setUpdated(created)).then(() => dispatch(loadPosts(user.id)));
     setComment("");
   };
 

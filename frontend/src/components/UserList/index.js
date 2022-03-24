@@ -23,19 +23,21 @@ export const UserList = () => {
     if(url ==="followers") dispatch(loadFollowers(id))
     if(url ==="following") dispatch(loadFollowing(id))
     if(url ==="likes") dispatch(loadOnePost(id))
-
   }, [url])
 
+  // const likingUsers = likes?.map((obj) => obj.User)
 
   useEffect(() => {if(url === "followers") setToBeMapped(followers)}, [followers])
   useEffect(() => {if(url === "following") setToBeMapped(following)}, [following])
-  useEffect(() => {if(url === "likes") setToBeMapped(likingUsers)}, [likes])
+  useEffect(() => {if(url === "likes") setToBeMapped(likes?.map((obj) => obj.User))}, [likes])
+
+  useEffect(() => {console.log(toBeMapped)}, [toBeMapped])
 
 
-  const likingUsers = likes.map((obj) => obj.User)
+
 
   return <div>
-      {toBeMapped.map((obj) => {
+      {toBeMapped?.map((obj) => {
           return <UserCard key= {obj.id} user={obj}/>
       })}
   </div>;

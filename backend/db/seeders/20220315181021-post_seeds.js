@@ -141,17 +141,17 @@ module.exports = {
           createdAt: new Date(),
           updatedAt: new Date(),
         },
-        {
-          location: "Vancouver, BC",
-          lat: 0,
-          lng: 0,
-          userId: 6,
-          caption:
-            "BC Wines really are so incredible! Such a shame we don't see them in the states",
-          image: "https://hammergram.s3.amazonaws.com/lvp.JPG",
-          createdAt: new Date(),
-          updatedAt: new Date(),
-        },
+        // {
+        //   location: "Vancouver, BC",
+        //   lat: 0,
+        //   lng: 0,
+        //   userId: 6,
+        //   caption:
+        //     "BC Wines really are so incredible! Such a shame we don't see them in the states",
+        //   image: "https://hammergram.s3.amazonaws.com/lvp.JPG",
+        //   createdAt: new Date(),
+        //   updatedAt: new Date(),
+        // },
         {
           location: "Robert Sinskey Vineyards",
           lat: 0,

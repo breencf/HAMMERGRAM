@@ -10,11 +10,11 @@ export const ProfileMenu = ({closeModal }) => {
   return (
     <div className="options-menu">
       <ul>
-        <li>
+        {/* <li>
             Edit Profile
-        </li>
+        </li> */}
         <li onClick={() => {dispatch(logout()); history.push("/")}}>
-            Log Out
+            <p className="red">Log out</p>
         </li>
         <li onClick={() => closeModal()}>Cancel</li>
       </ul>

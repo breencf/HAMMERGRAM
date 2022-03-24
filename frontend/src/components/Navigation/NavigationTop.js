@@ -4,6 +4,7 @@ import { Link, useLocation } from "react-router-dom";
 import { useEffect } from "react";
 import SearchBar from "../SearchPage/SearchBar";
 import { useSelector } from "react-redux";
+import { BackButton } from "./BackButton";
 
 export const NavigatonTop = () => {
   const location = useLocation();
@@ -29,7 +30,9 @@ export const NavigatonTop = () => {
         !Number.isInteger(parseInt(split[split.length - 1])) &&
         split[split.length - 1] !== "search" && (
           <>
-            <div></div>
+            <div>
+              <BackButton />
+            </div>
             <h4>{split[split.length - 1]}</h4>
             <div></div>
           </>
@@ -41,16 +44,20 @@ export const NavigatonTop = () => {
           <div></div>
         </>
       )}
-      {split[split.length - 2].toLowerCase() === "users"  && (
+      {split[split.length - 2].toLowerCase() === "users" && (
         <>
-          <div></div>
+          <div>
+            <BackButton />
+          </div>
           <h4>{username}</h4>
           <div></div>
         </>
       )}
       {split[split.length - 2] === "posts" && (
         <>
-          <div></div>
+          <div>
+            <BackButton />
+          </div>
           <h4>Photo</h4>
           <div></div>
         </>

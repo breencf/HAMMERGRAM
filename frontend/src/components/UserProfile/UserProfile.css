@@ -74,6 +74,14 @@
   width: 33vw;
 }
 
+.post-follows span {
+  font-weight: bold;
+}
+
+.post-follows p {
+  font-weight: 400 !important;
+}
+
 @media (min-width: 500px) {
   .post-square {
     height: 166px;

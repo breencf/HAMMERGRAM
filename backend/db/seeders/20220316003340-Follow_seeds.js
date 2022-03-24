@@ -29,12 +29,12 @@ module.exports = {
           createdAt: new Date(),
           updatedAt: new Date(),
         },
-        // {
-        //   followingUserId: 6,
-        //   followedUserId: 1,
-        //   createdAt: new Date(),
-        //   updatedAt: new Date(),
-        // },
+        {
+          followingUserId: 6,
+          followedUserId: 1,
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
         {
           followingUserId: 1,
           followedUserId: 2,
@@ -53,24 +53,24 @@ module.exports = {
           createdAt: new Date(),
           updatedAt: new Date(),
         },
-        // {
-        //   followingUserId: 5,
-        //   followedUserId: 2,
-        //   createdAt: new Date(),
-        //   updatedAt: new Date(),
-        // },
-        // {
-        //   followingUserId: 6,
-        //   followedUserId: 2,
-        //   createdAt: new Date(),
-        //   updatedAt: new Date(),
-        // },
-        // {
-        //   followingUserId: 7,
-        //   followedUserId: 2,
-        //   createdAt: new Date(),
-        //   updatedAt: new Date(),
-        // },
+        {
+          followingUserId: 5,
+          followedUserId: 2,
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
+        {
+          followingUserId: 6,
+          followedUserId: 2,
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
+        {
+          followingUserId: 7,
+          followedUserId: 2,
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
         // {
         //   followingUserId: 8,
         //   followedUserId: 2,
@@ -101,18 +101,18 @@ module.exports = {
         //   createdAt: new Date(),
         //   updatedAt: new Date(),
         // },
-        // {
-        //   followingUserId: 6,
-        //   followedUserId: 4,
-        //   createdAt: new Date(),
-        //   updatedAt: new Date(),
-        // },
-        // {
-        //   followingUserId: 7,
-        //   followedUserId: 4,
-        //   createdAt: new Date(),
-        //   updatedAt: new Date(),
-        // },
+        {
+          followingUserId: 6,
+          followedUserId: 4,
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
+        {
+          followingUserId: 7,
+          followedUserId: 4,
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
         {
           followingUserId: 1,
           followedUserId: 4,
@@ -137,12 +137,12 @@ module.exports = {
           createdAt: new Date(),
           updatedAt: new Date(),
         },
-        // {
-        //   followingUserId: 7,
-        //   followedUserId: 5,
-        //   createdAt: new Date(),
-        //   updatedAt: new Date(),
-        // },
+        {
+          followingUserId: 7,
+          followedUserId: 5,
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
         // {
         //   followingUserId: 4,
         //   followedUserId: 5,
@@ -155,30 +155,30 @@ module.exports = {
         //   createdAt: new Date(),
         //   updatedAt: new Date(),
         // },
-        // {
-        //   followingUserId: 9,
-        //   followedUserId: 6,
-        //   createdAt: new Date(),
-        //   updatedAt: new Date(),
-        // },
-        // {
-        //   followingUserId: 7,
-        //   followedUserId: 6,
-        //   createdAt: new Date(),
-        //   updatedAt: new Date(),
-        // },
-        // {
-        //   followingUserId: 5,
-        //   followedUserId: 6,
-        //   createdAt: new Date(),
-        //   updatedAt: new Date(),
-        // },
-        // {
-        //   followingUserId: 2,
-        //   followedUserId: 6,
-        //   createdAt: new Date(),
-        //   updatedAt: new Date(),
-        // },
+        {
+          followingUserId: 1,
+          followedUserId: 6,
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
+        {
+          followingUserId: 7,
+          followedUserId: 6,
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
+        {
+          followingUserId: 5,
+          followedUserId: 3,
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
+        {
+          followingUserId: 2,
+          followedUserId: 6,
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
         {
           followingUserId: 4,
           followedUserId: 1,
@@ -191,24 +191,24 @@ module.exports = {
           createdAt: new Date(),
           updatedAt: new Date(),
         },
-        // {
-        //   followingUserId: 10,
-        //   followedUserId: 6,
-        //   createdAt: new Date(),
-        //   updatedAt: new Date(),
-        // },
-        // {
-        //   followingUserId: 10,
-        //   followedUserId: 7,
-        //   createdAt: new Date(),
-        //   updatedAt: new Date(),
-        // },
-        // {
-        //   followingUserId: 1,
-        //   followedUserId: 2,
-        //   createdAt: new Date(),
-        //   updatedAt: new Date(),
-        // },
+        {
+          followingUserId: 3,
+          followedUserId: 6,
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
+        {
+          followingUserId: 4,
+          followedUserId: 6,
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
+        {
+          followingUserId: 5,
+          followedUserId: 6,
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
         {
           followingUserId: 2,
           followedUserId: 1,
@@ -299,12 +299,12 @@ module.exports = {
         //   createdAt: new Date(),
         //   updatedAt: new Date(),
         // },
-        // {
-        //   followingUserId: 6,
-        //   followedUserId: 10,
-        //   createdAt: new Date(),
-        //   updatedAt: new Date(),
-        // },
+        {
+          followingUserId: 6,
+          followedUserId: 7,
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
       ],
       {}
     );
