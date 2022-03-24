@@ -19,7 +19,7 @@ const validateSignup = [
     .exists({ checkFalsy: true })
     .isLength({ min: 3 })
     .withMessage(
-      "Please provide a username that is a minimum of 3 characters and on in use"
+      "Please provide a username that is a minimum of 3 characters, with no spaces, and not in use"
     ),
   check("password")
     .exists({ checkFalsy: true })

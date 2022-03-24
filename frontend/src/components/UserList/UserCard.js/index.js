@@ -2,8 +2,10 @@ import { Link } from "react-router-dom";
 import "../../CommentPage/CommentPage.css";
 import { FollowButton } from "../../FollowButton";
 import "../../ActivityPage/ActivityCard.css";
+import { useSelector } from "react-redux";
 
 export const UserCard = ({ user }) => {
+  const {id} = useSelector(s => s.sessions.user)
   return (
     <div className="activity-card">
       <div className="activity-card-left">
@@ -14,7 +16,7 @@ export const UserCard = ({ user }) => {
         </div>
       </div>
       <div className="userCardFollowButton">
-      <FollowButton followedUserId={user.id} />
+      {user.id !== id && <FollowButton followedUserId={user.id} />}
       </div>
     </div>
   );
