@@ -3,6 +3,7 @@ import "./Navigation.css";
 import { useSelector, useDispatch } from "react-redux";
 import { createPost, loadPosts } from "../../store/posts";
 import { useHistory } from "react-router-dom";
+import { loadProfile } from "../../store/user";
 
 export const SimpleCreateForm = () => {
   const { id } = useSelector((s) => s.sessions.user);
@@ -14,9 +15,9 @@ export const SimpleCreateForm = () => {
 
   const onSubmit = (e) => {
     e.preventDefault();
-    dispatch(createPost({ id, caption, location, image })).then(() =>
-      dispatch(loadPosts(id))
-    );
+    const newPost = dispatch(createPost({ id, caption, location, image }))
+      .then(() => dispatch(loadProfile(id)))
+      .then(() => dispatch(loadPosts(id)));
     history.push(`/users/${id}`);
   };
 
