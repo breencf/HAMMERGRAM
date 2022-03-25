@@ -8,11 +8,18 @@ const UPDATE_ONE = "posts/UPDATE_ONE";
 const CREATE = "posts/CREATE";
 const CREATE_COMMENT = "comments/CREATE";
 const DELETE_COMMENT = "comments/DELETE";
+const CLEAR = "posts/CLEAR";
 
 const load = (posts) => {
   return {
     type: LOAD,
     posts,
+  };
+};
+
+export const clearPosts = () => {
+  return {
+    type: CLEAR,
   };
 };
 
@@ -165,7 +172,7 @@ export const deleteAComment = (id) => async (dispatch) => {
   }
 };
 
-const initialState = { feed: {}, current: null, explore:{} };
+const initialState = { feed: {}, current: null, explore: {} };
 let newState;
 export const postReducer = (state = initialState, action) => {
   switch (action.type) {
@@ -207,6 +214,9 @@ export const postReducer = (state = initialState, action) => {
       newState.current.Comments = newState.current.Comments.filter(
         (comment) => comment.id !== action.deletedComment.postId
       );
+      return newState;
+    case CLEAR:
+      newState = initialState;
       return newState;
     default:
       return state;

@@ -15,6 +15,7 @@ export const Main = () => {
   const dispatch = useDispatch();
   const posts = useSelector((s) => s.posts.feed);
   const user = useSelector((s) => s.sessions.user);
+  console.log(user)
   useEffect(() => {
     dispatch(loadPosts(user.id));
   }, [dispatch, posts?.length]);

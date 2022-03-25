@@ -45,7 +45,7 @@ export const UserProfile = () => {
 
   useEffect(() => {
     dispatch(loadFollowers(id));
-  }, [Object.values(following).length]);
+  }, [following]);
 
   return (
     <>

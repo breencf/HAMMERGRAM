@@ -99,7 +99,8 @@ export const signup =
       body: JSON.stringify({ name, username, email, password }),
     });
     const data = await response.json();
-    dispatch(startSession(data));
+    console.log(data);
+    dispatch(startSession(data.user, data.following, data.likes));
     return data;
   };
 
@@ -128,8 +129,8 @@ export default function sessionReducer(state = initialState, action) {
     case END:
       newState = { ...state };
       delete newState.user;
-      newState.following = {};
-      newState.likes = {};
+      delete newState.likes;
+      delete newState.following;
       return newState;
     case FOLLOW:
       newState = { ...state };

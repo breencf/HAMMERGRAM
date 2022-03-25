@@ -3,11 +3,16 @@ const LOAD_PROFILE = "users/LOAD_PROFILE";
 const LOAD_ACTIVITY = "users/LOAD_ACTIVITY";
 const LOAD_FOLLOWERS = "users/LOAD_FOLLOWERS";
 const LOAD_FOLLOWING = "users/LOAD_FOLLOWING";
+const CLEAR = "users/clear"
 
 
 const load = (profile) => {
   return { type: LOAD_PROFILE, profile };
 };
+
+export const clearUsers = () => {
+  return { type: CLEAR}
+}
 
 
 const lFollowers = (followers) => {
@@ -86,7 +91,10 @@ export const userReducer = (state = initialState, action) => {
       case LOAD_FOLLOWING:
         newState = {...state}
         newState.profileFollowing = action.following
-        return newState
+        return newState;
+      case CLEAR:
+      newState = initialState;
+      return newState;
     default:
       return state;
   }

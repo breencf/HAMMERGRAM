@@ -34,11 +34,18 @@ router.post(
   asyncHandler(async (req, res) => {
     const { email, name, image, password, username } = req.body;
     const user = await User.signup({ email, name, image, password, username });
+    const u = await User.findByPk(user.id);
+    const following = await db.Follow.findAll({
+      where: { followingUserId: u.id },
+    });
+    const likes = await db.Like.findAll({ where: { userId: u.id } });
 
     await setTokenCookie(res, user);
 
     return res.json({
-      user,
+      user: u.toSafeObject(),
+      following,
+      likes,
     });
   })
 );
@@ -124,11 +131,13 @@ router.get(
   asyncHandler(async (req, res) => {
     const { id } = req.params;
     const follows = await db.Follow.findAll({
-      where: { followedUserId: id }
+      where: { followedUserId: id },
     });
 
     followersArr = follows.map((follow) => follow.followingUserId);
-    const followers = await db.User.findAll({ where: {id: {[Op.in]: followersArr }}});
+    const followers = await db.User.findAll({
+      where: { id: { [Op.in]: followersArr } },
+    });
 
     res.json(followers);
   })
@@ -139,11 +148,13 @@ router.get(
   asyncHandler(async (req, res) => {
     const { id } = req.params;
     const followings = await db.Follow.findAll({
-      where: { followingUserId: id }
+      where: { followingUserId: id },
     });
 
     followingsArr = followings.map((follow) => follow.followedUserId);
-    const following = await db.User.findAll({ where: {id: {[Op.in]: followingsArr }}});
+    const following = await db.User.findAll({
+      where: { id: { [Op.in]: followingsArr } },
+    });
 
     res.json(following);
   })
