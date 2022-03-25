@@ -34,18 +34,13 @@ router.post(
   asyncHandler(async (req, res) => {
     const { email, name, image, password, username } = req.body;
     const user = await User.signup({ email, name, image, password, username });
-    const u = await User.findByPk(user.id);
-    const following = await db.Follow.findAll({
-      where: { followingUserId: u.id },
-    });
-    const likes = await db.Like.findAll({ where: { userId: u.id } });
 
     await setTokenCookie(res, user);
 
     return res.json({
-      user: u.toSafeObject(),
-      following,
-      likes,
+      user: user.toSafeObject(),
+      following: [],
+      likes: [],
     });
   })
 );

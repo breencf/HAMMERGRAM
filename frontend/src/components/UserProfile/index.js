@@ -34,34 +34,34 @@ export const UserProfile = () => {
     },
   };
 
-
   useEffect(() => {
     dispatch(loadProfile(id));
   }, [dispatch, id]);
 
   useEffect(() => {
-    if (profileFollowers) setFollowerCount(profileFollowers?.length);
-  }, [profileFollowers?.length]);
+    dispatch(loadFollowers(id));
+  }, [following, id]);
 
   useEffect(() => {
-    dispatch(loadFollowers(id));
-  }, [following]);
+    if (profileFollowers) setFollowerCount(profileFollowers?.length);
+  }, [profileFollowers?.length, id]);
 
   return (
     <>
       <div className="profile-container">
         <div className="profile-top">
-          <div className="profile-user"><img src={profile?.image} /></div>
+          <div className="profile-user">
+            <img src={profile?.image} />
+          </div>
 
           <div className="profile-header">
             <h1>
               {profile?.username}{" "}
               {parseInt(id) === user.id && <BsGearWide onClick={openModal} />}
             </h1>
-            {parseInt(id) === user.id ? (
-              // <button className="editButton">Edit Profile</button>
-              null
-            ) : (
+            {parseInt(id) ===
+            user.id ? // <button className="editButton">Edit Profile</button>
+            null : (
               <FollowButton followedUserId={id} />
             )}
           </div>
@@ -94,8 +94,9 @@ export const UserProfile = () => {
         {gridFeed === "g" && (
           <Grid posts={profile?.Posts?.sort((a, b) => b.id - a.id)} />
         )}
-        {gridFeed === "f" && <Feed posts={profile?.Posts?.sort((a, b) => b.id - a.id)}/>}
-
+        {gridFeed === "f" && (
+          <Feed posts={profile?.Posts?.sort((a, b) => b.id - a.id)} />
+        )}
       </div>
       <Modal
         isOpen={modalIsOpen}
