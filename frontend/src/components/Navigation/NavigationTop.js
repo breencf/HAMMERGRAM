@@ -14,12 +14,12 @@ export const NavigatonTop = () => {
 
   return (
     <nav className="nav-top">
-      {location.pathname === "/" && (
+      {location.pathname === "/feed" && (
         <>
           <a target="_blank" href="https://www.github.com/breencf">
             <FaGithub />
           </a>
-          <Link to="/">
+          <Link to="/feed">
             <img
               className="logo"
               src="https://hammergram.s3.amazonaws.com/icons/hammergram-logo.png"
@@ -30,7 +30,7 @@ export const NavigatonTop = () => {
           </a>
         </>
       )}
-      {location.pathname !== "/" &&
+      {location.pathname !== "/feed" &&
         !Number.isInteger(parseInt(split[split.length - 1])) &&
         split[split.length - 1] !== "search" && (
           <>

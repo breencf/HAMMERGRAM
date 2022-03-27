@@ -56,7 +56,7 @@ router.get(
         { model: db.Post, include: [db.Like, db.User] },
       ],
     });
-    res.json(user);
+    if (user) res.json(user);
   })
 );
 

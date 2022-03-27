@@ -12,6 +12,7 @@ export const SearchResults = () => {
   const results = useSelector((s) => s.search);
   const posts = useSelector((s) => s.posts.explore);
   const [explore, setExplore] = useState([]);
+  console.log(results)
   const [loadedExplore, setLoadedExplore] = useState(false);
 
   useEffect(() => {
@@ -43,6 +44,7 @@ export const SearchResults = () => {
 
   return (
     <div>
+      {results.length === 0 && <div className="empty-list"><p>No results available for the given search.</p></div> }
       {window.searchName.length > 2 &&
         results.map((result) => {
           return (

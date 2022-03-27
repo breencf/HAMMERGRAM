@@ -57,6 +57,7 @@ export const CommentPage = () => {
               type="text"
               id="comment"
               value={comment}
+              // maxLength="255"
               onChange={(e) => setComment(e.target.value)}
               placeholder="Add a comment..."
             />

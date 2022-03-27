@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
 import { FaRegHeart, FaHeart } from "react-icons/fa";
 import "./LikeButton.css";
-import { loadPosts } from "../../store/posts";
+import { loadOnePost, loadPosts } from "../../store/posts";
 import { likeButton } from "../../store/session";
 
 export const LikeButton = ({ postId }) => {
@@ -31,7 +31,7 @@ export const LikeButton = ({ postId }) => {
   };
 
   useEffect(() => {
-     if(dispatched) dispatch(loadPosts(user.id));
+     if(dispatched) {dispatch(loadPosts(user.id)); dispatch(loadOnePost(postId))};
      setDispatched(false)
   }, [dispatched]);
 

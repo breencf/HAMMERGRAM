@@ -43,9 +43,10 @@ export const PostPage = () => {
 
   useEffect(() => {
     dispatch(loadOnePost(id));
-  }, [dispatch, content?.id]);
+  }, [dispatch, id]);
 
   useEffect(() => {
+    console.log(likes);
     if (likes) setLikeCount(likes.length);
   }, [likes?.length]);
 

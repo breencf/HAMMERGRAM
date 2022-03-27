@@ -36,6 +36,7 @@ export const UserList = () => {
 
 
   return <div>
+    { toBeMapped && toBeMapped.length === 0 && <div className='empty-list'><p>This list of {url} is empty....</p></div>}
       {toBeMapped?.map((obj) => {
           return <UserCard key= {obj.id} user={obj}/>
       })}

@@ -55,6 +55,9 @@ export const Main = () => {
           <Route exact path="/posts/:id/likes">
             <UserList/>
           </Route>
+          <Route>
+            <h1>404 bb</h1>
+          </Route>
         </Switch>
       </div>
     </>

@@ -31,7 +31,7 @@ export const CommentPageComment = ({ comment, setUpdated }) => {
   return (
     <div className="comment-page-comment">
       <img className="userIcon" src={comment?.User?.image} />
-      <div>
+      <div className="comment-body">
         <Link to={`/users/${comment?.userId}`}>{comment?.User?.username}</Link>
         {comment?.content ? comment?.content : comment?.caption}
         <br />
