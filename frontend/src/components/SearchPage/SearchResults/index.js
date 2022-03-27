@@ -12,7 +12,6 @@ export const SearchResults = () => {
   const results = useSelector((s) => s.search);
   const posts = useSelector((s) => s.posts.explore);
   const [explore, setExplore] = useState([]);
-  console.log(results)
   const [loadedExplore, setLoadedExplore] = useState(false);
 
   useEffect(() => {

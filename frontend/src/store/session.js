@@ -99,7 +99,6 @@ export const signup =
       body: JSON.stringify({ name, username, email, password }),
     });
     const data = await response.json();
-    console.log(data);
     dispatch(startSession(data.user, data.following, data.likes));
     return data;
   };

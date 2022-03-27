@@ -34,6 +34,8 @@ export const UserProfile = () => {
     },
   };
 
+
+
   useEffect(() => {
     dispatch(loadProfile(id));
   }, [dispatch, id]);

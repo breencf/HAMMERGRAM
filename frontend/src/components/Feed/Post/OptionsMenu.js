@@ -4,6 +4,7 @@ import { deletePost, loadPosts } from "../../../store/posts";
 import { useState, useEffect } from "react";
 import { followButton } from "../../../store/session";
 import { FollowButton } from "../../FollowButton";
+import { loadProfile } from "../../../store/user";
 
 export const OptionsMenu = ({
   content,
@@ -24,9 +25,9 @@ export const OptionsMenu = ({
   // }, [profileUser])
 
   const onClickDelete = () => {
-    dispatch(deletePost(content.id)).then(() => dispatch(loadPosts(content.userId)));
+    dispatch(deletePost(content.id)).then(() => dispatch(loadProfile(content.userId)));
     closeModal();
-    history.push("/");
+    history.push(`/users/${content.userId}`);
   };
 
   return (

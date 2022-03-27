@@ -24,7 +24,7 @@ export const FollowButton = ({ followedUserId, options }) => {
                 followingUserId: user.id,
                 followedUserId,
               })
-            ).then(() => dispatch(loadPosts(user.id)));
+            ).then(() => dispatch(loadFollowers(followedUserId)));
           }}
         >
           {followToggle ? "Unfollow" : "Follow"}

@@ -38,7 +38,7 @@ export const LikeButton = ({ postId }) => {
   return (
     <div>
       <button className="likeButton" type="button" onClick={onClick}>
-        {likeToggle ? <FaHeart /> : <FaRegHeart />}
+        {likeToggle ? <div className="red"><FaHeart /></div> : <FaRegHeart />}
       </button>
     </div>
   );

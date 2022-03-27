@@ -10,12 +10,11 @@ import { UserList } from "../UserList";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { loadPosts } from "../../store/posts";
+import { BsCart4 } from "react-icons/bs";
 export const Main = () => {
-
   const dispatch = useDispatch();
   const posts = useSelector((s) => s.posts.feed);
   const user = useSelector((s) => s.sessions.user);
-  console.log(user)
   useEffect(() => {
     dispatch(loadPosts(user.id));
   }, [dispatch, posts?.length]);
@@ -25,8 +24,8 @@ export const Main = () => {
       <div id="main">
         <Switch>
           <Route exact path="/feed">
-            {user && <Feed posts={Object.values(posts)}/>}
-            {!user && <Redirect to="/"/>}
+            {user && <Feed posts={Object.values(posts)} />}
+            {!user && <Redirect to="/" />}
           </Route>
           <Route exact path="/posts/:id">
             <PostPage />
@@ -47,16 +46,23 @@ export const Main = () => {
             <SearchResults />
           </Route>
           <Route exact path="/users/:id/followers">
-            <UserList/>
+            <UserList />
           </Route>
           <Route exact path="/users/:id/following">
-            <UserList/>
+            <UserList />
           </Route>
           <Route exact path="/posts/:id/likes">
-            <UserList/>
+            <UserList />
           </Route>
           <Route>
-            <h1>404 bb</h1>
+            <div className="empty-list">
+              <div>
+                <h1>404</h1>
+              </div>
+              <div>
+                <p>this page is either corked, mousy, or doesn't exist.... </p>
+              </div>
+            </div>
           </Route>
         </Switch>
       </div>
