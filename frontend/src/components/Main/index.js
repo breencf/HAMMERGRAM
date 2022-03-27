@@ -1,5 +1,5 @@
 import { Feed } from "../Feed";
-import { Route, Switch } from "react-router-dom";
+import { Redirect, Route, Switch } from "react-router-dom";
 import { PostPage } from "../SinglePost";
 import { SimpleCreateForm } from "../Navigation/SimpleCreateForm";
 import { UserProfile } from "../UserProfile";
@@ -24,8 +24,9 @@ export const Main = () => {
     <>
       <div id="main">
         <Switch>
-          <Route exact path="/">
-            <Feed posts={Object.values(posts)}/>
+          <Route exact path="/feed">
+            {user && <Feed posts={Object.values(posts)}/>}
+            {!user && <Redirect to="/"/>}
           </Route>
           <Route exact path="/posts/:id">
             <PostPage />

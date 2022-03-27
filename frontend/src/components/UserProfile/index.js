@@ -59,9 +59,7 @@ export const UserProfile = () => {
               {profile?.username}{" "}
               {parseInt(id) === user.id && <BsGearWide onClick={openModal} />}
             </h1>
-            {parseInt(id) ===
-            user.id ? // <button className="editButton">Edit Profile</button>
-            null : (
+            {parseInt(id) === user.id ? null : ( // <button className="editButton">Edit Profile</button>
               <FollowButton followedUserId={id} />
             )}
           </div>
@@ -75,7 +73,10 @@ export const UserProfile = () => {
           <div className="post-follows">
             <span>{profile?.Posts?.length}</span> <p>posts</p>
           </div>
-          <Link to={`/users/${id}/followers`}>
+          <Link
+            to={`/users/${id}/followers`}
+            disabled={followerCount > 0 ? false : true}
+          >
             <div className="post-follows">
               <span>{followerCount}</span> <p>followers</p>
             </div>

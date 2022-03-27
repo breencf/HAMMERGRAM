@@ -117,7 +117,7 @@ export default function sessionReducer(state = initialState, action) {
   let newState;
   switch (action.type) {
     case START:
-      newState = { ...state }; //Object.assign({}, state)
+      newState = initialState; //Object.assign({}, state)
       newState.user = action.user;
       if (action.following && action.likes) {
         action.following.forEach((obj) => {

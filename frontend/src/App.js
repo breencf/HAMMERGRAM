@@ -1,4 +1,4 @@
-import { Route, Switch } from "react-router-dom";
+import { Route, Switch, Redirect } from "react-router-dom";
 import {useState, useEffect} from 'react'
 import { LoginForm } from "./components/LoginPage";
 import { useDispatch, useSelector } from "react-redux";
@@ -16,6 +16,7 @@ function App() {
   }, [dispatch]);
 
   const user = useSelector((s) => s.sessions.user)
+  console.log(user)
 
   return (
     isLoaded && (
@@ -28,7 +29,8 @@ function App() {
       </>}
       <Switch>
         <Route exact path="/">
-          <LoginForm />
+         {!user &&  <LoginForm />}
+         {user && <Redirect to="/feed"/>}
         </Route>
         <Route path="/login">
           <LoginForm />

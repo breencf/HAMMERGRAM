@@ -21,7 +21,7 @@ export const LoginForm = () => {
       const data = await res.json();
       if (data && data.errors) {
         setErrors(data.errors);
-      } else history.push("/");
+      } else history.push("/feed");
     });
   };
 
@@ -29,7 +29,7 @@ export const LoginForm = () => {
     e.preventDefault();
     return dispatch(
       login({ credential: "jimmysuckling", password: "password" })
-    );
+    ).then(() => history.push("/feed"));
   };
 
   return (
@@ -93,8 +93,15 @@ export const LoginForm = () => {
         </Link>
       </p>
       <div className="about">
-        <p>Hammergram is an instagram clone built as part of App Academy's 24 week Js/Py Software Engineering Bootcamp.</p>
-        <p>This project uses Javascript, Express.JS, Sequelize, and PostgreSQL in the backend, and uses React, Javascript, and Redux in the frontend, along with plain CSS.</p>
+        <p>
+          Hammergram is an instagram clone built as part of App Academy's 24
+          week Js/Py Software Engineering Bootcamp.
+        </p>
+        <p>
+          This project uses Javascript, Express.JS, Sequelize, and PostgreSQL in
+          the backend, and uses React, Javascript, and Redux in the frontend,
+          along with plain CSS.
+        </p>
       </div>
     </div>
   );
