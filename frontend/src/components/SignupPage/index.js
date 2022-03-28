@@ -1,11 +1,12 @@
 import { signup } from "../../store/session";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
-import { Redirect, Link } from "react-router-dom";
+import { Redirect, Link, useHistory } from "react-router-dom";
 
 import "../LoginPage/LoginForm.css";
 
 export const SignupForm = () => {
+  const history = useHistory()
   const user = useSelector((state) => state.sessions.user);
   const dispatch = useDispatch();
   const [name, setName] = useState("");
@@ -15,7 +16,8 @@ export const SignupForm = () => {
   const [confirmPassword, setConfirmPassword] = useState("");
   const [errors, setErrors] = useState([]);
 
-  if (user) return <Redirect to="/feed" />;
+    if (user) return <Redirect to="/feed" />;
+
 
   const onSubmit = (e) => {
     e.preventDefault();
@@ -25,6 +27,7 @@ export const SignupForm = () => {
         async (res) => {
           const data = await res.json();
           if (data && data.errors) setErrors(data.errors);
+          else history.push("/feed");
         }
       );
     }
