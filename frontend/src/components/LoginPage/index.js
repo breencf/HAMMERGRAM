@@ -17,12 +17,14 @@ export const LoginForm = () => {
   const onSubmit = async (e) => {
     e.preventDefault();
     setErrors([]);
-    return dispatch(login({ credential, password })).catch(async (res) => {
-      const data = await res.json();
-      if (data && data.errors) {
-        setErrors(data.errors);
-      } else history.push("/feed");
-    });
+    return dispatch(login({ credential, password }))
+      .then(() => history.push("/feed"))
+      .catch(async (res) => {
+        const data = await res.json();
+        if (data && data.errors) {
+          setErrors(data.errors);
+        } else history.push("/feed");
+      });
   };
 
   const onSubmitDemo = async (e) => {
