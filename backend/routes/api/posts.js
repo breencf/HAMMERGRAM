@@ -163,7 +163,8 @@ router.post(
       res.json("destroyed");
     } else {
       const bm = await db.Bookmark.create({ postId, userId });
-      res.json(bm);
+      const bmWid = await db.Bookmark.findByPk(bm.id, { include: [db.Post] });
+      res.json(bmWid);
     }
   })
 );
