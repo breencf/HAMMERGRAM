@@ -23,7 +23,7 @@ export const SignupForm = () => {
     e.preventDefault();
     if (password === confirmPassword) {
       setErrors([]);
-      return dispatch(signup({ email, name, username, password })).catch(
+      return dispatch(signup({ email, name, username, password })).then(() => history.push('/feed')).catch(
         async (res) => {
           const data = await res.json();
           if (data && data.errors) setErrors(data.errors);
