@@ -3,7 +3,12 @@ import { useParams, Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { loadFollowers, loadProfile } from "../../store/user";
 import { followButton } from "../../store/session";
-import { BsGearWide, BsGrid3X3, BsCollection, BsBookmark } from "react-icons/bs";
+import {
+  BsGearWide,
+  BsGrid3X3,
+  BsCollection,
+  BsBookmark,
+} from "react-icons/bs";
 import { Grid } from "./Grid";
 import "./UserProfile.css";
 import Modal from "react-modal";
@@ -33,8 +38,6 @@ export const UserProfile = () => {
       padding: "0px",
     },
   };
-
-
 
   useEffect(() => {
     dispatch(loadProfile(id));
@@ -93,7 +96,7 @@ export const UserProfile = () => {
         <div className="post-follows-container">
           <BsGrid3X3 onClick={() => setGridFeed("g")} />
           <BsCollection onClick={() => setGridFeed("f")} />
-          {user.id === parseInt(id) && <BsBookmark onClick={() => setGridFeed("b")}/>}
+          {/* {user.id === parseInt(id) && <BsBookmark onClick={() => setGridFeed("b")}/>} */}
         </div>
         {gridFeed === "g" && (
           <Grid posts={profile?.Posts?.sort((a, b) => b.id - a.id)} />
@@ -101,9 +104,9 @@ export const UserProfile = () => {
         {gridFeed === "f" && (
           <Feed posts={profile?.Posts?.sort((a, b) => b.id - a.id)} />
         )}
-        {gridFeed === "b" && (
+        {/* {gridFeed === "b" && (
           <Grid posts={Object.values(bookmarks).map((bookmark) => bookmark.Post)}/>
-        )}
+        )} */}
       </div>
       <Modal
         isOpen={modalIsOpen}

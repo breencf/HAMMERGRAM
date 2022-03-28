@@ -91,7 +91,7 @@ export const Post = ({ content }) => {
             </Link>
             <FaRegPaperPlane />
           </div>
-          <BookmarkButton postId={content.id} />
+          {/* <BookmarkButton postId={content.id} /> */}
         </div>
         <div className="post-bottom-bottom">
           <div>

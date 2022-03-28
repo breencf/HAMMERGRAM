@@ -150,24 +150,24 @@ router.post(
   })
 );
 
-router.post(
-  "/:id/bookmark",
-  asyncHandler(async (req, res) => {
-    const { userId, postId } = req.body;
-    const exists = await db.Bookmark.findOne({
-      where: { postId, userId },
-    });
-    if (exists) {
-      await db.Bookmark.destroy({ where: { postId, userId } });
-      await db.Post.findByPk(postId);
-      res.json("destroyed");
-    } else {
-      const bm = await db.Bookmark.create({ postId, userId });
-      const bmWid = await db.Bookmark.findByPk(bm.id, { include: [db.Post] });
-      res.json(bmWid);
-    }
-  })
-);
+// router.post(
+//   "/:id/bookmark",
+//   asyncHandler(async (req, res) => {
+//     const { userId, postId } = req.body;
+//     const exists = await db.Bookmark.findOne({
+//       where: { postId, userId },
+//     });
+//     if (exists) {
+//       await db.Bookmark.destroy({ where: { postId, userId } });
+//       await db.Post.findByPk(postId);
+//       res.json("destroyed");
+//     } else {
+//       const bm = await db.Bookmark.create({ postId, userId });
+//       const bmWid = await db.Bookmark.findByPk(bm.id, { include: [db.Post] });
+//       res.json(bmWid);
+//     }
+//   })
+// );
 
 router.post(
   "/:id/comments",

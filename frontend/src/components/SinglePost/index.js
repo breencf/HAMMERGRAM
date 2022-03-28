@@ -100,7 +100,7 @@ export const PostPage = () => {
                   </Link>{" "}
                   <FaRegPaperPlane />
                 </div>
-                {content && <BookmarkButton postId={content.id} />}
+                {/* {content && <BookmarkButton postId={content.id} />} */}
               </div>
               <div className="post-bottom-bottom">
                 <div>

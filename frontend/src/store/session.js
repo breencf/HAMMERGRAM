@@ -3,15 +3,14 @@ const FOLLOW = "posts/FOLLOW";
 const LIKE = "posts/LIKE";
 const START = "/api/session/START";
 const END = "/api/session/END";
-const BOOKMARK = "posts/BOOKMARK";
+// const BOOKMARK = "posts/BOOKMARK";
 
-export const startSession = (user, following, likes, bookmarks) => {
+export const startSession = (user, following, likes) => {
   return {
     type: START,
     user,
     following,
     likes,
-    bookmarks,
   };
 };
 
@@ -39,14 +38,14 @@ const likeUnlike = ({ userId, postId, like }) => {
   };
 };
 
-const bookmarkUnbookmark = ({ userId, postId, bookmark }) => {
-  return {
-    type: BOOKMARK,
-    userId,
-    postId,
-    bookmark,
-  };
-};
+// const bookmarkUnbookmark = ({ userId, postId, bookmark }) => {
+//   return {
+//     type: BOOKMARK,
+//     userId,
+//     postId,
+//     bookmark,
+//   };
+// };
 
 export const likeButton =
   ({ userId, postId }) =>
@@ -64,21 +63,21 @@ export const likeButton =
     }
   };
 
-export const bookmarkButton =
-  ({ userId, postId }) =>
-  async (dispatch) => {
-    const response = await csrfFetch(`/api/posts/${postId}/bookmark`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ userId, postId }),
-    });
+// export const bookmarkButton =
+//   ({ userId, postId }) =>
+//   async (dispatch) => {
+//     const response = await csrfFetch(`/api/posts/${postId}/bookmark`, {
+//       method: "POST",
+//       headers: { "Content-Type": "application/json" },
+//       body: JSON.stringify({ userId, postId }),
+//     });
 
-    if (response.ok) {
-      const bookmark = await response.json();
-      dispatch(bookmarkUnbookmark({ userId, postId, bookmark }));
-      return true;
-    }
-  };
+//     if (response.ok) {
+//       const bookmark = await response.json();
+//       dispatch(bookmarkUnbookmark({ userId, postId, bookmark }));
+//       return true;
+//     }
+//   };
 
 export const followButton =
   ({ followingUserId, followedUserId }) =>
@@ -107,14 +106,14 @@ export const login = (user) => async (dispatch) => {
     }),
   });
   const data = await response.json();
-  dispatch(startSession(data.user, data.following, data.likes, data.bookmarks));
+  dispatch(startSession(data.user, data.following, data.likes));
   return response;
 };
 
 export const restoreUser = () => async (dispatch) => {
   const response = await csrfFetch("/api/session");
   const data = await response.json();
-  dispatch(startSession(data.user, data.following, data.likes, data.bookmarks));
+  dispatch(startSession(data.user, data.following, data.likes));
   return response;
 };
 
@@ -126,9 +125,7 @@ export const signup =
       body: JSON.stringify({ name, username, email, password }),
     });
     const data = await response.json();
-    dispatch(
-      startSession(data.user, data.following, data.likes, data.bookmarks)
-    );
+    dispatch(startSession(data.user, data.following, data.likes));
     return data;
   };
 
@@ -139,7 +136,7 @@ export const logout = () => async (dispatch) => {
   return data;
 };
 
-const initialState = { user: {}, likes: {}, following: {}, bookmarks: {} };
+const initialState = { user: {}, likes: {}, following: {} };
 
 export default function sessionReducer(state = initialState, action) {
   let newState;
@@ -147,14 +144,14 @@ export default function sessionReducer(state = initialState, action) {
     case START:
       newState = initialState; //Object.assign({}, state)
       newState.user = action.user;
-      if (action.following && action.likes && action.bookmarks) {
+      if (action.following && action.likes) {
         action.following.forEach((obj) => {
           newState.following[obj.followedUserId] = obj;
         });
         action.likes.forEach((obj) => (newState.likes[obj.postId] = obj));
-        action.bookmarks.forEach(
-          (obj) => (newState.bookmarks[obj.postId] = obj)
-        );
+        // action.bookmarks.forEach(
+        //   (obj) => (newState.bookmarks[obj.postId] = obj)
+        // );
       }
       return newState;
     case END:
@@ -162,7 +159,7 @@ export default function sessionReducer(state = initialState, action) {
       delete newState.user;
       delete newState.likes;
       delete newState.following;
-      delete newState.bookmarks;
+
       return newState;
     case FOLLOW:
       newState = { ...state };
@@ -172,14 +169,14 @@ export default function sessionReducer(state = initialState, action) {
         newState.following[action.followedUserId] = action.follow;
       }
       return newState;
-    case BOOKMARK:
-      newState = { ...state };
-      if (action.bookmark === "destroyed") {
-        delete newState.bookmarks[action.postId];
-      } else {
-        newState.bookmarks[action.postId] = action.bookmark;
-      }
-      return newState;
+    // case BOOKMARK:
+    //   newState = { ...state };
+    //   if (action.bookmark === "destroyed") {
+    //     delete newState.bookmarks[action.postId];
+    //   } else {
+    //     newState.bookmarks[action.postId] = action.bookmark;
+    //   }
+    //   return newState;
     case LIKE:
       newState = { ...state };
       if (action.like === "destroyed") {

@@ -40,11 +40,11 @@ router.post(
         where: { followingUserId: user.id },
       });
       const likes = await db.Like.findAll({ where: { userId: user.id } });
-      const bookmarks = await db.Bookmark.findAll({
-        where: { userId: user.id, include: [db.Post] },
-      });
+      // const bookmarks = await db.Bookmark.findAll({
+      //   where: { userId: user.id, include: [db.Post] },
+      // });
 
-      return res.json({ user, following, likes, bookmarks });
+      return res.json({ user, following, likes });
     }
   })
 );
@@ -69,15 +69,15 @@ router.get(
         where: { followingUserId: u.id },
       });
       const likes = await db.Like.findAll({ where: { userId: u.id } });
-      const bookmarks = await db.Bookmark.findAll({
-        where: { userId: u.id },
-        include: [db.Post],
-      });
+      // const bookmarks = await db.Bookmark.findAll({
+      //   where: { userId: u.id },
+      //   include: [db.Post],
+      // });
       return res.json({
         user: u.toSafeObject(),
         following,
         likes,
-        bookmarks,
+        // bookmarks,
       });
     } else return res.json({});
   })
