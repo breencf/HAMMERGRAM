@@ -75,7 +75,9 @@ export const Post = ({ content }) => {
         </button>
       </div>
       <div className="post-image">
-        <img src={content.image} {...bind} onDoubleClick={onDClick} />
+        <img src={content.image} {...bind}
+        //  onDoubleClick={onDClick}
+         />
         {showHeart && (
           <div className="bigHeart">
             <FaHeart />
