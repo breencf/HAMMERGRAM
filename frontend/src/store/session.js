@@ -3,13 +3,15 @@ const FOLLOW = "posts/FOLLOW";
 const LIKE = "posts/LIKE";
 const START = "/api/session/START";
 const END = "/api/session/END";
+const BOOKMARK = "posts/BOOKMARK";
 
-export const startSession = (user, following, likes) => {
+export const startSession = (user, following, likes, bookmarks) => {
   return {
     type: START,
     user,
     following,
     likes,
+    bookmarks,
   };
 };
 
@@ -37,6 +39,15 @@ const likeUnlike = ({ userId, postId, like }) => {
   };
 };
 
+const bookmarkUnbookmark = ({ userId, postId, bookmark }) => {
+  return {
+    type: BOOKMARK,
+    userId,
+    postId,
+    bookmark,
+  };
+};
+
 export const likeButton =
   ({ userId, postId }) =>
   async (dispatch) => {
@@ -49,6 +60,22 @@ export const likeButton =
     if (response.ok) {
       const like = await response.json();
       dispatch(likeUnlike({ userId, postId, like }));
+      return true;
+    }
+  };
+
+export const bookmarkButton =
+  ({ userId, postId }) =>
+  async (dispatch) => {
+    const response = await csrfFetch(`/api/posts/${postId}/bookmark`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ userId, postId }),
+    });
+
+    if (response.ok) {
+      const bookmark = await response.json();
+      dispatch(bookmarkUnbookmark({ userId, postId, bookmark }));
       return true;
     }
   };
@@ -80,14 +107,14 @@ export const login = (user) => async (dispatch) => {
     }),
   });
   const data = await response.json();
-  dispatch(startSession(data.user, data.following, data.likes));
+  dispatch(startSession(data.user, data.following, data.likes, data.bookmarks));
   return response;
 };
 
 export const restoreUser = () => async (dispatch) => {
   const response = await csrfFetch("/api/session");
   const data = await response.json();
-  dispatch(startSession(data.user, data.following, data.likes));
+  dispatch(startSession(data.user, data.following, data.likes, data.bookmarks));
   return response;
 };
 
@@ -99,7 +126,9 @@ export const signup =
       body: JSON.stringify({ name, username, email, password }),
     });
     const data = await response.json();
-    dispatch(startSession(data.user, data.following, data.likes));
+    dispatch(
+      startSession(data.user, data.following, data.likes, data.bookmarks)
+    );
     return data;
   };
 
@@ -110,7 +139,7 @@ export const logout = () => async (dispatch) => {
   return data;
 };
 
-const initialState = { user: {}, likes: {}, following: {} };
+const initialState = { user: {}, likes: {}, following: {}, bookmarks: {} };
 
 export default function sessionReducer(state = initialState, action) {
   let newState;
@@ -118,11 +147,14 @@ export default function sessionReducer(state = initialState, action) {
     case START:
       newState = initialState; //Object.assign({}, state)
       newState.user = action.user;
-      if (action.following && action.likes) {
+      if (action.following && action.likes && action.bookmarks) {
         action.following.forEach((obj) => {
           newState.following[obj.followedUserId] = obj;
         });
         action.likes.forEach((obj) => (newState.likes[obj.postId] = obj));
+        action.bookmarks.forEach(
+          (obj) => (newState.bookmarks[obj.postId] = obj)
+        );
       }
       return newState;
     case END:
@@ -130,6 +162,7 @@ export default function sessionReducer(state = initialState, action) {
       delete newState.user;
       delete newState.likes;
       delete newState.following;
+      delete newState.bookmarks;
       return newState;
     case FOLLOW:
       newState = { ...state };
@@ -137,6 +170,14 @@ export default function sessionReducer(state = initialState, action) {
         delete newState.following[action.followedUserId];
       } else {
         newState.following[action.followedUserId] = action.follow;
+      }
+      return newState;
+    case BOOKMARK:
+      newState = { ...state };
+      if (action.bookmark === "destroyed") {
+        delete newState.bookmarks[action.postId];
+      } else {
+        newState.bookmarks[action.postId] = action.bookmark;
       }
       return newState;
     case LIKE:

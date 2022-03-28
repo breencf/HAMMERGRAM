@@ -16,6 +16,7 @@ import dayjs from "dayjs";
 import { likeButton } from "../../../store/session";
 import { loadOnePost, loadPosts } from "../../../store/posts";
 import { useDoubleTap } from "use-double-tap";
+import { BookmarkButton } from "../../BookmarkButton/index";
 
 let relativeTime = require("dayjs/plugin/relativeTime");
 dayjs.extend(relativeTime);
@@ -90,7 +91,7 @@ export const Post = ({ content }) => {
             </Link>
             <FaRegPaperPlane />
           </div>
-          <FaRegBookmark />
+          <BookmarkButton postId={content.id} />
         </div>
         <div className="post-bottom-bottom">
           <div>

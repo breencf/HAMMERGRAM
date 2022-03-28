@@ -16,6 +16,7 @@ import { EditPost } from "./EditPost";
 import { LikeButton } from "../LikeButton";
 import { likeButton } from "../../store/session";
 import { useDoubleTap } from "use-double-tap";
+import { BookmarkButton } from "../BookmarkButton/index";
 
 export const PostPage = () => {
   const { id } = useParams();
@@ -99,7 +100,7 @@ export const PostPage = () => {
                   </Link>{" "}
                   <FaRegPaperPlane />
                 </div>
-                <FaRegBookmark />
+                {content && <BookmarkButton postId={content.id} />}
               </div>
               <div className="post-bottom-bottom">
                 <div>

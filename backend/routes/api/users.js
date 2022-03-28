@@ -41,6 +41,7 @@ router.post(
       user: user.toSafeObject(),
       following: [],
       likes: [],
+      bookmarks: [],
     });
   })
 );
