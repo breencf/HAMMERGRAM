@@ -1,7 +1,7 @@
 # HAMMERGRAM
 Hammergram is an instagram clone dedicated to the art of the social media bottle shot, simply put, Hammergram is a place to show off your unicorns and hammers. It is optimized for mobile viewing, but is fully functional in a browser as well.
 
-live link: http://hammergram.herokuapp.com
+live link: https://hammergram.herokuapp.com
 
 
 ## Features
